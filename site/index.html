@@ -29,9 +29,9 @@
         </h1>
 
         <p class="hero-copy">
-          Представительный лендинг мероприятия с центральной фишкой:
-          интерактивными предсказаниями от «Высшей силы», которые можно
-          открывать прямо на сайте и пересылать друзьям.
+          Два дня встречи, общей памяти и живого контакта. Здесь собраны
+          программа, ежедневник на сегодня, контакты и личные предсказания от
+          Высшей силы, которые открываются прямо на сайте.
         </p>
 
         <div class="hero-actions">
@@ -50,36 +50,32 @@
 
       <section class="content-grid">
         <section class="panel panel-oracle" id="oracle">
-          <div class="panel-eyebrow">Главная фича лендинга</div>
+          <div class="panel-eyebrow">Предсказания от ВС</div>
           <h2 class="panel-title">Предсказания от Высшей силы</h2>
           <p class="panel-copy">
-            Нажми кнопку и получи случайное предсказание. Механика работает как
-            эмоциональный вход в лендинг и дает понятный повод отправить ссылку
-            тем, кто еще сомневается, ехать ли на событие.
+            Открой личное предсказание на эти дни. Каждое из них собрано в
+            тональности юбилея, темы «Единство в NAC» и настроения встречи 9 и
+            10 мая.
           </p>
 
-          <div class="oracle-card" aria-live="polite">
+          <div class="oracle-card oracle-card-idle" id="oracle-card" aria-live="polite">
             <div class="oracle-label">Сегодня Высшая сила говорит:</div>
-            <h3 class="oracle-title" id="prediction-title">
-              Твой лучший разговор на этом событии еще не начался
-            </h3>
-            <p class="oracle-text" id="prediction-text">
-              Останься чуть дольше после официальной части. Именно там тебя
-              найдет нужный человек, нужный смех и нужная поддержка.
-            </p>
+            <div class="oracle-placeholder" id="oracle-placeholder">
+              Нажми кнопку и открой личное предсказание от ВС
+            </div>
+            <h3 class="oracle-title oracle-hidden" id="prediction-title"></h3>
+            <p class="oracle-text oracle-hidden" id="prediction-text"></p>
 
             <div class="oracle-actions">
               <button class="button button-primary" id="prediction-button" type="button">
                 Получить предсказание
               </button>
-              <button class="button button-secondary" id="prediction-share" type="button">
+              <button class="button button-secondary" id="prediction-share" type="button" disabled>
                 Скопировать текст
               </button>
             </div>
 
-            <div class="oracle-meta" id="prediction-meta">
-              Предсказание №1 из колоды Высшей силы
-            </div>
+            <div class="oracle-meta oracle-hidden" id="prediction-meta"></div>
           </div>
         </section>
 
@@ -87,9 +83,9 @@
           <div class="panel-eyebrow">О событии</div>
           <h2 class="panel-title">Два дня, одна точка притяжения</h2>
           <p class="panel-copy">
-            Сайт должен не просто сообщать факты, а продавать настроение
-            встречи: торжественная часть, спикерские, открытое собрание,
-            розыгрыш, чайная, тусовка и свободный второй день.
+            Юбилей задуман как плотная живая встреча: торжественная часть,
+            спикерские, открытое собрание, розыгрыш, чайная, тусовка и более
+            свободный второй день для общения.
           </p>
 
           <div class="facts">
@@ -110,9 +106,66 @@
       </section>
 
       <section class="content-grid content-grid-lower">
+        <section class="panel" id="daily">
+          <div class="panel-daily-head">
+            <div>
+              <div class="panel-eyebrow">Ежедневник на сегодня</div>
+              <h2 class="panel-title" id="daily-title">09 Квітня • «Діємо»</h2>
+            </div>
+            <div class="lang-switch" role="tablist" aria-label="Язык ежедневника">
+              <button class="lang-switch-button is-active" id="lang-uk" type="button">укр</button>
+              <button class="lang-switch-button" id="lang-ru" type="button">рус</button>
+            </div>
+          </div>
+          <p class="panel-copy">
+            Сегодняшний текст дня встроен в страницу как отдельная опора рядом
+            с афишей, программой и предсказаниями от Высшей силы.
+          </p>
+
+          <div class="daily-card">
+            <blockquote class="daily-quote" id="daily-quote"></blockquote>
+
+            <p class="daily-source" id="daily-source"></p>
+
+            <div id="daily-body"></div>
+
+            <div class="daily-focus">
+              <strong id="daily-focus-label"></strong>
+              <span id="daily-focus-text"></span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel panel-info">
+          <div class="panel-eyebrow">Смысловой слой</div>
+          <h2 class="panel-title">Афиша, встреча и внутренний настрой</h2>
+          <p class="panel-copy">
+            Страница собирает не только информацию о событии, но и настроение:
+            предвкушение встречи, сегодняшнее чтение и личное обращение через
+            предсказания.
+          </p>
+
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-label">Источник</span>
+              <strong>укр: база • рус: сайт NA Russia</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Запись</span>
+              <strong>На сегодня</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Роль</span>
+              <strong>Опора и настрой</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="content-grid content-grid-lower">
         <section class="panel" id="program">
           <div class="panel-eyebrow">Программа</div>
-          <h2 class="panel-title">Черновик расписания</h2>
+          <h2 class="panel-title">Программа встречи</h2>
           <div class="days">
             <article class="day">
               <h3>9 мая • 1-й день</h3>
@@ -145,7 +198,7 @@
 
         <aside class="panel" id="contacts">
           <div class="panel-eyebrow">Контакты</div>
-          <h2 class="panel-title">Связь и координация</h2>
+          <h2 class="panel-title">Контакты и координация</h2>
           <div class="contact-links">
             <a class="contact-link" href="tel:+48791629324">
               <strong>Связаться с ВС</strong>
@@ -164,6 +217,6 @@
       </section>
     </main>
 
-    <script type="module" src="./scripts/predictions.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>

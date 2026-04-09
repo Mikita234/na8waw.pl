@@ -5,15 +5,21 @@ const textNode = document.getElementById("prediction-text");
 const metaNode = document.getElementById("prediction-meta");
 const buttonNode = document.getElementById("prediction-button");
 const shareNode = document.getElementById("prediction-share");
+const oracleCardNode = document.getElementById("oracle-card");
 
 let currentIndex = 0;
+let hasRevealedPrediction = false;
 
 function renderPrediction(index) {
   const item = predictions[index];
 
+  oracleCardNode.classList.remove("oracle-card-idle");
+  oracleCardNode.classList.add("oracle-card-revealed");
   titleNode.textContent = item.title;
   textNode.textContent = item.text;
   metaNode.textContent = `Предсказание №${index + 1} из колоды Высшей силы`;
+  shareNode.disabled = false;
+  hasRevealedPrediction = true;
 }
 
 function getNextPredictionIndex() {
@@ -29,6 +35,10 @@ function getNextPredictionIndex() {
 }
 
 async function copyPrediction() {
+  if (!hasRevealedPrediction) {
+    return;
+  }
+
   const text = `${predictions[currentIndex].title}. ${predictions[currentIndex].text}`;
 
   try {
@@ -51,5 +61,3 @@ buttonNode.addEventListener("click", () => {
 shareNode.addEventListener("click", () => {
   copyPrediction();
 });
-
-renderPrediction(currentIndex);

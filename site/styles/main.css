@@ -240,14 +240,14 @@ body::after {
 
 .hero-blob video {
   position: absolute;
-  inset: 13% 18% 12% 15%;
+  inset: 14% 24% 14% 18%;
   width: auto;
-  height: 82%;
-  max-width: 36%;
+  height: 74%;
+  max-width: 28%;
   object-fit: cover;
   border-radius: 50%;
   mix-blend-mode: screen;
-  opacity: 0.84;
+  opacity: 0.7;
 }
 
 .hero-blob::before {
@@ -273,19 +273,19 @@ body::after {
 }
 
 .hero-blob-ring-one {
-  left: 28%;
-  top: 30%;
-  width: 138px;
-  height: 82px;
-  transform: rotate(17deg);
+  left: 36%;
+  top: 32%;
+  width: 128px;
+  height: 76px;
+  transform: rotate(18deg);
 }
 
 .hero-blob-ring-two {
-  left: 38%;
-  top: 38%;
-  width: 170px;
-  height: 108px;
-  transform: rotate(28deg);
+  left: 48%;
+  top: 39%;
+  width: 162px;
+  height: 102px;
+  transform: rotate(26deg);
 }
 
 .content-grid {
@@ -297,6 +297,13 @@ body::after {
 
 .content-grid-lower {
   align-items: start;
+}
+
+.panel-daily-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .panel {
@@ -335,6 +342,10 @@ body::after {
     linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 233, 0.8));
 }
 
+.oracle-card-idle {
+  min-height: 360px;
+}
+
 .oracle-label,
 .oracle-meta,
 .fact-label {
@@ -343,6 +354,15 @@ body::after {
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--muted);
+}
+
+.oracle-placeholder {
+  margin: 18px 0 20px;
+  max-width: 520px;
+  font-size: clamp(1.6rem, 3.4vw, 2.7rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 .oracle-title {
@@ -365,13 +385,111 @@ body::after {
   flex-wrap: wrap;
 }
 
+.oracle-hidden {
+  display: none;
+}
+
+.oracle-card-revealed .oracle-hidden {
+  display: block;
+}
+
+.oracle-card-revealed .oracle-placeholder {
+  display: none;
+}
+
 .oracle-meta {
   margin-top: 18px;
+}
+
+#prediction-share[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .facts {
   display: grid;
   gap: 12px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.64);
+}
+
+.lang-switch-button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  min-width: 64px;
+  min-height: 40px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-switch-button.is-active {
+  color: #fff;
+  background: var(--ink);
+}
+
+.daily-card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top left, rgba(13, 87, 187, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 241, 232, 0.84));
+}
+
+.daily-quote {
+  margin: 0 0 14px;
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.daily-source {
+  margin: 0 0 18px;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.daily-text {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.daily-focus {
+  display: grid;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.daily-focus strong {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+}
+
+.daily-focus span {
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .fact,
@@ -467,6 +585,10 @@ body::after {
     padding-top: 8px;
   }
 
+  .panel-daily-head {
+    flex-direction: column;
+  }
+
   .hero,
   .panel {
     padding-left: 16px;
@@ -512,23 +634,23 @@ body::after {
   }
 
   .hero-blob video {
-    inset: 16% 14% 14% 12%;
-    max-width: 42%;
+    inset: 17% 20% 15% 16%;
+    max-width: 34%;
   }
 
   .hero-blob-ring-one {
-    left: 18%;
-    top: 30%;
-    width: 96px;
+    left: 28%;
+    top: 31%;
+    width: 84px;
     height: 58px;
     border-width: 12px;
   }
 
   .hero-blob-ring-two {
-    left: 28%;
+    left: 42%;
     top: 40%;
-    width: 122px;
-    height: 78px;
+    width: 112px;
+    height: 72px;
     border-width: 14px;
   }
 
