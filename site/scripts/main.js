@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260409u";
 import "./daily.js?v=20260409u";
-import { siteCopy } from "./locale-data.js?v=20260409u";
+import { siteCopy } from "./locale-data.js?v=20260409v";
 import { subscribeLocale } from "./locale.js?v=20260409u";
 
 const nodes = {
@@ -25,15 +25,10 @@ const nodes = {
   factFormatValue: document.getElementById("fact-format-value"),
   dailyEyebrow: document.getElementById("daily-eyebrow"),
   dailyCopy: document.getElementById("daily-copy"),
-  layerEyebrow: document.getElementById("layer-eyebrow"),
-  layerTitle: document.getElementById("layer-title"),
-  layerCopy: document.getElementById("layer-copy"),
-  sourceLabel: document.getElementById("source-label"),
-  sourceValue: document.getElementById("source-value"),
-  entryLabel: document.getElementById("entry-label"),
-  entryValue: document.getElementById("entry-value"),
-  roleLabel: document.getElementById("role-label"),
-  roleValue: document.getElementById("role-value"),
+  locationsEyebrow: document.getElementById("locations-eyebrow"),
+  locationsTitle: document.getElementById("locations-title"),
+  locationsCopy: document.getElementById("locations-copy"),
+  locationLinks: document.getElementById("location-links"),
   programEyebrow: document.getElementById("program-eyebrow"),
   programTitle: document.getElementById("program-title"),
   programDays: document.getElementById("program-days"),
@@ -70,6 +65,24 @@ function renderProgram(days) {
     });
 
     article.appendChild(list);
+
+    if (day.locationHref && day.locationLabel) {
+      const actions = document.createElement("div");
+      actions.className = "day-actions";
+
+      const link = document.createElement("a");
+      link.className = "button button-secondary day-action";
+      link.href = day.locationHref;
+      link.textContent = day.locationLabel;
+      if (day.locationHref.startsWith("http")) {
+        link.target = "_blank";
+        link.rel = "noreferrer noopener";
+      }
+
+      actions.appendChild(link);
+      article.appendChild(actions);
+    }
+
     nodes.programDays.appendChild(article);
   });
 }
@@ -81,8 +94,37 @@ function renderContacts(items) {
     const link = document.createElement("a");
     link.className = "contact-link";
     link.href = item.href;
-    link.innerHTML = `<strong>${item.title}</strong><span>${item.text}</span>`;
+    if (item.href.startsWith("http")) {
+      link.target = "_blank";
+      link.rel = "noreferrer noopener";
+    }
+    link.innerHTML = `<strong>${item.title}</strong><span>${item.text}</span>${
+      item.action ? `<em>${item.action}</em>` : ""
+    }`;
     nodes.contactLinks.appendChild(link);
+  });
+}
+
+function renderLocations(items) {
+  nodes.locationLinks.innerHTML = "";
+
+  items.forEach((item) => {
+    const link = document.createElement("a");
+    link.className = "location-link";
+    link.href = item.href;
+    if (item.href.startsWith("http")) {
+      link.target = "_blank";
+      link.rel = "noreferrer noopener";
+    }
+    link.innerHTML = `
+      <div class="location-link-head">
+        <strong>${item.title}</strong>
+        <span>${item.kicker}</span>
+      </div>
+      <p>${item.text}</p>
+      <em>${item.action}</em>
+    `;
+    nodes.locationLinks.appendChild(link);
   });
 }
 
@@ -117,20 +159,15 @@ subscribeLocale((locale) => {
   setText(nodes.factFormatValue, copy.factFormatValue);
   setText(nodes.dailyEyebrow, copy.dailyEyebrow);
   setText(nodes.dailyCopy, copy.dailyCopy);
-  setText(nodes.layerEyebrow, copy.layerEyebrow);
-  setText(nodes.layerTitle, copy.layerTitle);
-  setText(nodes.layerCopy, copy.layerCopy);
-  setText(nodes.sourceLabel, copy.sourceLabel);
-  setText(nodes.sourceValue, copy.sourceValue);
-  setText(nodes.entryLabel, copy.entryLabel);
-  setText(nodes.entryValue, copy.entryValue);
-  setText(nodes.roleLabel, copy.roleLabel);
-  setText(nodes.roleValue, copy.roleValue);
+  setText(nodes.locationsEyebrow, copy.locationsEyebrow);
+  setText(nodes.locationsTitle, copy.locationsTitle);
+  setText(nodes.locationsCopy, copy.locationsCopy);
   setText(nodes.programEyebrow, copy.programEyebrow);
   setText(nodes.programTitle, copy.programTitle);
   setText(nodes.contactsEyebrow, copy.contactsEyebrow);
   setText(nodes.contactsTitle, copy.contactsTitle);
 
   renderProgram(copy.programDays);
+  renderLocations(copy.locations);
   renderContacts(copy.contacts);
 });

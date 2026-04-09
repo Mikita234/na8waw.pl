@@ -34,41 +34,50 @@ export const siteCopy = {
     dailyEyebrow: "Щоденник на сьогодні",
     dailyCopy:
       "Тут можна прочитати щоденник на сьогодні й одразу перейти до програми зустрічі.",
-    layerEyebrow: "Перед зустріччю",
-    layerTitle: "Що варто зробити",
-    layerCopy:
-      "Перед виїздом можна подивитися програму, відкрити щоденник на сьогодні й надіслати сайт тим, хто теж збирається.",
-    sourceLabel: "Програма",
-    sourceValue: "Розклад на 9-10 травня",
-    entryLabel: "Щоденник",
-    entryValue: "Оновлюється щодня",
-    roleLabel: "Поділитися",
-    roleValue: "Надіслати сайт друзям",
+    locationsEyebrow: "Точки зустрічі",
+    locationsTitle: "Де зустрічаємось",
+    locationsCopy:
+      "Для 9 і 10 травня будуть окремі локації. Поки обидві кнопки ведуть на одну тестову точку на карті.",
     localeSwitcherLabel: "Перемикач мови",
     programEyebrow: "Програма",
     programTitle: "Програма зустрічі",
     contactsEyebrow: "Контакти",
     contactsTitle: "Контакти й координація",
+    locations: [
+      {
+        title: "9 травня",
+        kicker: "Перший день",
+        text: "Відкрити точку на карті для першого дня зустрічі.",
+        action: "Відкрити карту",
+        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+      },
+      {
+        title: "10 травня",
+        kicker: "Другий день",
+        text: "Відкрити точку на карті для другого дня зустрічі.",
+        action: "Відкрити карту",
+        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+      },
+    ],
     contacts: [
       {
-        title: "Координатор зустрічі",
-        text: "+48 791 629 324 • Саша, розселення та організаційні питання",
+        title: "Зателефонувати координатору",
+        text: "Саша • розселення та організаційні питання",
         href: "tel:+48791629324",
+        action: "+48 791 629 324",
       },
       {
-        title: "Telegram",
-        text: "Приєднатися до Telegram-каналу зустрічі",
+        title: "Написати в Telegram",
+        text: "Група зустрічі «МАЇВКА 8 років»",
         href: "https://t.me/Maevka_8let",
-      },
-      {
-        title: "Поділитися сайтом",
-        text: "Надіслати сайт друзям і гостям зустрічі",
-        href: "#oracle",
+        action: "Відкрити групу",
       },
     ],
     programDays: [
       {
         title: "9 травня • 1-й день",
+        locationLabel: "Точка на карті для 9 травня",
+        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
         items: [
           ["11:00", "Збір для служителів"],
           ["11:30", "Зустріч гостей, реєстрація"],
@@ -86,6 +95,8 @@ export const siteCopy = {
       },
       {
         title: "10 травня • 2-й день",
+        locationLabel: "Точка на карті для 10 травня",
+        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
         items: [
           ["13:00", "Початок"],
           ["14:00", "Група"],
@@ -129,41 +140,50 @@ export const siteCopy = {
     dailyEyebrow: "Ежедневник на сегодня",
     dailyCopy:
       "Здесь можно прочитать ежедневник на сегодня и сразу перейти к программе встречи.",
-    layerEyebrow: "Перед встречей",
-    layerTitle: "Что стоит сделать",
-    layerCopy:
-      "Перед выездом можно посмотреть программу, открыть ежедневник на сегодня и отправить сайт тем, кто тоже собирается.",
-    sourceLabel: "Программа",
-    sourceValue: "Расписание на 9-10 мая",
-    entryLabel: "Ежедневник",
-    entryValue: "Обновляется каждый день",
-    roleLabel: "Поделиться",
-    roleValue: "Отправить сайт друзьям",
+    locationsEyebrow: "Точки встречи",
+    locationsTitle: "Где встречаемся",
+    locationsCopy:
+      "Для 9 и 10 мая будут отдельные локации. Пока обе кнопки ведут на одну тестовую точку на карте.",
     localeSwitcherLabel: "Переключатель языка",
     programEyebrow: "Программа",
     programTitle: "Программа встречи",
     contactsEyebrow: "Контакты",
     contactsTitle: "Контакты и координация",
+    locations: [
+      {
+        title: "9 мая",
+        kicker: "Первый день",
+        text: "Открыть точку на карте для первого дня встречи.",
+        action: "Открыть карту",
+        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+      },
+      {
+        title: "10 мая",
+        kicker: "Второй день",
+        text: "Открыть точку на карте для второго дня встречи.",
+        action: "Открыть карту",
+        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+      },
+    ],
     contacts: [
       {
-        title: "Координатор встречи",
-        text: "+48 791 629 324 • Саша, расселение и организационные вопросы",
+        title: "Позвонить координатору",
+        text: "Саша • расселение и организационные вопросы",
         href: "tel:+48791629324",
+        action: "+48 791 629 324",
       },
       {
-        title: "Telegram",
-        text: "Присоединиться к Telegram-каналу встречи",
+        title: "Написать в Telegram",
+        text: "Группа встречи «МАЕВКА 8 лет»",
         href: "https://t.me/Maevka_8let",
-      },
-      {
-        title: "Поделиться сайтом",
-        text: "Отправить сайт друзьям и тем, кто собирается на встречу",
-        href: "#oracle",
+        action: "Открыть группу",
       },
     ],
     programDays: [
       {
         title: "9 мая • 1-й день",
+        locationLabel: "Точка на карте для 9 мая",
+        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
         items: [
           ["11:00", "Сбор для служащих"],
           ["11:30", "Встреча гостей, регистрация"],
@@ -181,6 +201,8 @@ export const siteCopy = {
       },
       {
         title: "10 мая • 2-й день",
+        locationLabel: "Точка на карте для 10 мая",
+        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
         items: [
           ["13:00", "Начало"],
           ["14:00", "Группа"],
