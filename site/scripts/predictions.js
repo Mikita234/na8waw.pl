@@ -1,6 +1,6 @@
-import { siteCopy } from "./locale-data.js?v=20260409g";
-import { getLocale, subscribeLocale } from "./locale.js?v=20260409g";
-import { predictionsByLocale } from "./predictions-data.js?v=20260409g";
+import { siteCopy } from "./locale-data.js?v=20260409h";
+import { getLocale, setLocale, subscribeLocale } from "./locale.js?v=20260409h";
+import { predictionsByLocale } from "./predictions-data.js?v=20260409h";
 
 const titleNode = document.getElementById("prediction-title");
 const textNode = document.getElementById("prediction-text");
@@ -13,6 +13,14 @@ let currentIndex = 0;
 let hasRevealedPrediction = false;
 let currentLocale = getLocale();
 
+function syncOracleUrl(index, locale) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", locale);
+  url.searchParams.set("oracle", String(index + 1));
+  url.hash = "oracle";
+  window.history.replaceState({}, "", url);
+}
+
 function renderPrediction(index) {
   const item = predictionsByLocale[currentLocale][index];
 
@@ -23,6 +31,7 @@ function renderPrediction(index) {
   metaNode.textContent = siteCopy[currentLocale].oracleMeta(index + 1);
   shareNode.disabled = false;
   hasRevealedPrediction = true;
+  syncOracleUrl(index, currentLocale);
 }
 
 function getNextPredictionIndex() {
@@ -38,16 +47,36 @@ function getNextPredictionIndex() {
   return nextIndex;
 }
 
-async function copyPrediction() {
+function getPredictionShareUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", currentLocale);
+  url.searchParams.set("oracle", String(currentIndex + 1));
+  url.hash = "oracle";
+  return url.toString();
+}
+
+async function sharePrediction() {
   if (!hasRevealedPrediction) {
     return;
   }
 
   const item = predictionsByLocale[currentLocale][currentIndex];
-  const text = `${item.title}. ${item.text}`;
+  const url = getPredictionShareUrl();
+  const shareText =
+    currentLocale === "uk"
+      ? `${item.title}. Передбачення від Вищої Сили й інформація про ювілей у Варшаві:`
+      : `${item.title}. Предсказание от Высшей силы и информация о юбилее в Варшаве:`;
 
   try {
-    await navigator.clipboard.writeText(text);
+    if (navigator.share) {
+      await navigator.share({
+        title: item.title,
+        text: shareText,
+        url,
+      });
+    } else {
+      await navigator.clipboard.writeText(url);
+    }
     shareNode.textContent = siteCopy[currentLocale].oracleShareDone;
   } catch (error) {
     shareNode.textContent = siteCopy[currentLocale].oracleShareFail;
@@ -64,8 +93,34 @@ buttonNode.addEventListener("click", () => {
 });
 
 shareNode.addEventListener("click", () => {
-  copyPrediction();
+  sharePrediction();
 });
+
+function revealPredictionFromUrl() {
+  const url = new URL(window.location.href);
+  const locale = url.searchParams.get("lang");
+  const rawIndex = Number.parseInt(url.searchParams.get("oracle") || "", 10);
+
+  if (locale === "uk" || locale === "ru") {
+    setLocale(locale);
+  }
+
+  if (!Number.isInteger(rawIndex)) {
+    return;
+  }
+
+  const nextLocale = getLocale();
+  const predictions = predictionsByLocale[nextLocale];
+  const normalizedIndex = rawIndex - 1;
+
+  if (normalizedIndex < 0 || normalizedIndex >= predictions.length) {
+    return;
+  }
+
+  currentLocale = nextLocale;
+  currentIndex = normalizedIndex;
+  renderPrediction(currentIndex);
+}
 
 subscribeLocale((locale) => {
   currentLocale = locale;
@@ -76,3 +131,5 @@ subscribeLocale((locale) => {
     renderPrediction(currentIndex);
   }
 });
+
+revealPredictionFromUrl();

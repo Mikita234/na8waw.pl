@@ -214,10 +214,10 @@ body::after {
 
 .hero-blob video {
   position: absolute;
-  inset: 10% auto auto 14%;
+  inset: 6% auto auto 10%;
   z-index: 1;
-  width: 40%;
-  max-width: 320px;
+  width: 50%;
+  max-width: 400px;
   aspect-ratio: 1 / 1;
   height: auto;
   object-fit: cover;
@@ -620,9 +620,9 @@ body::after {
   }
 
   .hero-blob video {
-    left: 9%;
-    top: 8%;
-    width: 42%;
+    left: 4%;
+    top: 4%;
+    width: 52%;
     max-width: none;
   }
 
