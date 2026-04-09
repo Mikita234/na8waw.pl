@@ -293,6 +293,10 @@ body::after {
   align-items: start;
 }
 
+.content-grid-single {
+  grid-template-columns: 1fr;
+}
+
 .panel-daily-head {
   display: flex;
   justify-content: space-between;

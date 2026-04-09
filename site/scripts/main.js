@@ -1,7 +1,7 @@
-import "./predictions.js?v=20260409p";
-import "./daily.js?v=20260409p";
-import { siteCopy } from "./locale-data.js?v=20260409p";
-import { subscribeLocale } from "./locale.js?v=20260409p";
+import "./predictions.js?v=20260409q";
+import "./daily.js?v=20260409q";
+import { siteCopy } from "./locale-data.js?v=20260409q";
+import { subscribeLocale } from "./locale.js?v=20260409q";
 
 const nodes = {
   heroKicker: document.getElementById("hero-kicker"),
@@ -42,6 +42,12 @@ const nodes = {
   contactLinks: document.getElementById("contact-links"),
   localeSwitchers: Array.from(document.querySelectorAll('[role="tablist"]')),
 };
+
+function setText(node, value) {
+  if (node) {
+    node.textContent = value;
+  }
+}
 
 function renderProgram(days) {
   nodes.programDays.innerHTML = "";
@@ -90,40 +96,40 @@ subscribeLocale((locale) => {
     node.setAttribute("aria-label", copy.localeSwitcherLabel);
   });
 
-  nodes.heroKicker.textContent = copy.heroKicker;
-  nodes.heroTitleMain.textContent = copy.heroTitleMain;
-  nodes.heroCopy.textContent = copy.heroCopy;
-  nodes.heroCtaPrimary.textContent = copy.heroCtaPrimary;
-  nodes.heroCtaSecondary.textContent = copy.heroCtaSecondary;
-  nodes.oracleEyebrow.textContent = copy.oracleEyebrow;
-  nodes.oracleTitle.textContent = copy.oracleTitle;
-  nodes.oracleCopy.textContent = copy.oracleCopy;
-  nodes.oracleLabel.textContent = copy.oracleLabel;
-  nodes.oraclePlaceholder.textContent = copy.oraclePlaceholder;
-  nodes.aboutEyebrow.textContent = copy.aboutEyebrow;
-  nodes.aboutTitle.textContent = copy.aboutTitle;
-  nodes.aboutCopy.textContent = copy.aboutCopy;
-  nodes.factCityLabel.textContent = copy.factCityLabel;
-  nodes.factCityValue.textContent = copy.factCityValue;
-  nodes.factDatesLabel.textContent = copy.factDatesLabel;
-  nodes.factDatesValue.textContent = copy.factDatesValue;
-  nodes.factFormatLabel.textContent = copy.factFormatLabel;
-  nodes.factFormatValue.textContent = copy.factFormatValue;
-  nodes.dailyEyebrow.textContent = copy.dailyEyebrow;
-  nodes.dailyCopy.textContent = copy.dailyCopy;
-  nodes.layerEyebrow.textContent = copy.layerEyebrow;
-  nodes.layerTitle.textContent = copy.layerTitle;
-  nodes.layerCopy.textContent = copy.layerCopy;
-  nodes.sourceLabel.textContent = copy.sourceLabel;
-  nodes.sourceValue.textContent = copy.sourceValue;
-  nodes.entryLabel.textContent = copy.entryLabel;
-  nodes.entryValue.textContent = copy.entryValue;
-  nodes.roleLabel.textContent = copy.roleLabel;
-  nodes.roleValue.textContent = copy.roleValue;
-  nodes.programEyebrow.textContent = copy.programEyebrow;
-  nodes.programTitle.textContent = copy.programTitle;
-  nodes.contactsEyebrow.textContent = copy.contactsEyebrow;
-  nodes.contactsTitle.textContent = copy.contactsTitle;
+  setText(nodes.heroKicker, copy.heroKicker);
+  setText(nodes.heroTitleMain, copy.heroTitleMain);
+  setText(nodes.heroCopy, copy.heroCopy);
+  setText(nodes.heroCtaPrimary, copy.heroCtaPrimary);
+  setText(nodes.heroCtaSecondary, copy.heroCtaSecondary);
+  setText(nodes.oracleEyebrow, copy.oracleEyebrow);
+  setText(nodes.oracleTitle, copy.oracleTitle);
+  setText(nodes.oracleCopy, copy.oracleCopy);
+  setText(nodes.oracleLabel, copy.oracleLabel);
+  setText(nodes.oraclePlaceholder, copy.oraclePlaceholder);
+  setText(nodes.aboutEyebrow, copy.aboutEyebrow);
+  setText(nodes.aboutTitle, copy.aboutTitle);
+  setText(nodes.aboutCopy, copy.aboutCopy);
+  setText(nodes.factCityLabel, copy.factCityLabel);
+  setText(nodes.factCityValue, copy.factCityValue);
+  setText(nodes.factDatesLabel, copy.factDatesLabel);
+  setText(nodes.factDatesValue, copy.factDatesValue);
+  setText(nodes.factFormatLabel, copy.factFormatLabel);
+  setText(nodes.factFormatValue, copy.factFormatValue);
+  setText(nodes.dailyEyebrow, copy.dailyEyebrow);
+  setText(nodes.dailyCopy, copy.dailyCopy);
+  setText(nodes.layerEyebrow, copy.layerEyebrow);
+  setText(nodes.layerTitle, copy.layerTitle);
+  setText(nodes.layerCopy, copy.layerCopy);
+  setText(nodes.sourceLabel, copy.sourceLabel);
+  setText(nodes.sourceValue, copy.sourceValue);
+  setText(nodes.entryLabel, copy.entryLabel);
+  setText(nodes.entryValue, copy.entryValue);
+  setText(nodes.roleLabel, copy.roleLabel);
+  setText(nodes.roleValue, copy.roleValue);
+  setText(nodes.programEyebrow, copy.programEyebrow);
+  setText(nodes.programTitle, copy.programTitle);
+  setText(nodes.contactsEyebrow, copy.contactsEyebrow);
+  setText(nodes.contactsTitle, copy.contactsTitle);
 
   renderProgram(copy.programDays);
   renderContacts(copy.contacts);
