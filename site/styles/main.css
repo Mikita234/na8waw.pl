@@ -526,21 +526,21 @@ body::after {
 .program-live {
   position: relative;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   width: fit-content;
   max-width: 100%;
   margin: 8px 0 18px;
-  padding: 16px 18px 18px;
-  border-radius: 26px;
+  padding: 14px 14px 16px;
+  border-radius: 20px;
   overflow: hidden;
-  color: #eaf1ff;
-  border: 1px solid rgba(22, 63, 146, 0.26);
+  color: #f6f7fb;
+  border: 1px solid rgba(12, 20, 34, 0.84);
   background:
-    radial-gradient(circle at top right, rgba(66, 125, 255, 0.18), transparent 28%),
-    linear-gradient(180deg, rgba(7, 16, 37, 0.96), rgba(11, 24, 56, 0.98));
+    linear-gradient(180deg, rgba(31, 38, 52, 0.96), rgba(21, 27, 39, 0.98));
   box-shadow:
-    0 22px 50px rgba(7, 16, 37, 0.2),
-    inset 0 1px 0 rgba(161, 198, 255, 0.12);
+    0 16px 30px rgba(10, 14, 22, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
 }
 
 .program-live::before {
@@ -548,21 +548,24 @@ body::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(110, 166, 255, 0.08), transparent 34%),
-    radial-gradient(circle at bottom left, rgba(71, 122, 255, 0.12), transparent 30%);
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.75));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 42%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 5px
+    );
   pointer-events: none;
 }
 
 .program-live::after {
   content: "";
   position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(110, 166, 255, 0), rgba(110, 166, 255, 0.55), rgba(110, 166, 255, 0));
-  opacity: 0.9;
+  inset: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
 }
 
 .program-live-label {
@@ -605,31 +608,37 @@ body::after {
   letter-spacing: 0.16em;
   font-size: 0.72rem;
   font-weight: 700;
-  color: rgba(200, 220, 255, 0.7);
+  color: rgba(222, 228, 238, 0.84);
 }
 
 .program-live-board {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
   width: fit-content;
+  padding: 8px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(7, 10, 15, 0.96), rgba(11, 14, 19, 0.98));
+  border: 1px solid rgba(74, 82, 98, 0.48);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
 
 .program-live-segment {
   display: grid;
   justify-items: center;
   gap: 4px;
-  min-width: 92px;
-  padding: 14px 12px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(120, 168, 255, 0.18);
+  min-width: 84px;
+  padding: 12px 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(58, 67, 84, 0.55);
   background:
-    linear-gradient(180deg, rgba(8, 20, 48, 0.96), rgba(6, 16, 38, 0.98)),
-    radial-gradient(circle at top center, rgba(116, 176, 255, 0.08), transparent 60%);
+    linear-gradient(180deg, rgba(17, 22, 29, 0.96), rgba(11, 14, 19, 0.98));
   box-shadow:
-    inset 0 1px 0 rgba(166, 203, 255, 0.08),
-    inset 0 -10px 20px rgba(0, 0, 0, 0.24),
-    0 12px 24px rgba(0, 0, 0, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.34);
 }
 
 .program-live-segment strong {
@@ -639,14 +648,14 @@ body::after {
     "Menlo",
     "Consolas",
     monospace;
-  font-size: clamp(1.55rem, 3.3vw, 2.35rem);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
   font-variant-numeric: tabular-nums;
-  color: #f4f8ff;
+  color: #ff9e40;
   line-height: 1;
-  letter-spacing: -0.08em;
+  letter-spacing: -0.06em;
   text-shadow:
-    0 0 10px rgba(140, 185, 255, 0.28),
-    0 0 22px rgba(140, 185, 255, 0.12);
+    0 0 6px rgba(255, 158, 64, 0.42),
+    0 0 14px rgba(255, 158, 64, 0.18);
 }
 
 .program-live-segment em {
@@ -654,7 +663,7 @@ body::after {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.68rem;
-  color: rgba(176, 204, 255, 0.7);
+  color: rgba(208, 216, 228, 0.72);
 }
 
 .program-live-current {
@@ -666,8 +675,8 @@ body::after {
   letter-spacing: -0.02em;
   text-wrap: balance;
   text-transform: uppercase;
-  color: #f4f8ff;
-  text-shadow: 0 0 16px rgba(140, 185, 255, 0.12);
+  color: #ffb166;
+  text-shadow: 0 0 12px rgba(255, 158, 64, 0.14);
 }
 
 @keyframes livePulse {
@@ -1063,8 +1072,8 @@ body::after {
     width: 100%;
     gap: 6px;
     margin-bottom: 16px;
-    padding: 16px 16px 18px;
-    border-radius: 22px;
+    padding: 14px 14px 16px;
+    border-radius: 18px;
   }
 
   .program-live-text {
@@ -1072,17 +1081,19 @@ body::after {
   }
 
   .program-live-board {
+    width: 100%;
     gap: 8px;
+    padding: 6px;
   }
 
   .program-live-segment {
     min-width: 0;
-    padding: 12px 6px 10px;
-    border-radius: 14px;
+    padding: 11px 4px 9px;
+    border-radius: 8px;
   }
 
   .program-live-segment strong {
-    font-size: clamp(1.2rem, 6.4vw, 1.58rem);
+    font-size: clamp(1.1rem, 6vw, 1.44rem);
   }
 
   .program-live-current {
