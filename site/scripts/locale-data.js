@@ -58,7 +58,7 @@ export const siteCopy = {
       {
         title: "Telegram",
         text: "Telegram-чат анонсуємо ближче до зустрічі",
-        href: "https://t.me/your_link",
+        href: "https://t.me/Maevka_8let",
       },
       {
         title: "Надіслати сайт",
@@ -153,7 +153,7 @@ export const siteCopy = {
       {
         title: "Telegram",
         text: "Telegram-чат анонсируем ближе к встрече",
-        href: "https://t.me/your_link",
+        href: "https://t.me/Maevka_8let",
       },
       {
         title: "Отправить сайт",
