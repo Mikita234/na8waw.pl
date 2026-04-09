@@ -126,7 +126,7 @@ ${paragraphs}
 }
 
 function renderRuPage(data) {
-  const description = `${data.title}. ${data.quote}`;
+  const description = `Русский ежедневник на сегодня для NA8 Warszawa. ${data.title}. Юбилей группы «МАЕВКА» пройдет 9–10 мая в Варшаве.`;
   const previewParagraphs = data.previewLead
     .map((paragraph) => `          <p>\n            ${escapeHtml(paragraph)}\n          </p>`)
     .join("\n");
@@ -136,20 +136,33 @@ function renderRuPage(data) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ежедневник на сегодня | NA8 Warszawa</title>
+    <title>${escapeHtml(data.title)} | Ежедневник на сегодня | NA8 Warszawa</title>
     <meta
       name="description"
       content="${escapeHtml(description)}"
     />
+    <link rel="canonical" href="https://na8waw.pl/daily/ru.html" />
+    <link rel="alternate" hreflang="ru" href="https://na8waw.pl/daily/ru.html" />
+    <link rel="alternate" hreflang="uk" href="https://na8waw.pl/daily/uk.html" />
+    <meta property="og:site_name" content="NA8 Warszawa" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="uk_UA" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://na8waw.pl/daily/ru.html" />
-    <meta property="og:title" content="Ежедневник на сегодня | NA8 Warszawa" />
+    <meta property="og:title" content="${escapeHtml(data.title)} | Ежедневник на сегодня | NA8 Warszawa" />
     <meta
       property="og:description"
       content="${escapeHtml(description)}"
     />
     <meta property="og:image" content="https://na8waw.pl/media/na8.png" />
+    <meta property="og:image:alt" content="NA8 Warszawa" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(data.title)} | Ежедневник на сегодня | NA8 Warszawa" />
+    <meta
+      name="twitter:description"
+      content="${escapeHtml(description)}"
+    />
+    <meta name="twitter:image" content="https://na8waw.pl/media/na8.png" />
     <style>
       :root {
         --bg: #f7f3eb;
