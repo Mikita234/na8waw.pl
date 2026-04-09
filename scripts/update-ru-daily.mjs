@@ -271,8 +271,8 @@ function renderRuPage(data) {
         <div class="eyebrow">Ежедневник на сегодня</div>
         <h1>${escapeHtml(data.title)}</h1>
         <p>
-          Полный сегодняшний текст дня и быстрый переход к информации о
-          юбилейной встрече в Варшаве 9–10 мая.
+          Ежедневник на сегодня и вся информация о юбилейной встрече в Варшаве
+          9–10 мая.
         </p>
       </header>
 
@@ -293,7 +293,7 @@ ${bodyParagraphs}
           </p>
         </div>
 
-        <a class="button" href="/?lang=ru">Узнать о мероприятии в Варшаве</a>
+        <a class="button" href="/?lang=ru">Перейти на сайт встречи</a>
       </section>
     </main>
   </body>
