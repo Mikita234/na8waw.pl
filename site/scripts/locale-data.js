@@ -39,7 +39,7 @@ export const siteCopy = {
     layerCopy:
       "Сторінка збирає не тільки інформацію про подію, але й настрій: передчуття зустрічі, сьогоднішнє читання і особисте звернення через передбачення.",
     sourceLabel: "Джерело",
-    sourceValue: "укр: база • рус: na-russia.org",
+    sourceValue: "Щоденник сьогодні: укр і рус",
     entryLabel: "Запис",
     entryValue: "На сьогодні",
     roleLabel: "Роль",
@@ -57,7 +57,7 @@ export const siteCopy = {
       },
       {
         title: "Telegram",
-        text: "Підставити реальне посилання на чат або канал події",
+        text: "Telegram-чат події з'явиться тут",
         href: "https://t.me/your_link",
       },
       {
@@ -134,7 +134,7 @@ export const siteCopy = {
     layerCopy:
       "Страница собирает не только информацию о событии, но и настроение: предвкушение встречи, сегодняшнее чтение и личное обращение через предсказания.",
     sourceLabel: "Источник",
-    sourceValue: "укр: база • рус: na-russia.org",
+    sourceValue: "Ежедневник сегодня: укр и рус",
     entryLabel: "Запись",
     entryValue: "На сегодня",
     roleLabel: "Роль",
@@ -152,7 +152,7 @@ export const siteCopy = {
       },
       {
         title: "Telegram",
-        text: "Подставить реальную ссылку на чат или канал мероприятия",
+        text: "Telegram-чат мероприятия появится здесь",
         href: "https://t.me/your_link",
       },
       {

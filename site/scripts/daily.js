@@ -1,5 +1,5 @@
-import { dailyMeditations } from "./daily-data.js?v=20260409i";
-import { getLocale, subscribeLocale } from "./locale.js?v=20260409i";
+import { dailyMeditations } from "./daily-data.js?v=20260409j";
+import { getLocale, subscribeLocale } from "./locale.js?v=20260409j";
 
 const titleNode = document.getElementById("daily-title");
 const quoteNode = document.getElementById("daily-quote");
@@ -44,7 +44,18 @@ shareButtonNode.addEventListener("click", async () => {
   url.hash = "";
 
   try {
-    await navigator.clipboard.writeText(url.toString());
+    if (navigator.share) {
+      await navigator.share({
+        title: locale === "uk" ? "Щоденник на сьогодні | NA8 Warszawa" : "Ежедневник на сегодня | NA8 Warszawa",
+        text:
+          locale === "uk"
+            ? "Щоденник на сьогодні і ювілей групи «МАЇВКА» у Варшаві 9–10 травня."
+            : "Ежедневник на сегодня и юбилей группы «МАЕВКА» в Варшаве 9–10 мая.",
+        url: url.toString(),
+      });
+    } else {
+      await navigator.clipboard.writeText(url.toString());
+    }
     shareButtonNode.textContent = locale === "uk" ? "Посилання скопійовано" : "Ссылка скопирована";
   } catch (error) {
     shareButtonNode.textContent = locale === "uk" ? "Не вдалося скопіювати" : "Не удалось скопировать";
