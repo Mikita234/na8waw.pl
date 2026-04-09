@@ -1,7 +1,7 @@
-import "./predictions.js";
-import "./daily.js";
-import { siteCopy } from "./locale-data.js";
-import { subscribeLocale } from "./locale.js";
+import "./predictions.js?v=20260409e";
+import "./daily.js?v=20260409e";
+import { siteCopy } from "./locale-data.js?v=20260409e";
+import { subscribeLocale } from "./locale.js?v=20260409e";
 
 const nodes = {
   heroKicker: document.getElementById("hero-kicker"),

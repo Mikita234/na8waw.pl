@@ -1,6 +1,6 @@
-import { siteCopy } from "./locale-data.js";
-import { getLocale, subscribeLocale } from "./locale.js";
-import { predictionsByLocale } from "./predictions-data.js";
+import { siteCopy } from "./locale-data.js?v=20260409e";
+import { getLocale, subscribeLocale } from "./locale.js?v=20260409e";
+import { predictionsByLocale } from "./predictions-data.js?v=20260409e";
 
 const titleNode = document.getElementById("prediction-title");
 const textNode = document.getElementById("prediction-text");
