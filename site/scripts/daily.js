@@ -1,5 +1,5 @@
-import { dailyMeditations } from "./daily-data.js?v=20260409l";
-import { getLocale, subscribeLocale } from "./locale.js?v=20260409l";
+import { dailyMeditations } from "./daily-data.js?v=20260409m";
+import { getLocale, subscribeLocale } from "./locale.js?v=20260409m";
 
 const titleNode = document.getElementById("daily-title");
 const quoteNode = document.getElementById("daily-quote");
@@ -39,7 +39,7 @@ function renderDaily(lang) {
 shareButtonNode.addEventListener("click", async () => {
   const locale = getLocale();
   const url = new URL(window.location.href);
-  url.pathname = locale === "uk" ? "/daily/uk.html" : "/daily/ru.html";
+  url.pathname = locale === "uk" ? "/daily/today-uk.html" : "/daily/today-ru.html";
   url.search = "";
   url.hash = "";
 
