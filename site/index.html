@@ -3,908 +3,167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NA8 Warszawa | Юбилей группы «МАЕВКА»</title>
+    <title>NA8 Warszawa | ЕДИНСТВО В NAC</title>
     <meta
       name="description"
-      content="Представительный лендинг мероприятия NA8 Warszawa: юбилей группы «МАЕВКА», программа, контакты и предсказания от Высшей силы."
+      content="Лендинг юбилея группы «МАЕВКА» в Варшаве: афишный визуал, программа, контакты и предсказания от Высшей силы."
     />
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #ebe4d7;
-        --paper: rgba(255, 249, 241, 0.88);
-        --paper-strong: rgba(255, 252, 246, 0.96);
-        --ink: #121212;
-        --muted: #62574c;
-        --line: rgba(18, 18, 18, 0.12);
-        --accent: #b2472c;
-        --accent-2: #0d5da6;
-        --accent-soft: rgba(178, 71, 44, 0.12);
-        --shadow: 0 28px 90px rgba(31, 22, 16, 0.12);
-        --radius-xl: 36px;
-        --radius-lg: 24px;
-        --radius-md: 18px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        position: relative;
-        margin: 0;
-        min-height: 100vh;
-        color: var(--ink);
-        font-family: "Arial Narrow", Arial, sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(178, 71, 44, 0.16), transparent 26%),
-          radial-gradient(circle at top right, rgba(13, 93, 166, 0.14), transparent 24%),
-          linear-gradient(180deg, #f6f1e8 0%, #ebe4d7 100%);
-        overflow-x: hidden;
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      body::before {
-        opacity: 0.48;
-        background-image:
-          linear-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.055) 1px, transparent 1px);
-        background-size: 46px 46px;
-        transform-origin: center top;
-        transform: perspective(1200px) rotateX(67deg) scale(1.5) translateY(-10%);
-      }
-
-      body::after {
-        opacity: 0.35;
-        background:
-          radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.95), transparent 32%),
-          repeating-radial-gradient(
-            circle at 50% -18%,
-            transparent 0 42px,
-            rgba(0, 0, 0, 0.03) 42px 43px
-          );
-        transform-origin: center top;
-        transform: perspective(1200px) rotateX(67deg) scale(1.9) translateY(-14%);
-      }
-
-      a {
-        color: inherit;
-      }
-
-      .page {
-        width: min(1180px, calc(100% - 24px));
-        margin: 0 auto;
-        padding: 18px 0 30px;
-      }
-
-      .shell {
-        position: relative;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-xl);
-        background: linear-gradient(180deg, var(--paper-strong), var(--paper));
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(16px);
-      }
-
-      .shell::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.28;
-        background:
-          radial-gradient(circle at 20% 0%, rgba(13, 93, 166, 0.08), transparent 26%),
-          linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
-        background-size: auto, 34px 34px, 34px 34px;
-        transform-origin: center top;
-        transform: perspective(1200px) rotateX(70deg) scale(1.18) translateY(-34%);
-      }
-
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        padding: 18px 24px;
-        border-bottom: 1px solid var(--line);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.78rem;
-        font-weight: 700;
-      }
-
-      .topbar-nav {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-
-      .topbar-nav a {
-        text-decoration: none;
-        color: var(--muted);
-      }
-
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-        gap: 24px;
-        padding: 28px 24px 24px;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 18px;
-        padding: 9px 14px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.74rem;
-        font-weight: 700;
-        background: rgba(255, 255, 255, 0.46);
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 0 6px rgba(178, 71, 44, 0.12);
-      }
-
-      h1 {
-        margin: 0 0 18px;
-        font-size: clamp(3rem, 6vw, 6rem);
-        line-height: 0.9;
-        letter-spacing: -0.05em;
-        text-transform: uppercase;
-      }
-
-      .hero-copy {
-        max-width: 620px;
-      }
-
-      .hero-lead {
-        margin: 0 0 26px;
-        color: var(--muted);
-        font-size: 1.08rem;
-        line-height: 1.65;
-      }
-
-      .hero-meta {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-bottom: 26px;
-      }
-
-      .meta-card {
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        background: rgba(255, 255, 255, 0.45);
-      }
-
-      .meta-label {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.72rem;
-        font-weight: 700;
-      }
-
-      .meta-value {
-        display: block;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-
-      .hero-actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 52px;
-        padding: 14px 22px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.84rem;
-        font-weight: 700;
-        transition:
-          transform 180ms ease,
-          box-shadow 180ms ease,
-          background-color 180ms ease,
-          border-color 180ms ease;
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
-      }
-
-      .button-primary {
-        color: #fff;
-        background: var(--ink);
-        box-shadow: 0 14px 28px rgba(18, 18, 18, 0.18);
-      }
-
-      .button-secondary {
-        background: rgba(255, 255, 255, 0.54);
-        border-color: var(--line);
-      }
-
-      .hero-visual {
-        position: relative;
-        min-height: 100%;
-      }
-
-      .visual-stack {
-        display: grid;
-        gap: 14px;
-        height: 100%;
-      }
-
-      .logo-panel,
-      .video-panel,
-      .prediction-panel,
-      .info-card,
-      .program-card,
-      .contact-card {
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        background: rgba(255, 255, 255, 0.48);
-      }
-
-      .logo-panel {
-        display: grid;
-        place-items: center;
-        min-height: 220px;
-        padding: 18px;
-        overflow: hidden;
-        background:
-          radial-gradient(circle at 20% 20%, rgba(178, 71, 44, 0.14), transparent 28%),
-          radial-gradient(circle at 80% 0%, rgba(13, 93, 166, 0.12), transparent 26%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(244, 236, 223, 0.94));
-      }
-
-      .logo-panel img {
-        display: block;
-        width: min(100%, 240px);
-        height: auto;
-      }
-
-      .video-panel {
-        overflow: hidden;
-        box-shadow: 0 18px 34px rgba(18, 18, 18, 0.08);
-      }
-
-      .video-panel video {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .section-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-        gap: 24px;
-        padding: 0 24px 24px;
-      }
-
-      .section-title {
-        margin: 0 0 16px;
-        font-size: 1.5rem;
-        line-height: 1;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .section-copy {
-        margin: 0 0 20px;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      .prediction-panel {
-        padding: 22px;
-        background:
-          radial-gradient(circle at top, rgba(178, 71, 44, 0.18), transparent 34%),
-          linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(246, 237, 226, 0.92));
-      }
-
-      .prediction-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 16px;
-        margin-bottom: 20px;
-      }
-
-      .prediction-header p {
-        margin: 0;
-        max-width: 420px;
-        color: var(--muted);
-        line-height: 1.55;
-      }
-
-      .prediction-badge {
-        flex-shrink: 0;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(18, 18, 18, 0.06);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.7rem;
-        font-weight: 700;
-      }
-
-      .oracle {
-        position: relative;
-        overflow: hidden;
-        min-height: 280px;
-        padding: 20px;
-        border-radius: 22px;
-        border: 1px solid rgba(18, 18, 18, 0.1);
-        background:
-          radial-gradient(circle at 50% 0%, rgba(13, 93, 166, 0.12), transparent 36%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 240, 230, 0.92));
-      }
-
-      .oracle::after {
-        content: "";
-        position: absolute;
-        right: -28px;
-        top: -28px;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 1px solid rgba(18, 18, 18, 0.08);
-      }
-
-      .oracle-label {
-        margin-bottom: 14px;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.72rem;
-        font-weight: 700;
-      }
-
-      .oracle-text {
-        margin: 0 0 18px;
-        font-size: clamp(1.5rem, 3vw, 2.4rem);
-        line-height: 1.02;
-        text-transform: uppercase;
-      }
-
-      .oracle-subtext {
-        margin: 0 0 20px;
-        max-width: 480px;
-        color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-
-      .oracle-controls {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .oracle-button {
-        cursor: pointer;
-      }
-
-      .oracle-button-secondary {
-        background: transparent;
-        border-color: var(--line);
-      }
-
-      .oracle-meta {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: 0.88rem;
-      }
-
-      .info-card {
-        padding: 22px;
-      }
-
-      .feature-list,
-      .timeline {
-        display: grid;
-        gap: 12px;
-      }
-
-      .feature-item,
-      .timeline-item {
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        background: rgba(255, 255, 255, 0.4);
-      }
-
-      .feature-item strong,
-      .timeline-item strong {
-        display: block;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        font-size: 0.82rem;
-      }
-
-      .feature-item span,
-      .timeline-item span {
-        color: var(--muted);
-        line-height: 1.55;
-      }
-
-      .program-card,
-      .contact-card {
-        padding: 22px;
-      }
-
-      .days {
-        display: grid;
-        gap: 14px;
-      }
-
-      .day {
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        background: rgba(255, 255, 255, 0.42);
-      }
-
-      .day h3 {
-        margin: 0 0 12px;
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      .program-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 10px;
-      }
-
-      .program-list li {
-        display: grid;
-        grid-template-columns: 90px 1fr;
-        gap: 12px;
-        align-items: start;
-        line-height: 1.45;
-      }
-
-      .time {
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      .contact-links {
-        display: grid;
-        gap: 12px;
-      }
-
-      .contact-link {
-        display: block;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        background: rgba(255, 255, 255, 0.42);
-      }
-
-      .contact-link strong {
-        display: block;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.78rem;
-      }
-
-      .contact-link span {
-        color: var(--muted);
-      }
-
-      .footer {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
-        padding: 0 24px 24px;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      @media (max-width: 960px) {
-        .hero,
-        .section-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 720px) {
-        .page {
-          width: min(100%, calc(100% - 12px));
-          padding-top: 6px;
-        }
-
-        .topbar,
-        .hero,
-        .section-grid,
-        .footer {
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-
-        .topbar {
-          align-items: flex-start;
-          flex-direction: column;
-        }
-
-        .hero-meta {
-          grid-template-columns: 1fr;
-        }
-
-        .prediction-header {
-          flex-direction: column;
-        }
-
-        .program-list li {
-          grid-template-columns: 1fr;
-          gap: 4px;
-        }
-
-        .hero-actions,
-        .oracle-controls {
-          flex-direction: column;
-        }
-
-        .button {
-          width: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <main class="page">
-      <div class="shell">
-        <header class="topbar">
-          <div>NA8 Warszawa • Юбилей группы «МАЕВКА»</div>
-          <nav class="topbar-nav">
-            <a href="#oracle">Предсказания</a>
-            <a href="#about">О событии</a>
-            <a href="#program">Программа</a>
-            <a href="#contacts">Контакты</a>
-          </nav>
-        </header>
+    <div class="page-bg" aria-hidden="true"></div>
 
-        <section class="hero">
-          <div class="hero-copy">
-            <div class="eyebrow">9.05 - 10.05 • Варшава</div>
-            <h1>Высшая сила уже в сборе</h1>
-            <p class="hero-lead">
-              Не просто страница мероприятия, а цифровая точка входа в атмосферу
-              юбилея. Здесь собраны программа, контакты, видео и главный ритуал
-              лендинга: предсказания от «Высшей силы», которые можно открывать
-              прямо на сайте.
+    <main class="page-shell">
+      <header class="hero">
+        <div class="hero-topline">
+          <div class="hero-date">9.05</div>
+          <img class="hero-logo" src="./media/na8.png" alt="NA8 Warszawa" />
+          <div class="hero-date hero-date-right">10.05</div>
+        </div>
+
+        <div class="hero-kicker">Восьмой юбилей группы «МАЕВКА»</div>
+
+        <h1 class="hero-title">
+          <span>Единство в</span>
+          <span class="hero-title-accent">NAC</span>
+        </h1>
+
+        <p class="hero-copy">
+          Представительный лендинг мероприятия с центральной фишкой:
+          интерактивными предсказаниями от «Высшей силы», которые можно
+          открывать прямо на сайте и пересылать друзьям.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#oracle">Получить предсказание</a>
+          <a class="button button-secondary" href="#program">Смотреть программу</a>
+        </div>
+
+        <div class="hero-blob" aria-hidden="true">
+          <div class="hero-blob-ring hero-blob-ring-one"></div>
+          <div class="hero-blob-ring hero-blob-ring-two"></div>
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="./media/8lat.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </header>
+
+      <section class="content-grid">
+        <section class="panel panel-oracle" id="oracle">
+          <div class="panel-eyebrow">Главная фича лендинга</div>
+          <h2 class="panel-title">Предсказания от Высшей силы</h2>
+          <p class="panel-copy">
+            Нажми кнопку и получи случайное предсказание. Механика работает как
+            эмоциональный вход в лендинг и дает понятный повод отправить ссылку
+            тем, кто еще сомневается, ехать ли на событие.
+          </p>
+
+          <div class="oracle-card" aria-live="polite">
+            <div class="oracle-label">Сегодня Высшая сила говорит:</div>
+            <h3 class="oracle-title" id="prediction-title">
+              Твой лучший разговор на этом событии еще не начался
+            </h3>
+            <p class="oracle-text" id="prediction-text">
+              Останься чуть дольше после официальной части. Именно там тебя
+              найдет нужный человек, нужный смех и нужная поддержка.
             </p>
 
-            <div class="hero-meta">
-              <div class="meta-card">
-                <span class="meta-label">Формат</span>
-                <span class="meta-value">2 дня события</span>
-              </div>
-              <div class="meta-card">
-                <span class="meta-label">Главная фича</span>
-                <span class="meta-value">Онлайн предсказания</span>
-              </div>
-              <div class="meta-card">
-                <span class="meta-label">Связь</span>
-                <span class="meta-value">Telegram и звонок</span>
-              </div>
+            <div class="oracle-actions">
+              <button class="button button-primary" id="prediction-button" type="button">
+                Получить предсказание
+              </button>
+              <button class="button button-secondary" id="prediction-share" type="button">
+                Скопировать текст
+              </button>
             </div>
 
-            <div class="hero-actions">
-              <a class="button button-primary" href="#oracle">Открыть предсказание</a>
-              <a class="button button-secondary" href="#program">Смотреть программу</a>
-            </div>
-          </div>
-
-          <div class="hero-visual">
-            <div class="visual-stack">
-              <div class="logo-panel">
-                <img src="./media/na8.png" alt="NA8 Warszawa" />
-              </div>
-              <div class="video-panel">
-                <video autoplay muted loop playsinline preload="auto">
-                  <source src="./media/8lat.mp4" type="video/mp4" />
-                </video>
-              </div>
+            <div class="oracle-meta" id="prediction-meta">
+              Предсказание №1 из колоды Высшей силы
             </div>
           </div>
         </section>
 
-        <section class="section-grid" id="oracle">
-          <div class="prediction-panel">
-            <div class="prediction-header">
-              <div>
-                <h2 class="section-title">Предсказания от Высшей силы</h2>
-                <p>
-                  Центральный интерактив лендинга. Нажми кнопку и получи случайное
-                  предсказание в духе события: ироничное, теплое и немного
-                  мистическое.
-                </p>
-              </div>
-              <div class="prediction-badge">Live ritual</div>
-            </div>
+        <aside class="panel panel-info">
+          <div class="panel-eyebrow">О событии</div>
+          <h2 class="panel-title">Два дня, одна точка притяжения</h2>
+          <p class="panel-copy">
+            Сайт должен не просто сообщать факты, а продавать настроение
+            встречи: торжественная часть, спикерские, открытое собрание,
+            розыгрыш, чайная, тусовка и свободный второй день.
+          </p>
 
-            <div class="oracle" aria-live="polite">
-              <div class="oracle-label">Сегодня Высшая сила говорит:</div>
-              <h3 class="oracle-text" id="prediction-title">
-                Твой лучший разговор на этом событии еще не начался
-              </h3>
-              <p class="oracle-subtext" id="prediction-text">
-                Останься чуть дольше после официальной части. Именно там тебя
-                найдет нужный человек, нужный смех и нужная поддержка.
-              </p>
-              <div class="oracle-controls">
-                <button class="button button-primary oracle-button" id="prediction-button" type="button">
-                  Получить предсказание
-                </button>
-                <button
-                  class="button button-secondary oracle-button oracle-button-secondary"
-                  id="prediction-share"
-                  type="button"
-                >
-                  Скопировать текст
-                </button>
-              </div>
-              <div class="oracle-meta" id="prediction-meta">
-                Предсказание №1 из колоды Высшей силы
-              </div>
+          <div class="facts">
+            <div class="fact">
+              <span class="fact-label">Город</span>
+              <strong>Варшава</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Даты</span>
+              <strong>9.05 - 10.05</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Формат</span>
+              <strong>Юбилей + вовлечение</strong>
             </div>
           </div>
+        </aside>
+      </section>
 
-          <aside class="info-card" id="about">
-            <h2 class="section-title">О событии</h2>
-            <p class="section-copy">
-              Юбилей «МАЕВКИ» в Варшаве задуман как плотная, живая встреча:
-              торжественная часть, спикерские, открытое собрание, чайная,
-              тусовка и второй день с более свободным форматом.
-            </p>
+      <section class="content-grid content-grid-lower">
+        <section class="panel" id="program">
+          <div class="panel-eyebrow">Программа</div>
+          <h2 class="panel-title">Черновик расписания</h2>
+          <div class="days">
+            <article class="day">
+              <h3>9 мая • 1-й день</h3>
+              <ul class="program-list">
+                <li><span class="time">11:00</span><span>Сбор для служащих</span></li>
+                <li><span class="time">11:30</span><span>Встреча гостей, регистрация</span></li>
+                <li><span class="time">12:00 - 13:00</span><span>Торжественная часть: открытие, минута молчания, видео, считалочка ЧВ, поздравления</span></li>
+                <li><span class="time">13:00 - 13:10</span><span>Перерыв</span></li>
+                <li><span class="time">13:10 - 14:00</span><span>Спикерская 1</span></li>
+                <li><span class="time">14:00 - 15:00</span><span>Обед</span></li>
+                <li><span class="time">15:00 - 15:45</span><span>Спикерская 2</span></li>
+                <li><span class="time">15:45 - 16:00</span><span>Перерыв</span></li>
+                <li><span class="time">16:00 - 17:30</span><span>Открытое собрание заключительное</span></li>
+                <li><span class="time">17:30 - 18:30</span><span>Розыгрыш сувенирки и чайная</span></li>
+                <li><span class="time">18:30 - 20:00</span><span>Тусовка</span></li>
+                <li><span class="time">20:00 - 21:00</span><span>Уборка и сдача помещения</span></li>
+              </ul>
+            </article>
 
-            <div class="feature-list">
-              <div class="feature-item">
-                <strong>Не сухой афишный сайт</strong>
-                <span>Страница должна не только сообщать, но и втягивать в настроение события.</span>
-              </div>
-              <div class="feature-item">
-                <strong>Механика вовлечения</strong>
-                <span>Предсказания работают как фановая точка входа и повод отправить ссылку друзьям.</span>
-              </div>
-              <div class="feature-item">
-                <strong>Вся информация в одном месте</strong>
-                <span>Даты, программа, контакты и кнопки связи без лишней навигации и перегруза.</span>
-              </div>
-            </div>
-
-            <div style="height: 18px"></div>
-
-            <h2 class="section-title">Как пройдет</h2>
-            <div class="timeline">
-              <div class="timeline-item">
-                <strong>9 мая</strong>
-                <span>Основной день с торжественной частью, спикерскими, открытым собранием и вечерней тусовкой.</span>
-              </div>
-              <div class="timeline-item">
-                <strong>10 мая</strong>
-                <span>Продолжение в более свободном формате: группа, шашлыки, игры и общение.</span>
-              </div>
-              <div class="timeline-item">
-                <strong>До события</strong>
-                <span>Участники могут заранее зайти на лендинг, изучить программу и получить свое предсказание.</span>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <section class="section-grid" id="program">
-          <div class="program-card">
-            <h2 class="section-title">Программа</h2>
-            <p class="section-copy">
-              Ниже черновая программа, уже пригодная для публикации. Если время
-              или формулировки изменятся, это легко обновляется прямо в одном
-              файле.
-            </p>
-
-            <div class="days">
-              <article class="day">
-                <h3>9 мая • 1-й день</h3>
-                <ul class="program-list">
-                  <li><span class="time">11:00</span><span>Сбор для служащих</span></li>
-                  <li><span class="time">11:30</span><span>Встреча гостей, регистрация</span></li>
-                  <li>
-                    <span class="time">12:00 - 13:00</span>
-                    <span>Торжественная часть: открытие, минута молчания, видео, считалочка ЧВ, поздравления</span>
-                  </li>
-                  <li><span class="time">13:00 - 13:10</span><span>Перерыв</span></li>
-                  <li><span class="time">13:10 - 14:00</span><span>Спикерская 1</span></li>
-                  <li><span class="time">14:00 - 15:00</span><span>Обед</span></li>
-                  <li><span class="time">15:00 - 15:45</span><span>Спикерская 2</span></li>
-                  <li><span class="time">15:45 - 16:00</span><span>Перерыв</span></li>
-                  <li><span class="time">16:00 - 17:30</span><span>Открытое собрание заключительное</span></li>
-                  <li><span class="time">17:30 - 18:30</span><span>Розыгрыш сувенирки и чайная</span></li>
-                  <li><span class="time">18:30 - 20:00</span><span>Тусовка</span></li>
-                  <li><span class="time">20:00 - 21:00</span><span>Уборка и сдача помещения</span></li>
-                </ul>
-              </article>
-
-              <article class="day">
-                <h3>10 мая • 2-й день</h3>
-                <ul class="program-list">
-                  <li><span class="time">13:00</span><span>Начало</span></li>
-                  <li><span class="time">14:00</span><span>Группа</span></li>
-                  <li><span class="time">После</span><span>Шашлыки, игры, общение</span></li>
-                </ul>
-              </article>
-            </div>
+            <article class="day">
+              <h3>10 мая • 2-й день</h3>
+              <ul class="program-list">
+                <li><span class="time">13:00</span><span>Начало</span></li>
+                <li><span class="time">14:00</span><span>Группа</span></li>
+                <li><span class="time">После</span><span>Шашлыки, игры, общение</span></li>
+              </ul>
+            </article>
           </div>
-
-          <aside class="contact-card" id="contacts">
-            <h2 class="section-title">Контакты</h2>
-            <p class="section-copy">
-              Для адреса, уточнений по размещению, программе или координации
-              лучше писать сразу. Сайт уже готов принимать реальную ссылку на
-              Telegram-чат.
-            </p>
-
-            <div class="contact-links">
-              <a class="contact-link" href="tel:+48791629324">
-                <strong>Связь с ВС</strong>
-                <span>+48 791 629 324 • Саша</span>
-              </a>
-              <a class="contact-link" href="https://t.me/your_link">
-                <strong>Telegram</strong>
-                <span>Подставить реальную ссылку на чат или канал мероприятия</span>
-              </a>
-              <a class="contact-link" href="#oracle">
-                <strong>Фишка лендинга</strong>
-                <span>Отправь другу ссылку и скажи: сначала получи свое предсказание</span>
-              </a>
-            </div>
-          </aside>
         </section>
 
-        <footer class="footer">
-          <span>NA8 Warszawa • na8waw.pl</span>
-          <span>Лендинг мероприятия с интерактивной механикой</span>
-        </footer>
-      </div>
+        <aside class="panel" id="contacts">
+          <div class="panel-eyebrow">Контакты</div>
+          <h2 class="panel-title">Связь и координация</h2>
+          <div class="contact-links">
+            <a class="contact-link" href="tel:+48791629324">
+              <strong>Связаться с ВС</strong>
+              <span>+48 791 629 324 • Саша</span>
+            </a>
+            <a class="contact-link" href="https://t.me/your_link">
+              <strong>Telegram</strong>
+              <span>Подставить реальную ссылку на чат или канал мероприятия</span>
+            </a>
+            <a class="contact-link" href="#oracle">
+              <strong>Поделиться</strong>
+              <span>Отправь ссылку на сайт вместе с предсказанием от Высшей силы</span>
+            </a>
+          </div>
+        </aside>
+      </section>
     </main>
 
-    <script>
-      const predictions = [
-        {
-          title: "Твой лучший разговор на этом событии еще не начался",
-          text:
-            "Останься чуть дольше после официальной части. Именно там тебя найдет нужный человек, нужный смех и нужная поддержка.",
-        },
-        {
-          title: "Высшая сила велит не стоять у стены",
-          text:
-            "Сядь ближе, заговори первым и не прячься за телефоном. Твое место в центре живого контакта, а не на краю зала.",
-        },
-        {
-          title: "Тебе выпадет чай, смех и один важный инсайт",
-          text:
-            "Не пытайся вычислить заранее, когда случится главное. Самое точное попадание часто приходит между пунктами программы.",
-        },
-        {
-          title: "На юбилее ты услышишь именно то, что был не готов услышать",
-          text:
-            "И в этом будет польза. Не спорь с моментом сразу, дай ему дорасти до смысла к вечеру.",
-        },
-        {
-          title: "Высшая сила уже забронировала тебе знакомство",
-          text:
-            "Есть человек, с которым вы пока не встретились, но после этой поездки будете помнить друг друга очень долго.",
-        },
-        {
-          title: "Второй день окажется важнее, чем кажется сейчас",
-          text:
-            "Не воспринимай его как довесок. Именно в более свободной части события часто случается главное сближение.",
-        },
-        {
-          title: "Ты уйдешь домой не с тем настроением, с которым пришел",
-          text:
-            "Тяжесть заметно отпустит. Но для этого придется дать мероприятию шанс и не закрываться в первые часы.",
-        },
-        {
-          title: "Сегодня для тебя сработает простая магия присутствия",
-          text:
-            "Слушай внимательно, говори честно и не спеши. Высшая сила любит тех, кто действительно присутствует.",
-        },
-      ];
-
-      const titleNode = document.getElementById("prediction-title");
-      const textNode = document.getElementById("prediction-text");
-      const metaNode = document.getElementById("prediction-meta");
-      const buttonNode = document.getElementById("prediction-button");
-      const shareNode = document.getElementById("prediction-share");
-
-      let currentIndex = 0;
-
-      function renderPrediction(index) {
-        const item = predictions[index];
-        titleNode.textContent = item.title;
-        textNode.textContent = item.text;
-        metaNode.textContent = `Предсказание №${index + 1} из колоды Высшей силы`;
-      }
-
-      buttonNode.addEventListener("click", () => {
-        let nextIndex = Math.floor(Math.random() * predictions.length);
-
-        if (predictions.length > 1) {
-          while (nextIndex === currentIndex) {
-            nextIndex = Math.floor(Math.random() * predictions.length);
-          }
-        }
-
-        currentIndex = nextIndex;
-        renderPrediction(currentIndex);
-      });
-
-      shareNode.addEventListener("click", async () => {
-        const text = `${predictions[currentIndex].title}. ${predictions[currentIndex].text}`;
-
-        try {
-          await navigator.clipboard.writeText(text);
-          shareNode.textContent = "Скопировано";
-
-          window.setTimeout(() => {
-            shareNode.textContent = "Скопировать текст";
-          }, 1400);
-        } catch (error) {
-          shareNode.textContent = "Не удалось скопировать";
-
-          window.setTimeout(() => {
-            shareNode.textContent = "Скопировать текст";
-          }, 1400);
-        }
-      });
-
-      renderPrediction(currentIndex);
-    </script>
+    <script type="module" src="./scripts/predictions.js"></script>
   </body>
 </html>
