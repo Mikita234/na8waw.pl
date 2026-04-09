@@ -126,6 +126,12 @@ body::after {
   min-height: 760px;
 }
 
+.hero-locale {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
 .hero-topline {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -263,29 +269,6 @@ body::after {
   box-shadow:
     inset 0 -28px 60px rgba(2, 23, 61, 0.16),
     inset 0 18px 36px rgba(255, 255, 255, 0.16);
-}
-
-.hero-blob-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 20px solid rgba(255, 255, 255, 0.92);
-  background: transparent;
-}
-
-.hero-blob-ring-one {
-  left: 36%;
-  top: 32%;
-  width: 128px;
-  height: 76px;
-  transform: rotate(18deg);
-}
-
-.hero-blob-ring-two {
-  left: 48%;
-  top: 39%;
-  width: 162px;
-  height: 102px;
-  transform: rotate(26deg);
 }
 
 .content-grid {
@@ -586,20 +569,9 @@ body::after {
 @media (max-width: 720px) {
   body::before,
   body::after,
+  .page-bg::before,
   .page-bg::after {
     display: none;
-  }
-
-  .page-bg::before {
-    left: 50%;
-    bottom: auto;
-    top: 320px;
-    width: 120vw;
-    height: 58vw;
-    min-width: 0;
-    min-height: 0;
-    transform: translateX(-18%) rotate(-8deg);
-    opacity: 0.92;
   }
 
   .page-shell {
@@ -615,11 +587,12 @@ body::after {
   .panel {
     padding-left: 16px;
     padding-right: 16px;
+    backdrop-filter: none;
   }
 
   .hero {
     min-height: auto;
-    padding-bottom: 240px;
+    padding-bottom: 188px;
   }
 
   .hero-topline {
@@ -644,39 +617,24 @@ body::after {
     flex-direction: column;
   }
 
+  .hero-locale {
+    margin-bottom: 10px;
+  }
+
   .button {
     width: 100%;
   }
 
   .hero-blob {
-    left: 22%;
-    right: -18%;
+    left: 30%;
+    right: -10%;
     bottom: 18px;
-    height: 250px;
+    height: 180px;
     transform: translateX(0);
   }
 
   .hero-blob video {
-    inset: 18% 23% 18% 19%;
-    height: 66%;
-    max-width: 30%;
-    opacity: 0.62;
-  }
-
-  .hero-blob-ring-one {
-    left: 36%;
-    top: 33%;
-    width: 66px;
-    height: 42px;
-    border-width: 10px;
-  }
-
-  .hero-blob-ring-two {
-    left: 50%;
-    top: 40%;
-    width: 90px;
-    height: 58px;
-    border-width: 10px;
+    display: none;
   }
 
   .program-list li {

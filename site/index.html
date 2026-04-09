@@ -15,6 +15,13 @@
 
     <main class="page-shell">
       <header class="hero">
+        <div class="hero-locale">
+          <div class="lang-switch" role="tablist" aria-label="Перемикач мови" id="global-language-switch">
+            <button class="lang-switch-button is-active" data-set-locale="uk" type="button">укр</button>
+            <button class="lang-switch-button" data-set-locale="ru" type="button">рус</button>
+          </div>
+        </div>
+
         <div class="hero-topline">
           <div class="hero-date">9.05</div>
           <img class="hero-logo" src="./media/na8.png" alt="NA8 Warszawa" />
@@ -40,8 +47,6 @@
         </div>
 
         <div class="hero-blob" aria-hidden="true">
-          <div class="hero-blob-ring hero-blob-ring-one"></div>
-          <div class="hero-blob-ring hero-blob-ring-two"></div>
           <video autoplay muted loop playsinline preload="auto">
             <source src="./media/8lat.mp4" type="video/mp4" />
           </video>
@@ -112,9 +117,9 @@
               <div class="panel-eyebrow" id="daily-eyebrow">Щоденник на сьогодні</div>
               <h2 class="panel-title" id="daily-title">09 Квітня • «Діємо»</h2>
             </div>
-            <div class="lang-switch" role="tablist" aria-label="Language switcher">
-              <button class="lang-switch-button is-active" id="lang-uk" type="button">укр</button>
-              <button class="lang-switch-button" id="lang-ru" type="button">рус</button>
+            <div class="lang-switch" role="tablist" aria-label="Перемикач мови" id="daily-language-switch">
+              <button class="lang-switch-button is-active" data-set-locale="uk" type="button">укр</button>
+              <button class="lang-switch-button" data-set-locale="ru" type="button">рус</button>
             </div>
           </div>
           <p class="panel-copy" id="daily-copy">
