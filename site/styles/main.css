@@ -215,7 +215,7 @@ body::after {
   display: none;
 }
 
-.hero-blob video {
+.hero-blob img {
   position: absolute;
   inset: 2% auto auto -6%;
   z-index: 1;
@@ -942,7 +942,7 @@ body::after {
     display: none;
   }
 
-  .hero-blob video {
+  .hero-blob img {
     inset: 0;
     width: 100%;
     height: 100%;
