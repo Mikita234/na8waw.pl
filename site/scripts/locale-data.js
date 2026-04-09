@@ -47,16 +47,20 @@ export const siteCopy = {
       {
         title: "9 травня",
         kicker: "Перший день",
-        text: "Відкрити точку на карті для першого дня зустрічі.",
+        mapDayTitle: "9 травня • Перший день",
+        text: "Точка зустрічі на 9 травня. Натисни, щоб показати її на карті.",
         action: "Відкрити карту",
-        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
       },
       {
         title: "10 травня",
         kicker: "Другий день",
-        text: "Відкрити точку на карті для другого дня зустрічі.",
+        mapDayTitle: "10 травня • Другий день",
+        text: "Точка зустрічі на 10 травня. Натисни, щоб показати її на карті.",
         action: "Відкрити карту",
-        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
       },
     ],
     contacts: [
@@ -77,7 +81,7 @@ export const siteCopy = {
       {
         title: "9 травня • 1-й день",
         locationLabel: "Точка на карті для 9 травня",
-        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
         items: [
           ["11:00", "Збір для служителів"],
           ["11:30", "Зустріч гостей, реєстрація"],
@@ -96,7 +100,7 @@ export const siteCopy = {
       {
         title: "10 травня • 2-й день",
         locationLabel: "Точка на карті для 10 травня",
-        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
         items: [
           ["13:00", "Початок"],
           ["14:00", "Група"],
@@ -153,16 +157,20 @@ export const siteCopy = {
       {
         title: "9 мая",
         kicker: "Первый день",
-        text: "Открыть точку на карте для первого дня встречи.",
+        mapDayTitle: "9 мая • Первый день",
+        text: "Точка встречи на 9 мая. Нажми, чтобы показать ее на карте.",
         action: "Открыть карту",
-        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
       },
       {
         title: "10 мая",
         kicker: "Второй день",
-        text: "Открыть точку на карте для второго дня встречи.",
+        mapDayTitle: "10 мая • Второй день",
+        text: "Точка встречи на 10 мая. Нажми, чтобы показать ее на карте.",
         action: "Открыть карту",
-        href: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
       },
     ],
     contacts: [
@@ -183,7 +191,7 @@ export const siteCopy = {
       {
         title: "9 мая • 1-й день",
         locationLabel: "Точка на карте для 9 мая",
-        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
         items: [
           ["11:00", "Сбор для служащих"],
           ["11:30", "Встреча гостей, регистрация"],
@@ -202,7 +210,7 @@ export const siteCopy = {
       {
         title: "10 мая • 2-й день",
         locationLabel: "Точка на карте для 10 мая",
-        locationHref: "https://share.google/fa0xr2xZXjl3Ge6ku",
+        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
         items: [
           ["13:00", "Начало"],
           ["14:00", "Группа"],

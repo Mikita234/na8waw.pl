@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260409u";
 import "./daily.js?v=20260409u";
-import { siteCopy } from "./locale-data.js?v=20260409v";
+import { siteCopy } from "./locale-data.js?v=20260409w";
 import { subscribeLocale } from "./locale.js?v=20260409u";
 
 const nodes = {
@@ -28,6 +28,9 @@ const nodes = {
   locationsEyebrow: document.getElementById("locations-eyebrow"),
   locationsTitle: document.getElementById("locations-title"),
   locationsCopy: document.getElementById("locations-copy"),
+  locationMapDay: document.getElementById("location-map-day"),
+  locationMapOpen: document.getElementById("location-map-open"),
+  locationMapFrame: document.getElementById("location-map-frame"),
   locationLinks: document.getElementById("location-links"),
   programEyebrow: document.getElementById("program-eyebrow"),
   programTitle: document.getElementById("program-title"),
@@ -108,15 +111,29 @@ function renderContacts(items) {
 function renderLocations(items) {
   nodes.locationLinks.innerHTML = "";
 
-  items.forEach((item) => {
-    const link = document.createElement("a");
-    link.className = "location-link";
-    link.href = item.href;
-    if (item.href.startsWith("http")) {
-      link.target = "_blank";
-      link.rel = "noreferrer noopener";
+  const activateLocation = (item, button) => {
+    setText(nodes.locationMapDay, item.mapDayTitle);
+    setText(nodes.locationMapOpen, item.action);
+    nodes.locationMapOpen.href = item.href;
+    nodes.locationMapFrame.src = item.embedHref;
+
+    Array.from(nodes.locationLinks.children).forEach((node) => {
+      node.classList.remove("is-active");
+    });
+
+    if (button) {
+      button.classList.add("is-active");
     }
-    link.innerHTML = `
+  };
+
+  items.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.className = "location-link";
+    button.type = "button";
+    if (index === 0) {
+      button.classList.add("is-active");
+    }
+    button.innerHTML = `
       <div class="location-link-head">
         <strong>${item.title}</strong>
         <span>${item.kicker}</span>
@@ -124,8 +141,15 @@ function renderLocations(items) {
       <p>${item.text}</p>
       <em>${item.action}</em>
     `;
-    nodes.locationLinks.appendChild(link);
+    button.addEventListener("click", () => {
+      activateLocation(item, button);
+    });
+    nodes.locationLinks.appendChild(button);
   });
+
+  if (items[0]) {
+    activateLocation(items[0], nodes.locationLinks.firstElementChild);
+  }
 }
 
 subscribeLocale((locale) => {
