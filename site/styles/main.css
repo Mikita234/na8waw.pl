@@ -335,6 +335,7 @@ body::after {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  box-shadow: 0 16px 34px rgba(7, 35, 82, 0.06);
   background:
     radial-gradient(circle at top, rgba(13, 87, 187, 0.08), transparent 36%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 242, 233, 0.8));
@@ -441,6 +442,7 @@ body::after {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  box-shadow: 0 12px 28px rgba(26, 26, 26, 0.05);
   background:
     radial-gradient(circle at top left, rgba(13, 87, 187, 0.06), transparent 28%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 241, 232, 0.84));
@@ -597,7 +599,7 @@ body::after {
 
   .hero {
     min-height: auto;
-    padding-bottom: 220px;
+    padding-bottom: 176px;
   }
 
   .hero-topline {
@@ -615,6 +617,14 @@ body::after {
 
   .hero-title {
     font-size: clamp(3rem, 17vw, 5.6rem);
+    line-height: 0.92;
+  }
+
+  .hero-copy {
+    margin-top: 14px;
+    max-width: 34ch;
+    font-size: 0.98rem;
+    line-height: 1.58;
   }
 
   .hero-actions,
@@ -630,12 +640,23 @@ body::after {
     width: 100%;
   }
 
+  .button-primary {
+    min-height: 54px;
+  }
+
+  .button-secondary {
+    min-height: 48px;
+    background: rgba(255, 255, 255, 0.48);
+    box-shadow: none;
+  }
+
   .hero-blob {
-    left: 42%;
-    right: -16%;
-    bottom: -2%;
-    height: 34%;
-    transform: none;
+    left: 50%;
+    right: auto;
+    bottom: 18px;
+    width: clamp(214px, 62vw, 318px);
+    height: clamp(214px, 62vw, 318px);
+    transform: translateX(-50%);
   }
 
   .hero::after {
@@ -643,10 +664,58 @@ body::after {
   }
 
   .hero-blob video {
-    left: -10%;
-    top: 0;
-    width: 78%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     max-width: none;
+  }
+
+  .oracle-card-idle {
+    min-height: 280px;
+  }
+
+  .oracle-placeholder {
+    margin: 14px 0 16px;
+    font-size: clamp(1.22rem, 8vw, 1.9rem);
+  }
+
+  .panel-daily-head {
+    gap: 12px;
+  }
+
+  .lang-switch {
+    padding: 3px;
+  }
+
+  .lang-switch-button {
+    min-width: 58px;
+    min-height: 36px;
+    font-size: 0.72rem;
+  }
+
+  .content-grid {
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .panel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .daily-card,
+  .oracle-card {
+    padding: 18px;
+  }
+
+  .daily-quote {
+    font-size: clamp(1.32rem, 6.5vw, 1.9rem);
+  }
+
+  .panel-copy,
+  .oracle-text,
+  .daily-text {
+    line-height: 1.58;
   }
 
   .program-list li {
