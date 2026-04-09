@@ -1,0 +1,33 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload site over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: hosting2658608.online.pro
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps-legacy
+          port: 990
+          local-dir: ./site/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
