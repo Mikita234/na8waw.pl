@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260409u";
 import "./daily.js?v=20260409u";
-import { siteCopy } from "./locale-data.js?v=20260409ab";
+import { siteCopy } from "./locale-data.js?v=20260409ae";
 import { subscribeLocale } from "./locale.js?v=20260409u";
 
 let programStatusInterval;
@@ -128,26 +128,147 @@ function formatCountdown(ms, units) {
   return { days, hours, minutes, seconds, units };
 }
 
-function renderCountdownMarkup(prefix, countdown) {
-  const segments = [
-    [countdown.days, countdown.units.d],
-    [countdown.hours, countdown.units.h],
-    [countdown.minutes, countdown.units.m],
-    [countdown.seconds, countdown.units.s],
-  ]
-    .map(
-      ([value, unit]) => `
-        <span class="program-live-segment">
-          <strong>${String(value).padStart(2, "0")}</strong>
-          <em>${unit}</em>
+const DOT_MATRIX = {
+  "0": [
+    "11111",
+    "10001",
+    "10011",
+    "10101",
+    "11001",
+    "10001",
+    "11111",
+  ],
+  "1": [
+    "00100",
+    "01100",
+    "00100",
+    "00100",
+    "00100",
+    "00100",
+    "01110",
+  ],
+  "2": [
+    "11111",
+    "00001",
+    "00001",
+    "11111",
+    "10000",
+    "10000",
+    "11111",
+  ],
+  "3": [
+    "11111",
+    "00001",
+    "00001",
+    "01111",
+    "00001",
+    "00001",
+    "11111",
+  ],
+  "4": [
+    "10001",
+    "10001",
+    "10001",
+    "11111",
+    "00001",
+    "00001",
+    "00001",
+  ],
+  "5": [
+    "11111",
+    "10000",
+    "10000",
+    "11111",
+    "00001",
+    "00001",
+    "11111",
+  ],
+  "6": [
+    "11111",
+    "10000",
+    "10000",
+    "11111",
+    "10001",
+    "10001",
+    "11111",
+  ],
+  "7": [
+    "11111",
+    "00001",
+    "00010",
+    "00100",
+    "01000",
+    "01000",
+    "01000",
+  ],
+  "8": [
+    "11111",
+    "10001",
+    "10001",
+    "11111",
+    "10001",
+    "10001",
+    "11111",
+  ],
+  "9": [
+    "11111",
+    "10001",
+    "10001",
+    "11111",
+    "00001",
+    "00001",
+    "11111",
+  ],
+  ":": [
+    "0",
+    "1",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+  ],
+};
+
+function renderDotMatrix(text) {
+  return text
+    .split("")
+    .map((char) => {
+      const pattern = DOT_MATRIX[char];
+      if (!pattern) {
+        return "";
+      }
+
+      const width = pattern[0].length;
+      const dots = pattern
+        .flatMap((row) => row.split(""))
+        .map((dot) => `<span class="program-live-dot${dot === "1" ? " is-on" : ""}"></span>`)
+        .join("");
+
+      return `
+        <span class="program-live-char" style="--dot-cols:${width}">
+          ${dots}
         </span>
-      `,
-    )
+      `;
+    })
     .join("");
+}
+
+function renderCountdownMarkup(prefix, countdown) {
+  const value = [
+    countdown.days,
+    countdown.hours,
+    countdown.minutes,
+    countdown.seconds,
+  ]
+    .map((part) => String(part).padStart(2, "0"))
+    .join(":");
 
   return `
     <span class="program-live-kicker">${prefix}</span>
-    <span class="program-live-board">${segments}</span>
+    <span class="program-live-board" aria-label="${value}">
+      ${renderDotMatrix(value)}
+    </span>
   `;
 }
 
