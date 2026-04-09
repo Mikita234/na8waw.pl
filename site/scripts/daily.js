@@ -7,13 +7,13 @@ const sourceNode = document.getElementById("daily-source");
 const bodyNode = document.getElementById("daily-body");
 const focusLabelNode = document.getElementById("daily-focus-label");
 const focusTextNode = document.getElementById("daily-focus-text");
-const ukButtonNode = document.getElementById("lang-uk");
-const ruButtonNode = document.getElementById("lang-ru");
 const shareButtonNode = document.getElementById("daily-share");
+const localeButtons = Array.from(document.querySelectorAll("[data-set-locale]"));
 
 function setActiveLanguage(lang) {
-  ukButtonNode.classList.toggle("is-active", lang === "uk");
-  ruButtonNode.classList.toggle("is-active", lang === "ru");
+  localeButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.setLocale === lang);
+  });
 }
 
 function renderDaily(lang) {
@@ -35,14 +35,6 @@ function renderDaily(lang) {
 
   setActiveLanguage(lang);
 }
-
-ukButtonNode.addEventListener("click", () => {
-  setLocale("uk");
-});
-
-ruButtonNode.addEventListener("click", () => {
-  setLocale("ru");
-});
 
 shareButtonNode.addEventListener("click", async () => {
   const locale = getLocale();

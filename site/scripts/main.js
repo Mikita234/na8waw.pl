@@ -40,6 +40,7 @@ const nodes = {
   contactsEyebrow: document.getElementById("contacts-eyebrow"),
   contactsTitle: document.getElementById("contacts-title"),
   contactLinks: document.getElementById("contact-links"),
+  localeSwitchers: Array.from(document.querySelectorAll('[role="tablist"]')),
 };
 
 function renderProgram(days) {
@@ -85,6 +86,9 @@ subscribeLocale((locale) => {
   document.documentElement.lang = copy.htmlLang;
   document.title = copy.pageTitle;
   document.querySelector('meta[name="description"]').setAttribute("content", copy.metaDescription);
+  nodes.localeSwitchers.forEach((node) => {
+    node.setAttribute("aria-label", copy.localeSwitcherLabel);
+  });
 
   nodes.heroKicker.textContent = copy.heroKicker;
   nodes.heroTitleMain.textContent = copy.heroTitleMain;

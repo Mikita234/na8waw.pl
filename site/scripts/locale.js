@@ -1,4 +1,5 @@
 const localeListeners = new Set();
+const localeButtons = Array.from(document.querySelectorAll("[data-set-locale]"));
 
 function detectLocale() {
   const langParam = new URLSearchParams(window.location.search).get("lang");
@@ -33,3 +34,9 @@ export function subscribeLocale(listener) {
     localeListeners.delete(listener);
   };
 }
+
+localeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setLocale(button.dataset.setLocale);
+  });
+});
