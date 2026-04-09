@@ -1,71 +1,452 @@
 <!doctype html>
-<html lang="pl">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>na8waw.pl</title>
+    <title>NA8 Warszawa | Юбилей группы «МАЕВКА»</title>
+    <meta
+      name="description"
+      content="Юбилей группы «МАЕВКА» в Варшаве. Программа на 9 и 10 мая, контакты и Telegram."
+    />
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f1e8;
-        --panel: #fffaf0;
-        --text: #1c1712;
-        --accent: #b8502d;
-        --muted: #6d6258;
-        --border: #d8c9b6;
+        --bg: #f4efe5;
+        --paper: rgba(255, 251, 245, 0.92);
+        --ink: #111111;
+        --muted: #5e574f;
+        --line: rgba(17, 17, 17, 0.14);
+        --accent: #1f6db1;
+        --accent-soft: rgba(31, 109, 177, 0.12);
+        --shadow: 0 30px 90px rgba(34, 24, 17, 0.12);
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
         background:
-          radial-gradient(circle at top, rgba(184, 80, 45, 0.18), transparent 32%),
-          linear-gradient(135deg, var(--bg), #ece5d8);
-        color: var(--text);
-        font-family: Georgia, "Times New Roman", serif;
+          radial-gradient(circle at top left, rgba(31, 109, 177, 0.1), transparent 28%),
+          radial-gradient(circle at top right, rgba(17, 17, 17, 0.06), transparent 24%),
+          linear-gradient(180deg, #f8f4ec 0%, #eee5d8 100%);
+        color: var(--ink);
+        font-family: "Arial Narrow", Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .poster {
+        width: min(100%, 760px);
+        margin: 0 auto;
         padding: 24px;
       }
 
-      main {
-        width: min(720px, 100%);
-        padding: 48px 40px;
-        background: rgba(255, 250, 240, 0.92);
-        border: 1px solid var(--border);
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        backdrop-filter: blur(14px);
+      }
+
+      .hero {
+        position: relative;
+        padding: 28px 28px 20px;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 18px 18px auto auto;
+        width: 120px;
+        height: 120px;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 50%;
+        opacity: 0.9;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 34px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        font-size: 0.86rem;
+      }
+
+      .header-left,
+      .header-right {
+        max-width: 40%;
+        line-height: 1.2;
+      }
+
+      .header-right {
+        text-align: right;
+      }
+
+      .brand {
+        display: grid;
+        place-items: center;
+        margin-bottom: 28px;
+      }
+
+      .brand-mark {
+        width: 154px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid var(--ink);
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(31, 109, 177, 0.16), transparent 40%),
+          linear-gradient(145deg, #fffdf8, #f4ecdf);
+      }
+
+      .brand-mark span {
+        display: block;
+        text-align: center;
+        font-weight: 700;
+        line-height: 0.85;
+        text-transform: uppercase;
+      }
+
+      .brand-mark .na {
+        font-size: 3.2rem;
+        letter-spacing: -0.06em;
+      }
+
+      .brand-mark .waw {
+        font-size: 0.82rem;
+        letter-spacing: 0.34em;
+        margin-left: 0.34em;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: 0.08em;
+      }
+
+      .lead {
+        margin: 0 0 28px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .hero-media {
+        margin: 0 0 24px;
+      }
+
+      .hero-media-frame {
+        position: relative;
+        overflow: hidden;
         border-radius: 24px;
-        box-shadow: 0 24px 60px rgba(28, 23, 18, 0.08);
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(242, 235, 224, 0.9));
+        box-shadow: 0 18px 34px rgba(17, 17, 17, 0.08);
       }
 
-      h1 {
+      .hero-media-frame video {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 210px;
+        padding: 14px 24px;
+        border-radius: 999px;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button-primary {
+        background: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 14px 28px rgba(17, 17, 17, 0.16);
+      }
+
+      .button-secondary {
+        color: var(--ink);
+        background: var(--accent-soft);
+        border: 1px solid rgba(31, 109, 177, 0.15);
+      }
+
+      .section {
+        padding: 26px 28px 30px;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-title {
+        margin: 0 0 18px;
+        text-align: center;
+        font-size: 1.45rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .schedule {
+        display: grid;
+        gap: 18px;
+      }
+
+      .day {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.45);
+      }
+
+      .day-title {
         margin: 0 0 12px;
-        font-size: clamp(2.5rem, 7vw, 4.5rem);
-        line-height: 0.95;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
-      p {
+      .program-list {
+        list-style: none;
         margin: 0;
-        font-size: 1.1rem;
-        line-height: 1.7;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .program-list li {
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 12px;
+        align-items: start;
+        line-height: 1.45;
+      }
+
+      .time {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .note {
         color: var(--muted);
       }
 
-      strong {
+      .contacts {
+        text-align: center;
+      }
+
+      .contacts p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .contact-link {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.04rem;
+      }
+
+      .telegram {
         color: var(--accent);
+      }
+
+      .footer {
+        padding: 0 28px 28px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 10px;
+        }
+
+        .poster {
+          padding: 10px 0;
+        }
+
+        .hero,
+        .section,
+        .footer {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .header {
+          font-size: 0.73rem;
+          margin-bottom: 22px;
+        }
+
+        .header-left,
+        .header-right {
+          max-width: 46%;
+        }
+
+        .brand-mark {
+          width: 128px;
+        }
+
+        .brand-mark .na {
+          font-size: 2.65rem;
+        }
+
+        .info-row {
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+        }
+
+        .button {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .section-title {
+          font-size: 1.16rem;
+        }
+
+        .program-list li {
+          grid-template-columns: 1fr;
+          gap: 3px;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>na8waw.pl</h1>
-      <p>
-        Базовый проект готов. Следующий шаг:
-        <strong>подключить серверные секреты и включить автодеплой</strong>.
-      </p>
+    <main class="poster">
+      <div class="card">
+        <section class="hero">
+          <div class="header">
+            <div class="header-left">Единство<br />в NAC</div>
+            <div class="header-right">Юбилей группы<br />«МАЕВКА»</div>
+          </div>
+
+          <div class="brand">
+            <div class="brand-mark" aria-label="NA8 Warszawa">
+              <span>
+                <span class="na">NA8</span>
+                <span class="waw">WAW</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span>9.05 - 10.05</span>
+            <span>Варшава</span>
+          </div>
+
+          <div class="hero-media">
+            <div class="hero-media-frame">
+              <video autoplay muted loop playsinline preload="auto" poster="">
+                <source src="./media/8lat.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <p class="lead">
+            Два дня встреч, спикерских, общего собрания, общения и живого
+            праздника. Вся программа и контакты собраны на одной странице.
+          </p>
+
+          <div class="actions">
+            <a class="button button-primary" href="tel:+48791629324">Связаться с ВС</a>
+            <a class="button button-secondary" href="https://t.me/your_link">Telegram</a>
+          </div>
+        </section>
+
+        <section class="section" id="program">
+          <h2 class="section-title">Программа</h2>
+
+          <div class="schedule">
+            <article class="day">
+              <h3 class="day-title">9 мая - 1-й день</h3>
+              <ul class="program-list">
+                <li><span class="time">11:00</span><span>Сбор для служащих</span></li>
+                <li><span class="time">11:30</span><span>Встреча гостей, регистрация</span></li>
+                <li>
+                  <span class="time">12:00-13:00</span>
+                  <span>Торжественная часть: открытие, минута молчания, видео, считалочка ЧВ, поздравления</span>
+                </li>
+                <li><span class="time">13:00-13:10</span><span>Перерыв</span></li>
+                <li><span class="time">13:10-14:00</span><span>Спикерская 1</span></li>
+                <li><span class="time">14:00-15:00</span><span>Обед</span></li>
+                <li><span class="time">15:00-15:45</span><span>Спикерская 2</span></li>
+                <li><span class="time">15:45-16:00</span><span>Перерыв</span></li>
+                <li><span class="time">16:00-17:30</span><span>Открытое собрание заключительное</span></li>
+                <li><span class="time">17:30-18:30</span><span>Розыгрыш сувенирки и чайная</span></li>
+                <li><span class="time">18:30-20:00</span><span>Тусовка</span></li>
+                <li><span class="time">20:00-21:00</span><span>Уборка и сдача помещения</span></li>
+              </ul>
+            </article>
+
+            <article class="day">
+              <h3 class="day-title">10 мая - 2-й день</h3>
+              <ul class="program-list">
+                <li><span class="time">13:00</span><span>Начало</span></li>
+                <li><span class="time">14:00</span><span>Группа</span></li>
+                <li><span class="time">После</span><span>Шашлыки, игры, общение</span></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section contacts" id="contacts">
+          <h2 class="section-title">Контакты</h2>
+          <p>
+            Если нужен адрес, детали по размещению или уточнения по программе,
+            связывайся напрямую.
+          </p>
+          <a class="contact-link" href="tel:+48791629324">+48 791 629 324 - Саша</a>
+          <a class="contact-link telegram" href="https://t.me/your_link">Присоединиться в Telegram</a>
+          <p class="note">Ссылку на Telegram можно заменить на реальную в следующем коммите.</p>
+        </section>
+
+        <div class="footer">NA8 Warszawa • na8waw.pl</div>
+      </div>
     </main>
   </body>
 </html>
