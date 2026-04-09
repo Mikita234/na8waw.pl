@@ -9,6 +9,7 @@
       content="09 Квітня • «Діємо». Ми вчимося переживати почуття і розуміти, що вони не можуть завдати нам шкоди, якщо ми не будемо діяти відповідно до них."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://na8waw.pl/daily/uk.html" />
     <meta property="og:title" content="Щоденник на сьогодні | NA8 Warszawa" />
     <meta
       property="og:description"
@@ -16,10 +17,142 @@
     />
     <meta property="og:image" content="https://na8waw.pl/media/na8.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      http-equiv="refresh"
-      content="0; url=/?lang=uk#daily"
-    />
+    <style>
+      :root {
+        --bg: #f7f3eb;
+        --panel: rgba(255, 255, 255, 0.9);
+        --ink: #171717;
+        --muted: #5e5e5e;
+        --line: rgba(23, 23, 23, 0.12);
+        --blue: #0d57bb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: "Arial Narrow", Arial, sans-serif;
+        background: linear-gradient(180deg, #fcfbf8 0%, var(--bg) 100%);
+        padding: 20px;
+      }
+
+      main {
+        width: min(100%, 760px);
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        background: var(--panel);
+        box-shadow: 0 24px 60px rgba(23, 23, 23, 0.08);
+        overflow: hidden;
+      }
+
+      header,
+      section {
+        padding: 24px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        margin-bottom: 10px;
+        color: var(--blue);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 5vw, 3.3rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      blockquote {
+        margin: 0 0 16px;
+        font-size: clamp(1.2rem, 3.5vw, 1.9rem);
+        line-height: 1.1;
+        text-transform: uppercase;
+      }
+
+      .source {
+        margin-bottom: 16px;
+        color: var(--blue);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .body {
+        display: grid;
+        gap: 14px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 22px;
+        padding: 14px 22px;
+        border-radius: 999px;
+        background: #171717;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">Щоденник на сьогодні</div>
+        <h1>09 Квітня • «Діємо»</h1>
+        <p>
+          Початок сьогоднішнього тексту дня. Повну версію можна відкрити на
+          основному сайті NA8 Warszawa.
+        </p>
+      </header>
+
+      <section>
+        <blockquote>
+          «Ми вчимося переживати почуття і розуміти, що вони не можуть завдати
+          нам шкоди, якщо ми не будемо діяти відповідно до них».
+        </blockquote>
+
+        <div class="source">ІП № 16, Для новачків</div>
+
+        <div class="body">
+          <p>
+            Багато хто приходить у відновлення з внутрішнім конфліктом: хочемо
+            позбутися болю, але не завжди готові відпустити старі способи
+            реагування. З часом стає видно, що свобода приходить не тільки
+            через відмову від руйнівної дії.
+          </p>
+          <p>
+            Вона приходить і через здатність витримати почуття, не
+            підкоряючись їм.
+          </p>
+        </div>
+
+        <a class="button" href="/?lang=uk#daily">Відкрити повний щоденник</a>
+      </section>
+    </main>
+  </body>
 </html>
