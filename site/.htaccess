@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Language-specific landing pages for bots and shared links.
+RewriteCond %{REQUEST_URI} ^/$
+RewriteCond %{QUERY_STRING} (^|&)lang=ru(&|$)
+RewriteRule ^$ /ru.html [R=302,L]
+
+RewriteCond %{REQUEST_URI} ^/$
+RewriteCond %{QUERY_STRING} (^|&)lang=uk(&|$)
+RewriteRule ^$ /uk.html [R=302,L]
