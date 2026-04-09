@@ -127,7 +127,7 @@ ${paragraphs}
 
 function renderRuPage(data) {
   const description = `Русский ежедневник на сегодня для NA8 Warszawa. ${data.title}. Юбилей группы «МАЕВКА» пройдет 9–10 мая в Варшаве.`;
-  const previewParagraphs = data.previewLead
+  const bodyParagraphs = data.paragraphs
     .map((paragraph) => `          <p>\n            ${escapeHtml(paragraph)}\n          </p>`)
     .join("\n");
 
@@ -271,8 +271,8 @@ function renderRuPage(data) {
         <div class="eyebrow">Ежедневник на сегодня</div>
         <h1>${escapeHtml(data.title)}</h1>
         <p>
-          Начало сегодняшнего текста дня. Полную версию можно открыть на
-          основном сайте NA8 Warszawa.
+          Полный сегодняшний текст дня и быстрый переход к информации о
+          юбилейной встрече в Варшаве 9–10 мая.
         </p>
       </header>
 
@@ -284,10 +284,16 @@ function renderRuPage(data) {
         <div class="source">${escapeHtml(data.source)}</div>
 
         <div class="body">
-${previewParagraphs}
+${bodyParagraphs}
         </div>
 
-        <a class="button" href="/?lang=ru#daily">Открыть полный ежедневник</a>
+        <div class="body">
+          <p>
+            <strong>${escapeHtml(data.focusLabel)}</strong> ${escapeHtml(data.focusText)}
+          </p>
+        </div>
+
+        <a class="button" href="/?lang=ru">Узнать о мероприятии в Варшаве</a>
       </section>
     </main>
   </body>
