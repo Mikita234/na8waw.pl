@@ -198,6 +198,25 @@ body::after {
   margin-top: 24px;
 }
 
+.hero-media {
+  margin-top: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top, rgba(13, 87, 187, 0.08), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(242, 237, 228, 0.92));
+  box-shadow: 0 16px 34px rgba(17, 24, 39, 0.08);
+}
+
+.hero-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -576,6 +595,14 @@ body::after {
 
   .button {
     width: 100%;
+  }
+
+  .hero-media {
+    margin-top: 22px;
+  }
+
+  .hero-media video {
+    max-height: 240px;
   }
 
   .program-list li {
