@@ -1,5 +1,5 @@
-import { dailyMeditations } from "./daily-data.js?v=20260409n";
-import { getLocale, subscribeLocale } from "./locale.js?v=20260409n";
+import { dailyMeditations } from "./daily-data.js?v=20260409p";
+import { getLocale, subscribeLocale } from "./locale.js?v=20260409p";
 
 const titleNode = document.getElementById("daily-title");
 const quoteNode = document.getElementById("daily-quote");
