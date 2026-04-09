@@ -13,7 +13,7 @@ const locales = {
     eventTail: "Ювілей групи «МАЇВКА» відбудеться 9–10 травня у Варшаві.",
     heroText: "Передбачення від Вищої Сили та вся інформація про ювілейну зустріч у Варшаві 9–10 травня.",
     buttonText: "Перейти до передбачення і програми",
-    eventUrl: (index) => `/?lang=uk&oracle=${index}#oracle`,
+    eventUrl: (index) => `/uk.html?oracle=${index}#oracle`,
   },
   ru: {
     dir: new URL("../site/oracle/ru/", import.meta.url),
@@ -26,7 +26,7 @@ const locales = {
     eventTail: "Юбилей группы «МАЕВКА» пройдет 9–10 мая в Варшаве.",
     heroText: "Предсказание от Высшей силы и вся информация о юбилейной встрече в Варшаве 9–10 мая.",
     buttonText: "Перейти к предсказанию и программе",
-    eventUrl: (index) => `/?lang=ru&oracle=${index}#oracle`,
+    eventUrl: (index) => `/ru.html?oracle=${index}#oracle`,
   },
 };
 
