@@ -1,6 +1,6 @@
-import { siteCopy } from "./locale-data.js?v=20260409j";
-import { getLocale, setLocale, subscribeLocale } from "./locale.js?v=20260409j";
-import { predictionsByLocale } from "./predictions-data.js?v=20260409j";
+import { siteCopy } from "./locale-data.js?v=20260409l";
+import { getLocale, setLocale, subscribeLocale } from "./locale.js?v=20260409l";
+import { predictionsByLocale } from "./predictions-data.js?v=20260409l";
 
 const titleNode = document.getElementById("prediction-title");
 const textNode = document.getElementById("prediction-text");
@@ -49,8 +49,7 @@ function getNextPredictionIndex() {
 
 function getPredictionShareUrl() {
   const url = new URL(window.location.origin);
-  url.pathname = currentLocale === "uk" ? "/oracle/uk.html" : "/oracle/ru.html";
-  url.searchParams.set("prediction", String(currentIndex + 1));
+  url.pathname = currentLocale === "uk" ? `/oracle/uk/${currentIndex + 1}.html` : `/oracle/ru/${currentIndex + 1}.html`;
   return url.toString();
 }
 

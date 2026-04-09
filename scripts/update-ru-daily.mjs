@@ -126,7 +126,7 @@ ${paragraphs}
 }
 
 function renderRuPage(data) {
-  const description = `Русский ежедневник на сегодня для NA8 Warszawa. ${data.title}. Юбилей группы «МАЕВКА» пройдет 9–10 мая в Варшаве.`;
+  const description = `Ежедневник на сегодня для гостей NA8 Warszawa. ${data.title}. Юбилей группы «МАЕВКА» пройдет 9–10 мая в Варшаве.`;
   const bodyParagraphs = data.paragraphs
     .map((paragraph) => `          <p>\n            ${escapeHtml(paragraph)}\n          </p>`)
     .join("\n");
