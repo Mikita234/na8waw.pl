@@ -1,4 +1,6 @@
-import { predictions } from "./predictions-data.js";
+import { siteCopy } from "./locale-data.js";
+import { getLocale, subscribeLocale } from "./locale.js";
+import { predictionsByLocale } from "./predictions-data.js";
 
 const titleNode = document.getElementById("prediction-title");
 const textNode = document.getElementById("prediction-text");
@@ -9,20 +11,22 @@ const oracleCardNode = document.getElementById("oracle-card");
 
 let currentIndex = 0;
 let hasRevealedPrediction = false;
+let currentLocale = getLocale();
 
 function renderPrediction(index) {
-  const item = predictions[index];
+  const item = predictionsByLocale[currentLocale][index];
 
   oracleCardNode.classList.remove("oracle-card-idle");
   oracleCardNode.classList.add("oracle-card-revealed");
   titleNode.textContent = item.title;
   textNode.textContent = item.text;
-  metaNode.textContent = `Предсказание №${index + 1} из колоды Высшей силы`;
+  metaNode.textContent = siteCopy[currentLocale].oracleMeta(index + 1);
   shareNode.disabled = false;
   hasRevealedPrediction = true;
 }
 
 function getNextPredictionIndex() {
+  const predictions = predictionsByLocale[currentLocale];
   let nextIndex = Math.floor(Math.random() * predictions.length);
 
   if (predictions.length > 1) {
@@ -39,17 +43,18 @@ async function copyPrediction() {
     return;
   }
 
-  const text = `${predictions[currentIndex].title}. ${predictions[currentIndex].text}`;
+  const item = predictionsByLocale[currentLocale][currentIndex];
+  const text = `${item.title}. ${item.text}`;
 
   try {
     await navigator.clipboard.writeText(text);
-    shareNode.textContent = "Скопировано";
+    shareNode.textContent = siteCopy[currentLocale].oracleShareDone;
   } catch (error) {
-    shareNode.textContent = "Не удалось скопировать";
+    shareNode.textContent = siteCopy[currentLocale].oracleShareFail;
   }
 
   window.setTimeout(() => {
-    shareNode.textContent = "Скопировать текст";
+    shareNode.textContent = siteCopy[currentLocale].oracleShare;
   }, 1400);
 }
 
@@ -60,4 +65,14 @@ buttonNode.addEventListener("click", () => {
 
 shareNode.addEventListener("click", () => {
   copyPrediction();
+});
+
+subscribeLocale((locale) => {
+  currentLocale = locale;
+  buttonNode.textContent = siteCopy[locale].oracleButton;
+  shareNode.textContent = siteCopy[locale].oracleShare;
+
+  if (hasRevealedPrediction) {
+    renderPrediction(currentIndex);
+  }
 });

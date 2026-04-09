@@ -492,6 +492,10 @@ body::after {
   line-height: 1.6;
 }
 
+.daily-actions {
+  margin-top: 18px;
+}
+
 .fact,
 .day,
 .contact-link {
@@ -580,6 +584,24 @@ body::after {
 }
 
 @media (max-width: 720px) {
+  body::before,
+  body::after,
+  .page-bg::after {
+    display: none;
+  }
+
+  .page-bg::before {
+    left: 50%;
+    bottom: auto;
+    top: 320px;
+    width: 120vw;
+    height: 58vw;
+    min-width: 0;
+    min-height: 0;
+    transform: translateX(-18%) rotate(-8deg);
+    opacity: 0.92;
+  }
+
   .page-shell {
     width: min(100%, calc(100% - 12px));
     padding-top: 8px;
@@ -596,8 +618,8 @@ body::after {
   }
 
   .hero {
-    min-height: 720px;
-    padding-bottom: 220px;
+    min-height: auto;
+    padding-bottom: 240px;
   }
 
   .hero-topline {
@@ -627,31 +649,34 @@ body::after {
   }
 
   .hero-blob {
-    left: 24%;
-    right: -26%;
-    bottom: 0;
-    height: 34%;
+    left: 22%;
+    right: -18%;
+    bottom: 18px;
+    height: 250px;
+    transform: translateX(0);
   }
 
   .hero-blob video {
-    inset: 17% 20% 15% 16%;
-    max-width: 34%;
+    inset: 18% 23% 18% 19%;
+    height: 66%;
+    max-width: 30%;
+    opacity: 0.62;
   }
 
   .hero-blob-ring-one {
-    left: 28%;
-    top: 31%;
-    width: 84px;
-    height: 58px;
-    border-width: 12px;
+    left: 36%;
+    top: 33%;
+    width: 66px;
+    height: 42px;
+    border-width: 10px;
   }
 
   .hero-blob-ring-two {
-    left: 42%;
+    left: 50%;
     top: 40%;
-    width: 112px;
-    height: 72px;
-    border-width: 14px;
+    width: 90px;
+    height: 58px;
+    border-width: 10px;
   }
 
   .program-list li {

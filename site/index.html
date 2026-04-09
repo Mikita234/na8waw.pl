@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NA8 Warszawa | ЕДИНСТВО В NAC</title>
+    <title>NA8 Warszawa | ЄДНІСТЬ У NAC</title>
     <meta
       name="description"
-      content="Лендинг юбилея группы «МАЕВКА» в Варшаве: афишный визуал, программа, контакты и предсказания от Высшей силы."
+      content="Лендінг ювілею групи «МАЇВКА» у Варшаві: афішний візуал, програма, контакти й передбачення від Вищої Сили."
     />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
@@ -21,22 +21,22 @@
           <div class="hero-date hero-date-right">10.05</div>
         </div>
 
-        <div class="hero-kicker">Восьмой юбилей группы «МАЕВКА»</div>
+        <div class="hero-kicker" id="hero-kicker">Восьмий ювілей групи «МАЇВКА»</div>
 
         <h1 class="hero-title">
-          <span>Единство в</span>
+          <span id="hero-title-main">Єдність у</span>
           <span class="hero-title-accent">NAC</span>
         </h1>
 
-        <p class="hero-copy">
-          Два дня встречи, общей памяти и живого контакта. Здесь собраны
-          программа, ежедневник на сегодня, контакты и личные предсказания от
-          Высшей силы, которые открываются прямо на сайте.
+        <p class="hero-copy" id="hero-copy">
+          Два дні зустрічі, спільної пам'яті й живого контакту. Тут зібрані
+          програма, щоденник на сьогодні, контакти й особисті передбачення від
+          Вищої Сили, які відкриваються просто на сайті.
         </p>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="#oracle">Получить предсказание</a>
-          <a class="button button-secondary" href="#program">Смотреть программу</a>
+          <a class="button button-primary" href="#oracle" id="hero-cta-primary">Отримати передбачення</a>
+          <a class="button button-secondary" href="#program" id="hero-cta-secondary">Дивитися програму</a>
         </div>
 
         <div class="hero-blob" aria-hidden="true">
@@ -50,28 +50,28 @@
 
       <section class="content-grid">
         <section class="panel panel-oracle" id="oracle">
-          <div class="panel-eyebrow">Предсказания от ВС</div>
-          <h2 class="panel-title">Предсказания от Высшей силы</h2>
-          <p class="panel-copy">
-            Открой личное предсказание на эти дни. Каждое из них собрано в
-            тональности юбилея, темы «Единство в NAC» и настроения встречи 9 и
-            10 мая.
+          <div class="panel-eyebrow" id="oracle-eyebrow">Передбачення від ВС</div>
+          <h2 class="panel-title" id="oracle-title">Передбачення від Вищої Сили</h2>
+          <p class="panel-copy" id="oracle-copy">
+            Відкрий особисте передбачення на ці дні. Кожне з них зібране в
+            тональності ювілею, теми «Єдність у NAC» і настрою зустрічі 9 та 10
+            травня.
           </p>
 
           <div class="oracle-card oracle-card-idle" id="oracle-card" aria-live="polite">
-            <div class="oracle-label">Сегодня Высшая сила говорит:</div>
+            <div class="oracle-label" id="oracle-label">Сьогодні Вища Сила говорить:</div>
             <div class="oracle-placeholder" id="oracle-placeholder">
-              Нажми кнопку и открой личное предсказание от ВС
+              Натисни кнопку і відкрий особисте передбачення від ВС
             </div>
             <h3 class="oracle-title oracle-hidden" id="prediction-title"></h3>
             <p class="oracle-text oracle-hidden" id="prediction-text"></p>
 
             <div class="oracle-actions">
               <button class="button button-primary" id="prediction-button" type="button">
-                Получить предсказание
+                Отримати передбачення
               </button>
               <button class="button button-secondary" id="prediction-share" type="button" disabled>
-                Скопировать текст
+                Скопіювати текст
               </button>
             </div>
 
@@ -80,26 +80,26 @@
         </section>
 
         <aside class="panel panel-info">
-          <div class="panel-eyebrow">О событии</div>
-          <h2 class="panel-title">Два дня, одна точка притяжения</h2>
-          <p class="panel-copy">
-            Юбилей задуман как плотная живая встреча: торжественная часть,
-            спикерские, открытое собрание, розыгрыш, чайная, тусовка и более
-            свободный второй день для общения.
+          <div class="panel-eyebrow" id="about-eyebrow">Про подію</div>
+          <h2 class="panel-title" id="about-title">Два дні, одна точка тяжіння</h2>
+          <p class="panel-copy" id="about-copy">
+            Ювілей задуманий як щільна жива зустріч: урочиста частина,
+            спікерські, відкрите зібрання, розіграш, чайна, тусовка і вільніший
+            другий день для спілкування.
           </p>
 
           <div class="facts">
             <div class="fact">
-              <span class="fact-label">Город</span>
-              <strong>Варшава</strong>
+              <span class="fact-label" id="fact-city-label">Місто</span>
+              <strong id="fact-city-value">Варшава</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">Даты</span>
-              <strong>9.05 - 10.05</strong>
+              <span class="fact-label" id="fact-dates-label">Дати</span>
+              <strong id="fact-dates-value">9.05 - 10.05</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">Формат</span>
-              <strong>Юбилей + вовлечение</strong>
+              <span class="fact-label" id="fact-format-label">Формат</span>
+              <strong id="fact-format-value">Ювілей + залучення</strong>
             </div>
           </div>
         </aside>
@@ -109,17 +109,17 @@
         <section class="panel" id="daily">
           <div class="panel-daily-head">
             <div>
-              <div class="panel-eyebrow">Ежедневник на сегодня</div>
+              <div class="panel-eyebrow" id="daily-eyebrow">Щоденник на сьогодні</div>
               <h2 class="panel-title" id="daily-title">09 Квітня • «Діємо»</h2>
             </div>
-            <div class="lang-switch" role="tablist" aria-label="Язык ежедневника">
+            <div class="lang-switch" role="tablist" aria-label="Language switcher">
               <button class="lang-switch-button is-active" id="lang-uk" type="button">укр</button>
               <button class="lang-switch-button" id="lang-ru" type="button">рус</button>
             </div>
           </div>
-          <p class="panel-copy">
-            Сегодняшний текст дня встроен в страницу как отдельная опора рядом
-            с афишей, программой и предсказаниями от Высшей силы.
+          <p class="panel-copy" id="daily-copy">
+            Сьогоднішній текст дня вбудований у сторінку як окрема опора поруч
+            з афішею, програмою і передбаченнями від Вищої Сили.
           </p>
 
           <div class="daily-card">
@@ -133,30 +133,36 @@
               <strong id="daily-focus-label"></strong>
               <span id="daily-focus-text"></span>
             </div>
+
+            <div class="daily-actions">
+              <button class="button button-secondary" id="daily-share" type="button">
+                Поделиться ежедневником
+              </button>
+            </div>
           </div>
         </section>
 
         <aside class="panel panel-info">
-          <div class="panel-eyebrow">Смысловой слой</div>
-          <h2 class="panel-title">Афиша, встреча и внутренний настрой</h2>
-          <p class="panel-copy">
-            Страница собирает не только информацию о событии, но и настроение:
-            предвкушение встречи, сегодняшнее чтение и личное обращение через
-            предсказания.
+          <div class="panel-eyebrow" id="layer-eyebrow">Смисловий шар</div>
+          <h2 class="panel-title" id="layer-title">Афіша, зустріч і внутрішній настрій</h2>
+          <p class="panel-copy" id="layer-copy">
+            Сторінка збирає не тільки інформацію про подію, але й настрій:
+            передчуття зустрічі, сьогоднішнє читання і особисте звернення через
+            передбачення.
           </p>
 
           <div class="facts">
             <div class="fact">
-              <span class="fact-label">Источник</span>
-              <strong>укр: база • рус: сайт NA Russia</strong>
+              <span class="fact-label" id="source-label">Джерело</span>
+              <strong id="source-value">укр: база • рус: сайт NA Russia</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">Запись</span>
-              <strong>На сегодня</strong>
+              <span class="fact-label" id="entry-label">Запис</span>
+              <strong id="entry-value">На сьогодні</strong>
             </div>
             <div class="fact">
-              <span class="fact-label">Роль</span>
-              <strong>Опора и настрой</strong>
+              <span class="fact-label" id="role-label">Роль</span>
+              <strong id="role-value">Опора і настрій</strong>
             </div>
           </div>
         </aside>
@@ -164,55 +170,15 @@
 
       <section class="content-grid content-grid-lower">
         <section class="panel" id="program">
-          <div class="panel-eyebrow">Программа</div>
-          <h2 class="panel-title">Программа встречи</h2>
-          <div class="days">
-            <article class="day">
-              <h3>9 мая • 1-й день</h3>
-              <ul class="program-list">
-                <li><span class="time">11:00</span><span>Сбор для служащих</span></li>
-                <li><span class="time">11:30</span><span>Встреча гостей, регистрация</span></li>
-                <li><span class="time">12:00 - 13:00</span><span>Торжественная часть: открытие, минута молчания, видео, считалочка ЧВ, поздравления</span></li>
-                <li><span class="time">13:00 - 13:10</span><span>Перерыв</span></li>
-                <li><span class="time">13:10 - 14:00</span><span>Спикерская 1</span></li>
-                <li><span class="time">14:00 - 15:00</span><span>Обед</span></li>
-                <li><span class="time">15:00 - 15:45</span><span>Спикерская 2</span></li>
-                <li><span class="time">15:45 - 16:00</span><span>Перерыв</span></li>
-                <li><span class="time">16:00 - 17:30</span><span>Открытое собрание заключительное</span></li>
-                <li><span class="time">17:30 - 18:30</span><span>Розыгрыш сувенирки и чайная</span></li>
-                <li><span class="time">18:30 - 20:00</span><span>Тусовка</span></li>
-                <li><span class="time">20:00 - 21:00</span><span>Уборка и сдача помещения</span></li>
-              </ul>
-            </article>
-
-            <article class="day">
-              <h3>10 мая • 2-й день</h3>
-              <ul class="program-list">
-                <li><span class="time">13:00</span><span>Начало</span></li>
-                <li><span class="time">14:00</span><span>Группа</span></li>
-                <li><span class="time">После</span><span>Шашлыки, игры, общение</span></li>
-              </ul>
-            </article>
-          </div>
+          <div class="panel-eyebrow" id="program-eyebrow">Програма</div>
+          <h2 class="panel-title" id="program-title">Програма зустрічі</h2>
+          <div class="days" id="program-days"></div>
         </section>
 
         <aside class="panel" id="contacts">
-          <div class="panel-eyebrow">Контакты</div>
-          <h2 class="panel-title">Контакты и координация</h2>
-          <div class="contact-links">
-            <a class="contact-link" href="tel:+48791629324">
-              <strong>Связаться с ВС</strong>
-              <span>+48 791 629 324 • Саша</span>
-            </a>
-            <a class="contact-link" href="https://t.me/your_link">
-              <strong>Telegram</strong>
-              <span>Подставить реальную ссылку на чат или канал мероприятия</span>
-            </a>
-            <a class="contact-link" href="#oracle">
-              <strong>Поделиться</strong>
-              <span>Отправь ссылку на сайт вместе с предсказанием от Высшей силы</span>
-            </a>
-          </div>
+          <div class="panel-eyebrow" id="contacts-eyebrow">Контакти</div>
+          <h2 class="panel-title" id="contacts-title">Контакти й координація</h2>
+          <div class="contact-links" id="contact-links"></div>
         </aside>
       </section>
     </main>

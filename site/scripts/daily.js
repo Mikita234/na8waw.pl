@@ -1,4 +1,5 @@
 import { dailyMeditations } from "./daily-data.js";
+import { getLocale, setLocale, subscribeLocale } from "./locale.js";
 
 const titleNode = document.getElementById("daily-title");
 const quoteNode = document.getElementById("daily-quote");
@@ -8,6 +9,7 @@ const focusLabelNode = document.getElementById("daily-focus-label");
 const focusTextNode = document.getElementById("daily-focus-text");
 const ukButtonNode = document.getElementById("lang-uk");
 const ruButtonNode = document.getElementById("lang-ru");
+const shareButtonNode = document.getElementById("daily-share");
 
 function setActiveLanguage(lang) {
   ukButtonNode.classList.toggle("is-active", lang === "uk");
@@ -35,11 +37,33 @@ function renderDaily(lang) {
 }
 
 ukButtonNode.addEventListener("click", () => {
-  renderDaily("uk");
+  setLocale("uk");
 });
 
 ruButtonNode.addEventListener("click", () => {
-  renderDaily("ru");
+  setLocale("ru");
 });
 
-renderDaily("uk");
+shareButtonNode.addEventListener("click", async () => {
+  const locale = getLocale();
+  const url = new URL(window.location.href);
+  url.pathname = locale === "uk" ? "/daily/uk.html" : "/daily/ru.html";
+  url.search = "";
+  url.hash = "";
+
+  try {
+    await navigator.clipboard.writeText(url.toString());
+    shareButtonNode.textContent = locale === "uk" ? "Посилання скопійовано" : "Ссылка скопирована";
+  } catch (error) {
+    shareButtonNode.textContent = locale === "uk" ? "Не вдалося скопіювати" : "Не удалось скопировать";
+  }
+
+  window.setTimeout(() => {
+    shareButtonNode.textContent = locale === "uk" ? "Поділитися щоденником" : "Поделиться ежедневником";
+  }, 1400);
+});
+
+subscribeLocale((locale) => {
+  renderDaily(locale);
+  shareButtonNode.textContent = locale === "uk" ? "Поділитися щоденником" : "Поделиться ежедневником";
+});
