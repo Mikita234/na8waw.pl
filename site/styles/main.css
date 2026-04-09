@@ -523,6 +523,30 @@ body::after {
   font-size: 1rem;
 }
 
+.program-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(19, 24, 33, 0.06);
+  border: 1px solid rgba(19, 24, 33, 0.08);
+}
+
+.program-live-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.program-live-text {
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
 .program-list {
   list-style: none;
   margin: 0;
@@ -897,5 +921,13 @@ body::after {
   .program-list li {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+
+  .program-live {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 20px;
   }
 }

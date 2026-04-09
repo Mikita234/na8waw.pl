@@ -1,7 +1,9 @@
 import "./predictions.js?v=20260409u";
 import "./daily.js?v=20260409u";
-import { siteCopy } from "./locale-data.js?v=20260409w";
+import { siteCopy } from "./locale-data.js?v=20260409y";
 import { subscribeLocale } from "./locale.js?v=20260409u";
+
+let programStatusInterval;
 
 const nodes = {
   heroKicker: document.getElementById("hero-kicker"),
@@ -33,6 +35,8 @@ const nodes = {
   locationMapFrame: document.getElementById("location-map-frame"),
   locationLinks: document.getElementById("location-links"),
   programEyebrow: document.getElementById("program-eyebrow"),
+  programLiveLabel: document.getElementById("program-live-label"),
+  programLiveText: document.getElementById("program-live-text"),
   programTitle: document.getElementById("program-title"),
   programDays: document.getElementById("program-days"),
   contactsEyebrow: document.getElementById("contacts-eyebrow"),
@@ -108,12 +112,69 @@ function renderContacts(items) {
   });
 }
 
-function renderLocations(items) {
+function formatCountdown(ms, units) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return [
+    `${days}${units.d}`,
+    `${hours}${units.h}`,
+    `${minutes}${units.m}`,
+    `${seconds}${units.s}`,
+  ].join(" ");
+}
+
+function startProgramStatus(copy) {
+  if (programStatusInterval) {
+    window.clearInterval(programStatusInterval);
+  }
+
+  const update = () => {
+    const now = Date.now();
+    const entries = copy.programTimeline.map((item) => ({
+      ...item,
+      startMs: new Date(item.start).getTime(),
+      endMs: new Date(item.end).getTime(),
+    }));
+
+    const firstStart = entries[0]?.startMs;
+    const active = entries.find((item) => now >= item.startMs && now < item.endMs);
+    const next = entries.find((item) => now < item.startMs);
+
+    if (firstStart && now < firstStart) {
+      setText(
+        nodes.programLiveText,
+        `${copy.programStatusCountdown} ${formatCountdown(firstStart - now, copy.programCountdownUnits)}`,
+      );
+      return;
+    }
+
+    if (active) {
+      setText(nodes.programLiveText, `${copy.programStatusNow} ${active.label}`);
+      return;
+    }
+
+    if (next) {
+      setText(nodes.programLiveText, `${copy.programStatusNext} ${next.label}`);
+      return;
+    }
+
+    setText(nodes.programLiveText, copy.programStatusEnded);
+  };
+
+  update();
+  programStatusInterval = window.setInterval(update, 1000);
+}
+
+function renderLocations(items, copy) {
   nodes.locationLinks.innerHTML = "";
 
   const activateLocation = (item, button) => {
     setText(nodes.locationMapDay, item.mapDayTitle);
-    setText(nodes.locationMapOpen, item.action);
+    setText(nodes.locationMapOpen, copy.locationMapOpenLabel);
     nodes.locationMapOpen.href = item.href;
     nodes.locationMapFrame.src = item.embedHref;
 
@@ -186,12 +247,15 @@ subscribeLocale((locale) => {
   setText(nodes.locationsEyebrow, copy.locationsEyebrow);
   setText(nodes.locationsTitle, copy.locationsTitle);
   setText(nodes.locationsCopy, copy.locationsCopy);
+  setText(nodes.locationMapOpen, copy.locationMapOpenLabel);
   setText(nodes.programEyebrow, copy.programEyebrow);
+  setText(nodes.programLiveLabel, copy.programLiveLabel);
   setText(nodes.programTitle, copy.programTitle);
   setText(nodes.contactsEyebrow, copy.contactsEyebrow);
   setText(nodes.contactsTitle, copy.contactsTitle);
 
   renderProgram(copy.programDays);
-  renderLocations(copy.locations);
+  renderLocations(copy.locations, copy);
   renderContacts(copy.contacts);
+  startProgramStatus(copy);
 });
