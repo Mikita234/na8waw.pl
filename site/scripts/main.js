@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260409u";
 import "./daily.js?v=20260409u";
-import { siteCopy } from "./locale-data.js?v=20260409y";
+import { siteCopy } from "./locale-data.js?v=20260409ab";
 import { subscribeLocale } from "./locale.js?v=20260409u";
 
 let programStatusInterval;
@@ -48,6 +48,12 @@ const nodes = {
 function setText(node, value) {
   if (node) {
     node.textContent = value;
+  }
+}
+
+function setHTML(node, value) {
+  if (node) {
+    node.innerHTML = value;
   }
 }
 
@@ -119,12 +125,37 @@ function formatCountdown(ms, units) {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  return [
-    `${days}${units.d}`,
-    `${hours}${units.h}`,
-    `${minutes}${units.m}`,
-    `${seconds}${units.s}`,
-  ].join(" ");
+  return { days, hours, minutes, seconds, units };
+}
+
+function renderCountdownMarkup(prefix, countdown) {
+  const segments = [
+    [countdown.days, countdown.units.d],
+    [countdown.hours, countdown.units.h],
+    [countdown.minutes, countdown.units.m],
+    [countdown.seconds, countdown.units.s],
+  ]
+    .map(
+      ([value, unit]) => `
+        <span class="program-live-segment">
+          <strong>${String(value).padStart(2, "0")}</strong>
+          <em>${unit}</em>
+        </span>
+      `,
+    )
+    .join("");
+
+  return `
+    <span class="program-live-kicker">${prefix}</span>
+    <span class="program-live-board">${segments}</span>
+  `;
+}
+
+function renderStatusMarkup(prefix, label) {
+  return `
+    <span class="program-live-kicker">${prefix}</span>
+    <span class="program-live-current">${label}</span>
+  `;
 }
 
 function startProgramStatus(copy) {
@@ -145,24 +176,27 @@ function startProgramStatus(copy) {
     const next = entries.find((item) => now < item.startMs);
 
     if (firstStart && now < firstStart) {
-      setText(
+      setHTML(
         nodes.programLiveText,
-        `${copy.programStatusCountdown} ${formatCountdown(firstStart - now, copy.programCountdownUnits)}`,
+        renderCountdownMarkup(
+          copy.programStatusCountdown,
+          formatCountdown(firstStart - now, copy.programCountdownUnits),
+        ),
       );
       return;
     }
 
     if (active) {
-      setText(nodes.programLiveText, `${copy.programStatusNow} ${active.label}`);
+      setHTML(nodes.programLiveText, renderStatusMarkup(copy.programStatusNow, active.label));
       return;
     }
 
     if (next) {
-      setText(nodes.programLiveText, `${copy.programStatusNext} ${next.label}`);
+      setHTML(nodes.programLiveText, renderStatusMarkup(copy.programStatusNext, next.label));
       return;
     }
 
-    setText(nodes.programLiveText, copy.programStatusEnded);
+    setHTML(nodes.programLiveText, renderStatusMarkup(copy.programStatusEnded, ""));
   };
 
   update();

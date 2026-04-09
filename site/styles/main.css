@@ -594,6 +594,56 @@ body::after {
 .program-live-text {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 10px;
+  max-width: 28ch;
+}
+
+.program-live-kicker {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.58);
+}
+
+.program-live-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.program-live-segment {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 10px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 92, 214, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(225, 235, 255, 0.9)),
+    radial-gradient(circle at top center, rgba(30, 92, 214, 0.12), transparent 60%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 12px 24px rgba(30, 92, 214, 0.08);
+}
+
+.program-live-segment strong {
+  font-size: clamp(1.4rem, 3.1vw, 2.15rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.program-live-segment em {
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  color: rgba(15, 23, 42, 0.62);
+}
+
+.program-live-current {
   display: block;
   max-width: 28ch;
   font-size: clamp(1.18rem, 2.4vw, 1.7rem);
@@ -1002,6 +1052,23 @@ body::after {
   }
 
   .program-live-text {
+    max-width: none;
+  }
+
+  .program-live-board {
+    gap: 8px;
+  }
+
+  .program-live-segment {
+    padding: 12px 6px 10px;
+    border-radius: 14px;
+  }
+
+  .program-live-segment strong {
+    font-size: clamp(1.2rem, 6.4vw, 1.58rem);
+  }
+
+  .program-live-current {
     max-width: none;
     font-size: clamp(1.02rem, 5.8vw, 1.42rem);
   }
