@@ -13,6 +13,37 @@ let currentIndex = 0;
 let hasRevealedPrediction = false;
 let currentLocale = getLocale();
 
+function prefersNativeShare() {
+  return (
+    typeof navigator.share === "function" &&
+    (window.matchMedia?.("(pointer: coarse)").matches ||
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
+  );
+}
+
+async function copyToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const field = document.createElement("textarea");
+  field.value = text;
+  field.setAttribute("readonly", "");
+  field.style.position = "absolute";
+  field.style.left = "-9999px";
+  document.body.appendChild(field);
+  field.select();
+  field.setSelectionRange(0, field.value.length);
+
+  try {
+    document.execCommand("copy");
+    return true;
+  } finally {
+    document.body.removeChild(field);
+  }
+}
+
 function syncOracleUrl(index, locale) {
   const url = new URL(window.location.href);
   url.searchParams.set("lang", locale);
@@ -66,14 +97,14 @@ async function sharePrediction() {
       : `${item.title}. Предсказание от Высшей силы и информация о юбилее в Варшаве:`;
 
   try {
-    if (navigator.share) {
+    if (prefersNativeShare()) {
       await navigator.share({
         title: item.title,
         text: shareText,
         url,
       });
     } else {
-      await navigator.clipboard.writeText(url);
+      await copyToClipboard(url);
     }
     shareNode.textContent = siteCopy[currentLocale].oracleShareDone;
   } catch (error) {

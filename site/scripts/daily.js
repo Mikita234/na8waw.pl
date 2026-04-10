@@ -10,6 +10,37 @@ const focusTextNode = document.getElementById("daily-focus-text");
 const shareButtonNode = document.getElementById("daily-share");
 const localeButtons = Array.from(document.querySelectorAll("[data-set-locale]"));
 
+function prefersNativeShare() {
+  return (
+    typeof navigator.share === "function" &&
+    (window.matchMedia?.("(pointer: coarse)").matches ||
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
+  );
+}
+
+async function copyToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const field = document.createElement("textarea");
+  field.value = text;
+  field.setAttribute("readonly", "");
+  field.style.position = "absolute";
+  field.style.left = "-9999px";
+  document.body.appendChild(field);
+  field.select();
+  field.setSelectionRange(0, field.value.length);
+
+  try {
+    document.execCommand("copy");
+    return true;
+  } finally {
+    document.body.removeChild(field);
+  }
+}
+
 function setActiveLanguage(lang) {
   localeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.setLocale === lang);
@@ -44,7 +75,7 @@ shareButtonNode.addEventListener("click", async () => {
   url.hash = "";
 
   try {
-    if (navigator.share) {
+    if (prefersNativeShare()) {
       await navigator.share({
         title: locale === "uk" ? "Щоденник на сьогодні | NA8 Warszawa" : "Ежедневник на сегодня | NA8 Warszawa",
         text:
@@ -54,7 +85,7 @@ shareButtonNode.addEventListener("click", async () => {
         url: url.toString(),
       });
     } else {
-      await navigator.clipboard.writeText(url.toString());
+      await copyToClipboard(url.toString());
     }
     shareButtonNode.textContent = locale === "uk" ? "Посилання скопійовано" : "Ссылка скопирована";
   } catch (error) {
