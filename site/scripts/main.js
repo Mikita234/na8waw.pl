@@ -1,7 +1,7 @@
-import "./predictions.js?v=20260410j";
-import "./daily.js?v=20260410j";
+import "./predictions.js?v=20260410m";
+import "./daily.js?v=20260410m";
 import { siteCopy } from "./locale-data.js?v=20260410l";
-import { subscribeLocale } from "./locale.js?v=20260409u";
+import { subscribeLocale } from "./locale.js?v=20260410m";
 
 let programStatusInterval;
 

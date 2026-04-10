@@ -1,5 +1,6 @@
 const localeListeners = new Set();
 const localeButtons = Array.from(document.querySelectorAll("[data-set-locale]"));
+const LOCALE_SCROLL_KEY = "na8waw:pending-locale-scroll";
 
 function normalizeForcedLocaleUrl() {
   const forcedLocale = document.body?.dataset?.forceLocale;
@@ -49,6 +50,28 @@ function detectLocale() {
 
 let currentLocale = detectLocale();
 
+function restorePendingScroll() {
+  const raw = window.sessionStorage.getItem(LOCALE_SCROLL_KEY);
+
+  if (!raw) {
+    return;
+  }
+
+  window.sessionStorage.removeItem(LOCALE_SCROLL_KEY);
+  const scrollY = Number.parseFloat(raw);
+
+  if (!Number.isFinite(scrollY)) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    window.scrollTo({ top: scrollY, left: 0, behavior: "auto" });
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, left: 0, behavior: "auto" });
+    });
+  });
+}
+
 export function getLocale() {
   return currentLocale;
 }
@@ -62,9 +85,10 @@ export function setLocale(locale) {
 
   const forcedLocale = document.body?.dataset?.forceLocale;
   if (forcedLocale === "uk" || forcedLocale === "ru" || url.pathname === "/" || url.pathname === "/index.html") {
+    window.sessionStorage.setItem(LOCALE_SCROLL_KEY, String(window.scrollY));
     url.pathname = target;
-    const hash = window.location.hash || "";
-    window.location.href = `${url.pathname}${url.search}${hash}`;
+    url.hash = "";
+    window.location.href = `${url.pathname}${url.search}`;
     return;
   }
 
@@ -87,3 +111,5 @@ localeButtons.forEach((button) => {
     setLocale(button.dataset.setLocale);
   });
 });
+
+restorePendingScroll();
