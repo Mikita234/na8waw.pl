@@ -13,9 +13,7 @@ const INDEX_PAGE_URL = new URL("../site/index.html", import.meta.url);
 const RU_HOME_URL = new URL("../site/ru.html", import.meta.url);
 const UK_HOME_URL = new URL("../site/uk.html", import.meta.url);
 const RU_DAILY_PAGE_URL = new URL("../site/daily/ru.html", import.meta.url);
-const RU_TODAY_PAGE_URL = new URL("../site/daily/today-ru.html", import.meta.url);
 const UK_DAILY_PAGE_URL = new URL("../site/daily/uk.html", import.meta.url);
-const UK_TODAY_PAGE_URL = new URL("../site/daily/today-uk.html", import.meta.url);
 
 const RU_MONTHS = [
   "января",
@@ -215,7 +213,7 @@ ${paragraphs}
 `;
 }
 
-function renderDailyPage(locale, pageType, data) {
+function renderDailyPage(locale, data) {
   const isUk = locale === "uk";
   const titleSuffix = isUk ? "Щоденник на сьогодні" : "Ежедневник на сегодня";
   const description = isUk
@@ -227,8 +225,8 @@ function renderDailyPage(locale, pageType, data) {
   const intro = isUk
     ? "Щоденник на сьогодні та вся інформація про ювілейну зустріч у Варшаві 9–10 травня."
     : "Ежедневник на сегодня и вся информация о юбилейной встрече в Варшаве 9–10 мая.";
-  const canonicalPath = pageType === "today" ? `/daily/today-${locale}.html` : `/daily/${locale}.html`;
-  const alternatePath = pageType === "today" ? `/daily/today-${isUk ? "ru" : "uk"}.html` : `/daily/${isUk ? "ru" : "uk"}.html`;
+  const canonicalPath = `/daily/${locale}.html`;
+  const alternatePath = `/daily/${isUk ? "ru" : "uk"}.html`;
   const localeMeta = isUk
     ? ['<meta property="og:locale" content="uk_UA" />', '<meta property="og:locale:alternate" content="ru_RU" />']
     : ['<meta property="og:locale" content="ru_RU" />', '<meta property="og:locale:alternate" content="uk_UA" />'];
@@ -463,10 +461,8 @@ async function main() {
   await Promise.all([
     writeFile(UK_MODULE_URL, renderModule("dailyMeditationUk", ukData), "utf8"),
     writeFile(RU_MODULE_URL, renderModule("dailyMeditationRu", ruData), "utf8"),
-    writeFile(UK_DAILY_PAGE_URL, renderDailyPage("uk", "default", ukData), "utf8"),
-    writeFile(UK_TODAY_PAGE_URL, renderDailyPage("uk", "today", ukData), "utf8"),
-    writeFile(RU_DAILY_PAGE_URL, renderDailyPage("ru", "default", ruData), "utf8"),
-    writeFile(RU_TODAY_PAGE_URL, renderDailyPage("ru", "today", ruData), "utf8"),
+    writeFile(UK_DAILY_PAGE_URL, renderDailyPage("uk", ukData), "utf8"),
+    writeFile(RU_DAILY_PAGE_URL, renderDailyPage("ru", ruData), "utf8"),
     writeFile(
       DAILY_DATA_URL,
       `import { dailyMeditationUk } from "./daily-uk.js?v=${warsaw.assetVersion}";\nimport { dailyMeditationRu } from "./daily-ru.js?v=${warsaw.assetVersion}";\n\nexport const dailyMeditations = {\n  uk: dailyMeditationUk,\n  ru: dailyMeditationRu,\n};\n`,

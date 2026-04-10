@@ -33,6 +33,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/scripts/daily-uk.js site/scripts/daily-ru.js site/scripts/daily-data.js site/scripts/daily.js site/scripts/main.js site/index.html site/ru.html site/uk.html site/daily/ru.html site/daily/uk.html site/daily/today-ru.html site/daily/today-uk.html
+          git add -A site/scripts/daily-uk.js site/scripts/daily-ru.js site/scripts/daily-data.js site/scripts/daily.js site/scripts/main.js site/index.html site/ru.html site/uk.html site/daily/ru.html site/daily/uk.html site/daily/today-ru.html site/daily/today-uk.html
           git commit -m "Update daily meditation"
           git push

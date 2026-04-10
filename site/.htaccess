@@ -1,5 +1,8 @@
 RewriteEngine On
 
+Redirect 302 /daily/today-ru.html /daily/ru.html
+Redirect 302 /daily/today-uk.html /daily/uk.html
+
 # Language-specific landing pages for bots and shared links.
 RewriteCond %{REQUEST_URI} ^/$
 RewriteCond %{QUERY_STRING} (^|&)lang=ru(&|$)

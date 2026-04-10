@@ -39,7 +39,7 @@ function renderDaily(lang) {
 shareButtonNode.addEventListener("click", async () => {
   const locale = getLocale();
   const url = new URL(window.location.href);
-  url.pathname = locale === "uk" ? "/daily/today-uk.html" : "/daily/today-ru.html";
+  url.pathname = locale === "uk" ? "/daily/uk.html" : "/daily/ru.html";
   url.search = "";
   url.hash = "";
 
