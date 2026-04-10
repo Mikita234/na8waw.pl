@@ -227,6 +227,8 @@ function renderDailyPage(locale, data) {
     : "Ежедневник на сегодня и вся информация о юбилейной встрече в Варшаве 9–10 мая.";
   const canonicalPath = `/daily/${locale}.html`;
   const alternatePath = `/daily/${isUk ? "ru" : "uk"}.html`;
+  const ogImage = `https://na8waw.pl/media/og-daily-${locale}.svg`;
+  const ogAlt = isUk ? "NA8 Warszawa — Щоденник на сьогодні" : "NA8 Warszawa — Ежедневник на сегодня";
   const localeMeta = isUk
     ? ['<meta property="og:locale" content="uk_UA" />', '<meta property="og:locale:alternate" content="ru_RU" />']
     : ['<meta property="og:locale" content="ru_RU" />', '<meta property="og:locale:alternate" content="uk_UA" />'];
@@ -256,15 +258,18 @@ function renderDailyPage(locale, data) {
       property="og:description"
       content="${escapeHtml(description)}"
     />
-    <meta property="og:image" content="https://na8waw.pl/media/na8.png" />
-    <meta property="og:image:alt" content="NA8 Warszawa" />
+    <meta property="og:image" content="${ogImage}" />
+    <meta property="og:image:alt" content="${ogAlt}" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(data.title)} | ${titleSuffix} | NA8 Warszawa" />
     <meta
       name="twitter:description"
       content="${escapeHtml(description)}"
     />
-    <meta name="twitter:image" content="https://na8waw.pl/media/na8.png" />
+    <meta name="twitter:image" content="${ogImage}" />
     <style>
       :root {
         --bg: #f7f3eb;

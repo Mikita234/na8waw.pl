@@ -14,6 +14,8 @@ const locales = {
     heroText: "Передбачення від Вищої Сили та вся інформація про ювілейну зустріч у Варшаві 9–10 травня.",
     buttonText: "Перейти до передбачення і програми",
     eventUrl: (index) => `/uk.html?oracle=${index}#oracle`,
+    image: "https://na8waw.pl/media/og-oracle-uk.svg",
+    imageAlt: "NA8 Warszawa — Передбачення від Вищої Сили",
   },
   ru: {
     dir: new URL("../site/oracle/ru/", import.meta.url),
@@ -27,6 +29,8 @@ const locales = {
     heroText: "Предсказание от Высшей силы и вся информация о юбилейной встрече в Варшаве 9–10 мая.",
     buttonText: "Перейти к предсказанию и программе",
     eventUrl: (index) => `/ru.html?oracle=${index}#oracle`,
+    image: "https://na8waw.pl/media/og-oracle-ru.svg",
+    imageAlt: "NA8 Warszawa — Предсказания от Высшей силы",
   },
 };
 
@@ -68,15 +72,18 @@ function renderPage(localeKey, item, index) {
       property="og:description"
       content="${escapeHtml(description)}"
     />
-    <meta property="og:image" content="https://na8waw.pl/media/na8.png" />
-    <meta property="og:image:alt" content="NA8 Warszawa" />
+    <meta property="og:image" content="${config.image}" />
+    <meta property="og:image:alt" content="${config.imageAlt}" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta
       name="twitter:description"
       content="${escapeHtml(description)}"
     />
-    <meta name="twitter:image" content="https://na8waw.pl/media/na8.png" />
+    <meta name="twitter:image" content="${config.image}" />
     <style>
       :root {
         --bg: #f7f3eb;

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbfaf7"/>
+  <g opacity="0.22" stroke="#1a1a1a" stroke-width="1">
+    <path d="M0 105h1200M0 175h1200M0 245h1200M0 315h1200M0 385h1200M0 455h1200M0 525h1200"/>
+    <path d="M90 0v630M210 0v630M330 0v630M450 0v630M570 0v630M690 0v630M810 0v630M930 0v630M1050 0v630"/>
+  </g>
+  <rect x="48" y="42" width="1104" height="546" rx="34" fill="#ffffff" stroke="#1a1a1a" stroke-opacity="0.12"/>
+  <circle cx="913" cy="426" r="166" fill="#0d57bb"/>
+  <circle cx="913" cy="426" r="114" fill="#f8fbff"/>
+  <circle cx="913" cy="426" r="87" fill="#1f63c9"/>
+  <circle cx="913" cy="426" r="63" fill="#ffffff"/>
+  <text x="110" y="126" fill="#0d57bb" font-family="Arial Narrow, Arial, sans-serif" font-size="34" font-weight="700">9.05</text>
+  <text x="1030" y="126" fill="#0d57bb" font-family="Arial Narrow, Arial, sans-serif" font-size="34" font-weight="700">10.05</text>
+  <text x="110" y="184" fill="#0d57bb" font-family="Arial Narrow, Arial, sans-serif" font-size="30" font-weight="700">ВОСЬМОЙ ЮБИЛЕЙ</text>
+  <text x="110" y="218" fill="#0d57bb" font-family="Arial Narrow, Arial, sans-serif" font-size="30" font-weight="700">ГРУППЫ «МАЕВКА»</text>
+  <text x="110" y="338" fill="#171717" font-family="Arial Narrow, Arial, sans-serif" font-size="108" font-weight="700">ЕДИНСТВО В</text>
+  <text x="110" y="432" fill="#0d57bb" font-family="Arial Narrow, Arial, sans-serif" font-size="108" font-weight="700">NAC</text>
+  <text x="110" y="492" fill="#5c5c5c" font-family="Arial Narrow, Arial, sans-serif" font-size="27">Варшава • программа встречи, ежедневник на сегодня,</text>
+  <text x="110" y="526" fill="#5c5c5c" font-family="Arial Narrow, Arial, sans-serif" font-size="27">контакты и предсказания от Высшей силы.</text>
+</svg>
