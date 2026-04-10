@@ -223,8 +223,8 @@ function renderDailyPage(locale, data) {
   const buttonLabel = isUk ? "Перейти на сайт зустрічі" : "Перейти на сайт встречи";
   const eyebrow = isUk ? "Щоденник на сьогодні" : "Ежедневник на сегодня";
   const intro = isUk
-    ? "Щоденник на сьогодні та вся інформація про ювілейну зустріч у Варшаві 9–10 травня."
-    : "Ежедневник на сегодня и вся информация о юбилейной встрече в Варшаве 9–10 мая.";
+    ? "Текст на сьогодні та посилання на зустріч у Варшаві 9–10 травня."
+    : "Текст на сегодня и ссылка на встречу в Варшаве 9–10 мая.";
   const canonicalPath = `/daily/${locale}.html`;
   const alternatePath = `/daily/${isUk ? "ru" : "uk"}.html`;
   const ogImage = `https://na8waw.pl/media/og-daily-${locale}.svg`;
