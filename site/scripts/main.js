@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260410m";
 import "./daily.js?v=20260410m";
-import { siteCopy } from "./locale-data.js?v=20260410n";
+import { siteCopy } from "./locale-data.js?v=20260410p";
 import { subscribeLocale } from "./locale.js?v=20260410m";
 
 let programStatusInterval;
@@ -27,6 +27,15 @@ const nodes = {
   factFormatValue: document.getElementById("fact-format-value"),
   dailyEyebrow: document.getElementById("daily-eyebrow"),
   dailyCopy: document.getElementById("daily-copy"),
+  layerEyebrow: document.getElementById("layer-eyebrow"),
+  layerTitle: document.getElementById("layer-title"),
+  layerCopy: document.getElementById("layer-copy"),
+  sourceLabel: document.getElementById("source-label"),
+  sourceValue: document.getElementById("source-value"),
+  entryLabel: document.getElementById("entry-label"),
+  entryValue: document.getElementById("entry-value"),
+  roleLabel: document.getElementById("role-label"),
+  roleValue: document.getElementById("role-value"),
   locationsEyebrow: document.getElementById("locations-eyebrow"),
   locationsTitle: document.getElementById("locations-title"),
   locationsCopy: document.getElementById("locations-copy"),
@@ -403,6 +412,15 @@ subscribeLocale((locale) => {
   setText(nodes.factFormatValue, copy.factFormatValue);
   setText(nodes.dailyEyebrow, copy.dailyEyebrow);
   setText(nodes.dailyCopy, copy.dailyCopy);
+  setText(nodes.layerEyebrow, copy.layerEyebrow);
+  setText(nodes.layerTitle, copy.layerTitle);
+  setText(nodes.layerCopy, copy.layerCopy);
+  setText(nodes.sourceLabel, copy.sourceLabel);
+  setText(nodes.sourceValue, copy.sourceValue);
+  setText(nodes.entryLabel, copy.entryLabel);
+  setText(nodes.entryValue, copy.entryValue);
+  setText(nodes.roleLabel, copy.roleLabel);
+  setText(nodes.roleValue, copy.roleValue);
   setText(nodes.locationsEyebrow, copy.locationsEyebrow);
   setText(nodes.locationsTitle, copy.locationsTitle);
   setText(nodes.locationsCopy, copy.locationsCopy);

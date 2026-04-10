@@ -34,6 +34,16 @@ export const siteCopy = {
     dailyEyebrow: "Щоденник на сьогодні",
     dailyCopy:
       "Щоденник на сьогодні поруч із програмою зустрічі. Можна прочитати його перед дорогою або вже на місці.",
+    layerEyebrow: "Перед зустріччю",
+    layerTitle: "Що може стати в пригоді",
+    layerCopy:
+      "Тут зібрані чат зустрічі, посилання на сторінку побажань і коротка пам'ятка для тих, хто їде на ювілей.",
+    sourceLabel: "Чат зустрічі",
+    sourceValue: "@Maevka_8let",
+    entryLabel: "Побажання",
+    entryValue: "Окрема сторінка з модерацією та live-екраном",
+    roleLabel: "Поділитися",
+    roleValue: "Сайтом, щоденником і передбаченням",
     locationsEyebrow: "Локації",
     locationsTitle: "Точки зустрічі",
     locationsCopy:
@@ -248,6 +258,16 @@ export const siteCopy = {
     dailyEyebrow: "Ежедневник на сегодня",
     dailyCopy:
       "Ежедневник на сегодня рядом с программой встречи. Можно прочитать его перед дорогой или уже на месте.",
+    layerEyebrow: "Перед встречей",
+    layerTitle: "Что может пригодиться",
+    layerCopy:
+      "Здесь собраны чат встречи, ссылка на страницу пожеланий и короткая памятка для тех, кто едет на юбилей.",
+    sourceLabel: "Чат встречи",
+    sourceValue: "@Maevka_8let",
+    entryLabel: "Пожелания",
+    entryValue: "Отдельная страница с модерацией и live-экраном",
+    roleLabel: "Поделиться",
+    roleValue: "Сайтом, ежедневником и предсказанием",
     locationsEyebrow: "Локации",
     locationsTitle: "Точки встречи",
     locationsCopy:
