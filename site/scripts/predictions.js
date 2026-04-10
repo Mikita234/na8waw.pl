@@ -1,4 +1,4 @@
-import { siteCopy } from "./locale-data.js?v=20260410k";
+import { siteCopy } from "./locale-data.js?v=20260410n";
 import { getLocale, setLocale, subscribeLocale } from "./locale.js?v=20260410m";
 import { predictionsByLocale } from "./predictions-data.js?v=20260409u";
 

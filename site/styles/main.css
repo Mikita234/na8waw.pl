@@ -748,6 +748,60 @@ body::after {
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
+.wish-form {
+  display: grid;
+  gap: 16px;
+}
+
+.wish-field {
+  display: grid;
+  gap: 8px;
+}
+
+.wish-field span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--blue-deep);
+}
+
+.wish-field input,
+.wish-field textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  font: inherit;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.wish-field textarea {
+  min-height: 132px;
+}
+
+.wish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.wish-status {
+  min-height: 24px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.wish-status[data-state="success"] {
+  color: var(--blue-deep);
+}
+
+.wish-status[data-state="error"] {
+  color: #b42318;
+}
+
 .location-link {
   width: 100%;
   text-align: left;
@@ -1029,6 +1083,14 @@ body::after {
   .location-link,
   .contact-link {
     padding: 14px;
+  }
+
+  .wish-actions {
+    flex-direction: column;
+  }
+
+  .wish-actions .button {
+    width: 100%;
   }
 
   .contact-link span,

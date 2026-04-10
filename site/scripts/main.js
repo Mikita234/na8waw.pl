@@ -1,6 +1,7 @@
 import "./predictions.js?v=20260410m";
 import "./daily.js?v=20260410m";
-import { siteCopy } from "./locale-data.js?v=20260410l";
+import "./wishes.js?v=20260410n";
+import { siteCopy } from "./locale-data.js?v=20260410n";
 import { subscribeLocale } from "./locale.js?v=20260410m";
 
 let programStatusInterval;
@@ -42,6 +43,16 @@ const nodes = {
   contactsEyebrow: document.getElementById("contacts-eyebrow"),
   contactsTitle: document.getElementById("contacts-title"),
   contactLinks: document.getElementById("contact-links"),
+  wishesEyebrow: document.getElementById("wishes-eyebrow"),
+  wishesTitle: document.getElementById("wishes-title"),
+  wishesCopy: document.getElementById("wishes-copy"),
+  wishesNameLabel: document.getElementById("wishes-name-label"),
+  wishesNameInput: document.getElementById("wish-author"),
+  wishesMessageLabel: document.getElementById("wishes-message-label"),
+  wishesMessageInput: document.getElementById("wish-message"),
+  wishesSubmit: document.getElementById("wish-submit"),
+  wishesAdmin: document.getElementById("wishes-admin-link"),
+  wishesLive: document.getElementById("wishes-live-link"),
   miniNavOracle: document.getElementById("mini-nav-oracle"),
   miniNavDaily: document.getElementById("mini-nav-daily"),
   miniNavProgram: document.getElementById("mini-nav-program"),
@@ -412,6 +423,20 @@ subscribeLocale((locale) => {
   setText(nodes.programTitle, copy.programTitle);
   setText(nodes.contactsEyebrow, copy.contactsEyebrow);
   setText(nodes.contactsTitle, copy.contactsTitle);
+  setText(nodes.wishesEyebrow, copy.wishesEyebrow);
+  setText(nodes.wishesTitle, copy.wishesTitle);
+  setText(nodes.wishesCopy, copy.wishesCopy);
+  setText(nodes.wishesNameLabel, copy.wishesNameLabel);
+  setText(nodes.wishesMessageLabel, copy.wishesMessageLabel);
+  if (nodes.wishesNameInput) {
+    nodes.wishesNameInput.placeholder = copy.wishesNamePlaceholder;
+  }
+  if (nodes.wishesMessageInput) {
+    nodes.wishesMessageInput.placeholder = copy.wishesMessagePlaceholder;
+  }
+  setText(nodes.wishesSubmit, copy.wishesSubmit);
+  setText(nodes.wishesAdmin, copy.wishesAdmin);
+  setText(nodes.wishesLive, copy.wishesLive);
   setText(nodes.miniNavOracle, copy.miniNavOracle);
   setText(nodes.miniNavDaily, copy.miniNavDaily);
   setText(nodes.miniNavProgram, copy.miniNavProgram);

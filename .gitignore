@@ -1,6 +1,7 @@
 .DS_Store
 .env
 .env.local
+/site/wishes/config.php
 node_modules/
 dist/
 coverage/
