@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260410j";
 import "./daily.js?v=20260410j";
-import { siteCopy } from "./locale-data.js?v=20260410k";
+import { siteCopy } from "./locale-data.js?v=20260410l";
 import { subscribeLocale } from "./locale.js?v=20260409u";
 
 let programStatusInterval;
@@ -42,6 +42,10 @@ const nodes = {
   contactsEyebrow: document.getElementById("contacts-eyebrow"),
   contactsTitle: document.getElementById("contacts-title"),
   contactLinks: document.getElementById("contact-links"),
+  miniNavOracle: document.getElementById("mini-nav-oracle"),
+  miniNavDaily: document.getElementById("mini-nav-daily"),
+  miniNavProgram: document.getElementById("mini-nav-program"),
+  miniNavContacts: document.getElementById("mini-nav-contacts"),
   localeSwitchers: Array.from(document.querySelectorAll('[role="tablist"]')),
 };
 
@@ -408,6 +412,10 @@ subscribeLocale((locale) => {
   setText(nodes.programTitle, copy.programTitle);
   setText(nodes.contactsEyebrow, copy.contactsEyebrow);
   setText(nodes.contactsTitle, copy.contactsTitle);
+  setText(nodes.miniNavOracle, copy.miniNavOracle);
+  setText(nodes.miniNavDaily, copy.miniNavDaily);
+  setText(nodes.miniNavProgram, copy.miniNavProgram);
+  setText(nodes.miniNavContacts, copy.miniNavContacts);
 
   renderProgram(copy.programDays);
   renderLocations(copy.locations, copy);
