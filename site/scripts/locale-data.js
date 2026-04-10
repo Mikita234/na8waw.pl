@@ -55,8 +55,8 @@ export const siteCopy = {
     programTitle: "Програма зустрічі",
     contactsEyebrow: "Контакти",
     contactsTitle: "Контакти й координація",
-    miniNavOracle: "слово",
-    miniNavDaily: "сьогодні",
+    miniNavOracle: "передбачення",
+    miniNavDaily: "щоденник",
     miniNavProgram: "програма",
     miniNavContacts: "контакти",
     locations: [
@@ -258,8 +258,8 @@ export const siteCopy = {
     programTitle: "Программа встречи",
     contactsEyebrow: "Контакты",
     contactsTitle: "Контакты и координация",
-    miniNavOracle: "слово",
-    miniNavDaily: "сегодня",
+    miniNavOracle: "предсказание",
+    miniNavDaily: "ежедневник",
     miniNavProgram: "программа",
     miniNavContacts: "контакты",
     locations: [
