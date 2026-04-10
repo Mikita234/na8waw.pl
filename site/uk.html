@@ -247,29 +247,31 @@
             точка для обох днів.
           </p>
 
-          <div class="location-map">
-            <div class="location-map-head">
-              <strong id="location-map-day">9 травня • Перший день</strong>
-              <a
-                class="button button-secondary location-map-open"
-                id="location-map-open"
-                href="https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                Відкрити в Google Maps
-              </a>
+          <div class="locations-layout">
+            <div class="location-map">
+              <div class="location-map-head">
+                <strong id="location-map-day">9 травня • Перший день</strong>
+                <a
+                  class="button button-secondary location-map-open"
+                  id="location-map-open"
+                  href="https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Відкрити в Google Maps
+                </a>
+              </div>
+              <iframe
+                class="location-map-frame"
+                id="location-map-frame"
+                title="Точка зустрічі"
+                src="https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
-            <iframe
-              class="location-map-frame"
-              id="location-map-frame"
-              title="Точка зустрічі"
-              src="https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div class="location-links" id="location-links"></div>
           </div>
-          <div class="location-links" id="location-links"></div>
         </aside>
       </section>
     </main>

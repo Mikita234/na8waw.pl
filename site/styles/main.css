@@ -691,6 +691,13 @@ body::after {
   gap: 12px;
 }
 
+.locations-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.32fr) minmax(280px, 0.68fr);
+  gap: 16px;
+  align-items: start;
+}
+
 .location-map {
   margin-top: 18px;
   margin-bottom: 14px;
@@ -883,6 +890,10 @@ body::after {
 
 @media (max-width: 980px) {
   .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .locations-layout {
     grid-template-columns: 1fr;
   }
 }
