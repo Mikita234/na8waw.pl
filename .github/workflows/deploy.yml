@@ -4,10 +4,23 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - Update daily meditation
+    types:
+      - completed
   workflow_dispatch:
 
 jobs:
   deploy:
+    if: >
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == 'main'
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
