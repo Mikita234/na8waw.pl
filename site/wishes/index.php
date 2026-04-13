@@ -253,6 +253,7 @@
 
         <div class="wish-actions">
           <button class="button" id="wish-submit" type="submit">Отправить на экран</button>
+          <a class="button button-secondary" href="/ru.html">Перейти на главную</a>
         </div>
 
         <p class="wish-status" id="wish-status" aria-live="polite"></p>
