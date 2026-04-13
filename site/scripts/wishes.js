@@ -58,6 +58,7 @@ if (formNode && statusNode && submitNode) {
     formData.append("message", String(document.getElementById("wish-message")?.value || ""));
     formData.append("clean_years", String(document.getElementById("wish-clean-years")?.value || ""));
     formData.append("clean_months", String(document.getElementById("wish-clean-months")?.value || ""));
+    formData.append("clean_days", String(document.getElementById("wish-clean-days")?.value || ""));
     formData.append("website", String(document.getElementById("wish-website")?.value || ""));
     statusNode.dataset.state = "pending";
     statusNode.textContent = messages[currentLocale].sending;

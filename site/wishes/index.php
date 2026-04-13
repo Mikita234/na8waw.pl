@@ -244,6 +244,11 @@
             <span>Срок ЧВ: месяцев</span>
             <input id="wish-clean-months" name="clean_months" type="number" min="0" max="11" inputmode="numeric" placeholder="0">
           </label>
+
+          <label class="wish-field">
+            <span>Срок ЧВ: дней</span>
+            <input id="wish-clean-days" name="clean_days" type="number" min="0" max="31" inputmode="numeric" placeholder="0">
+          </label>
         </div>
 
         <div class="wish-actions">
@@ -254,6 +259,6 @@
       </form>
     </main>
 
-    <script type="module" src="/scripts/wishes.js?v=20260413x"></script>
+    <script type="module" src="/scripts/wishes.js?v=20260413y"></script>
   </body>
 </html>

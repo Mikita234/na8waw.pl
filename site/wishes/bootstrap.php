@@ -90,6 +90,9 @@ function wishes_ensure_schema(PDO $pdo): void
           image_mime VARCHAR(32) NULL DEFAULT NULL,
           image_width INT UNSIGNED NULL DEFAULT NULL,
           image_height INT UNSIGNED NULL DEFAULT NULL,
+          clean_years SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+          clean_months TINYINT UNSIGNED NOT NULL DEFAULT 0,
+          clean_days TINYINT UNSIGNED NOT NULL DEFAULT 0,
           created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
           approved_at TIMESTAMP NULL DEFAULT NULL,
           PRIMARY KEY (id),
@@ -105,6 +108,7 @@ function wishes_ensure_schema(PDO $pdo): void
         'image_height' => "ALTER TABLE wishes ADD COLUMN image_height INT UNSIGNED NULL DEFAULT NULL AFTER image_width",
         'clean_years' => "ALTER TABLE wishes ADD COLUMN clean_years SMALLINT UNSIGNED NOT NULL DEFAULT 0 AFTER image_height",
         'clean_months' => "ALTER TABLE wishes ADD COLUMN clean_months TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER clean_years",
+        'clean_days' => "ALTER TABLE wishes ADD COLUMN clean_days TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER clean_months",
     ];
 
     foreach ($columns as $column => $sql) {
@@ -197,7 +201,7 @@ function wishes_normalize_text(string $value): string
     return $value;
 }
 
-function wishes_clean_duration_label(int $years, int $months, string $locale = 'ru'): string
+function wishes_clean_duration_label(int $years, int $months, int $days = 0, string $locale = 'ru'): string
 {
     $parts = [];
 
@@ -229,6 +233,22 @@ function wishes_clean_duration_label(int $years, int $months, string $locale = '
                 $months % 10 === 1 && $months % 100 !== 11 => 'месяц',
                 in_array($months % 10, [2, 3, 4], true) && !in_array($months % 100, [12, 13, 14], true) => 'месяца',
                 default => 'месяцев',
+            };
+        }
+    }
+
+    if ($days > 0) {
+        if ($locale === 'uk') {
+            $parts[] = $days . ' ' . match (true) {
+                $days % 10 === 1 && $days % 100 !== 11 => 'день',
+                in_array($days % 10, [2, 3, 4], true) && !in_array($days % 100, [12, 13, 14], true) => 'дні',
+                default => 'днів',
+            };
+        } else {
+            $parts[] = $days . ' ' . match (true) {
+                $days % 10 === 1 && $days % 100 !== 11 => 'день',
+                in_array($days % 10, [2, 3, 4], true) && !in_array($days % 100, [12, 13, 14], true) => 'дня',
+                default => 'дней',
             };
         }
     }

@@ -53,15 +53,17 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 $message = trim((string)($_POST['message'] ?? ''));
                 $cleanYears = max(0, min(99, (int)($_POST['clean_years'] ?? 0)));
                 $cleanMonths = max(0, min(11, (int)($_POST['clean_months'] ?? 0)));
+                $cleanDays = max(0, min(31, (int)($_POST['clean_days'] ?? 0)));
 
                 if ($message !== '') {
-                    $stmt = $pdo->prepare('UPDATE wishes SET author = :author, city = :city, message = :message, clean_years = :clean_years, clean_months = :clean_months WHERE id = :id');
+                    $stmt = $pdo->prepare('UPDATE wishes SET author = :author, city = :city, message = :message, clean_years = :clean_years, clean_months = :clean_months, clean_days = :clean_days WHERE id = :id');
                     $stmt->execute([
                         ':author' => mb_substr($author, 0, 40),
                         ':city' => mb_substr($city, 0, 60),
                         ':message' => mb_substr($message, 0, 220),
                         ':clean_years' => $cleanYears,
                         ':clean_months' => $cleanMonths,
+                        ':clean_days' => $cleanDays,
                         ':id' => $wishId,
                     ]);
                 }
@@ -124,7 +126,7 @@ if (!wishes_is_admin($config)) {
 }
 
 $csrf = wishes_admin_csrf_token($config);
-$pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_months, status, image_path, image_width, image_height, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
+$pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_months, clean_days, status, image_path, image_width, image_height, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
 ?>
 <!doctype html>
 <html lang="ru">
@@ -150,7 +152,7 @@ $pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_mon
       .actions{display:flex;flex-wrap:wrap;gap:8px}
       form{margin:0}
       .editor{display:grid;gap:10px;margin:0 0 16px}
-      .editor-grid{display:grid;grid-template-columns:1fr 1fr 120px 120px;gap:10px}
+      .editor-grid{display:grid;grid-template-columns:1fr 1fr 100px 100px 100px;gap:10px}
       .editor input,.editor textarea{width:100%;border:1px solid rgba(23,23,23,.12);border-radius:14px;padding:10px 12px;font:inherit}
       .editor textarea{min-height:84px;resize:vertical}
       @media (max-width: 900px){.editor-grid{grid-template-columns:1fr 1fr}.editor{gap:8px}}
@@ -189,13 +191,14 @@ $pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_mon
               <input name="city" type="text" maxlength="60" value="<?= htmlspecialchars((string)$wish['city'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="Город">
               <input name="clean_years" type="number" min="0" max="99" value="<?= (int)($wish['clean_years'] ?? 0) ?>" placeholder="Лет">
               <input name="clean_months" type="number" min="0" max="11" value="<?= (int)($wish['clean_months'] ?? 0) ?>" placeholder="Мес.">
+              <input name="clean_days" type="number" min="0" max="31" value="<?= (int)($wish['clean_days'] ?? 0) ?>" placeholder="Дней">
             </div>
             <textarea name="message" maxlength="220" placeholder="Текст пожелания"><?= htmlspecialchars((string)$wish['message'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></textarea>
             <div class="actions">
               <button class="ghost" type="submit">Сохранить правки</button>
             </div>
           </form>
-          <p class="author"><?= htmlspecialchars(trim(implode(' • ', array_filter([(string)($wish['author'] ?: 'Без подписи'), (string)($wish['city'] ?? ''), wishes_clean_duration_label((int)($wish['clean_years'] ?? 0), (int)($wish['clean_months'] ?? 0), 'ru')]))), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+          <p class="author"><?= htmlspecialchars(trim(implode(' • ', array_filter([(string)($wish['author'] ?: 'Без подписи'), (string)($wish['city'] ?? ''), wishes_clean_duration_label((int)($wish['clean_years'] ?? 0), (int)($wish['clean_months'] ?? 0), (int)($wish['clean_days'] ?? 0), 'ru')]))), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
           <div class="actions">
             <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="approve"><button type="submit">Одобрить</button></form>
             <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="reject"><button class="ghost" type="submit">Скрыть</button></form>

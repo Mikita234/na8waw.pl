@@ -50,6 +50,7 @@ if (mb_strlen($city) > $maxCityLength) {
 
 $cleanYears = max(0, min(99, (int)($_POST['clean_years'] ?? 0)));
 $cleanMonths = max(0, min(11, (int)($_POST['clean_months'] ?? 0)));
+$cleanDays = max(0, min(31, (int)($_POST['clean_days'] ?? 0)));
 
 $imagePath = null;
 $imageMime = null;
@@ -170,7 +171,7 @@ if ($photoData !== '') {
     $imageHeight = isset($imageInfo[1]) ? (int)$imageInfo[1] : null;
 }
 
-$stmt = $pdo->prepare('INSERT INTO wishes (author, city, message, status, image_path, image_mime, image_width, image_height, clean_years, clean_months) VALUES (:author, :city, :message, :status, :image_path, :image_mime, :image_width, :image_height, :clean_years, :clean_months)');
+$stmt = $pdo->prepare('INSERT INTO wishes (author, city, message, status, image_path, image_mime, image_width, image_height, clean_years, clean_months, clean_days) VALUES (:author, :city, :message, :status, :image_path, :image_mime, :image_width, :image_height, :clean_years, :clean_months, :clean_days)');
 $stmt->execute([
     ':author' => $author,
     ':city' => $city,
@@ -182,6 +183,7 @@ $stmt->execute([
     ':image_height' => $imageHeight,
     ':clean_years' => $cleanYears,
     ':clean_months' => $cleanMonths,
+    ':clean_days' => $cleanDays,
 ]);
 
 wishes_json([

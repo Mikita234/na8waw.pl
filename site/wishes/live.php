@@ -309,6 +309,7 @@ $cleanUi = (($_GET['clean'] ?? '') === '1');
       let cardItems = [];
       let cardIndex = 0;
       let cardTimer = null;
+      let currentSignature = "";
 
       function renderTicker(items) {
         if (!tickerTrack) {
@@ -361,30 +362,57 @@ $cleanUi = (($_GET['clean'] ?? '') === '1');
         cardAuthor.textContent = [item.author || "Без подписи", item.city || "", item.cleanLabel || ""].filter(Boolean).join(" • ");
       }
 
-      function scheduleCards(items) {
-        cardItems = items;
-        cardIndex = 0;
+      function buildSignature(items) {
+        return items.map((item) => `${item.id}:${item.approvedAt || ""}`).join("|");
+      }
 
-        if (cardTimer) {
-          window.clearInterval(cardTimer);
-          cardTimer = null;
-        }
+      function scheduleCards(items) {
+        const nextSignature = buildSignature(items);
+        const shouldReset = nextSignature !== currentSignature;
+        const lengthChanged = items.length !== cardItems.length;
+        currentSignature = nextSignature;
+        cardItems = items;
 
         if (!items.length) {
+          if (cardTimer) {
+            window.clearInterval(cardTimer);
+            cardTimer = null;
+          }
+          cardIndex = 0;
           applyCard(null);
           return;
         }
 
-        applyCard(items[0]);
+        if (shouldReset) {
+          cardIndex = 0;
+        } else if (cardIndex >= items.length) {
+          cardIndex = 0;
+        }
+
+        applyCard(items[cardIndex]);
 
         if (items.length === 1) {
+          if (cardTimer) {
+            window.clearInterval(cardTimer);
+            cardTimer = null;
+          }
           return;
         }
 
-        cardTimer = window.setInterval(() => {
-          cardIndex = (cardIndex + 1) % cardItems.length;
-          applyCard(cardItems[cardIndex]);
-        }, 10000);
+        if (shouldReset || lengthChanged || !cardTimer) {
+          if (cardTimer) {
+            window.clearInterval(cardTimer);
+          }
+
+          cardTimer = window.setInterval(() => {
+            if (!cardItems.length) {
+              return;
+            }
+
+            cardIndex = (cardIndex + 1) % cardItems.length;
+            applyCard(cardItems[cardIndex]);
+          }, 10000);
+        }
       }
 
       async function loadFeed() {
