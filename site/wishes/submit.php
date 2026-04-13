@@ -49,7 +49,56 @@ $effectiveUploadLimit = min(
     array_filter([$serverUploadLimit, $serverPostLimit, 5 * 1024 * 1024]) ?: [5 * 1024 * 1024]
 );
 
-if (isset($_FILES['photo']) && (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+$photoData = trim((string)($_POST['photo_data'] ?? ''));
+$photoName = trim((string)($_POST['photo_name'] ?? ''));
+
+if ($photoData !== '') {
+    if (!preg_match('#^data:(image/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$#', $photoData, $matches)) {
+        wishes_json(['ok' => false, 'error' => 'Поддерживаются только изображения JPG, PNG или WebP.'], 422);
+    }
+
+    $mime = $matches[1];
+    $binary = base64_decode($matches[2], true);
+
+    if ($binary === false || $binary === '') {
+        wishes_json(['ok' => false, 'error' => 'Не удалось прочитать фотографию. Попробуй выбрать файл заново.'], 422);
+    }
+
+    if (strlen($binary) > $effectiveUploadLimit) {
+        wishes_json(['ok' => false, 'error' => 'Фотография должна быть не больше ' . wishes_human_size($effectiveUploadLimit) . '.'], 422);
+    }
+
+    $imageInfo = @getimagesizefromstring($binary);
+
+    if (!is_array($imageInfo)) {
+        wishes_json(['ok' => false, 'error' => 'Поддерживаются только изображения JPG, PNG или WebP.'], 422);
+    }
+
+    $allowedMimes = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+
+    $extension = $allowedMimes[$mime] ?? null;
+
+    if ($extension === null) {
+        wishes_json(['ok' => false, 'error' => 'Поддерживаются только изображения JPG, PNG или WebP.'], 422);
+    }
+
+    $uploadDir = wishes_ensure_upload_dir();
+    $filename = date('Ymd-His') . '-' . bin2hex(random_bytes(6)) . '.' . $extension;
+    $targetPath = $uploadDir . '/' . $filename;
+
+    if (file_put_contents($targetPath, $binary) === false) {
+        wishes_json(['ok' => false, 'error' => 'Не удалось сохранить фотографию на сервере.'], 500);
+    }
+
+    $imagePath = wishes_upload_web_path($filename);
+    $imageMime = $mime;
+    $imageWidth = isset($imageInfo[0]) ? (int)$imageInfo[0] : null;
+    $imageHeight = isset($imageInfo[1]) ? (int)$imageInfo[1] : null;
+} elseif (isset($_FILES['photo']) && (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
     $fileError = (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE);
 
     if ($fileError !== UPLOAD_ERR_OK) {

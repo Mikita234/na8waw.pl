@@ -3,6 +3,7 @@ import { getLocale, subscribeLocale } from "./locale.js?v=20260410m";
 const formNode = document.getElementById("wish-form");
 const statusNode = document.getElementById("wish-status");
 const submitNode = document.getElementById("wish-submit");
+const photoNode = document.getElementById("wish-photo");
 
 const messages = {
   ru: {
@@ -21,6 +22,24 @@ const messages = {
 
 let currentLocale = getLocale();
 
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+        return;
+      }
+
+      reject(new Error(messages[currentLocale].error));
+    };
+    reader.onerror = () => {
+      reject(new Error(messages[currentLocale].error));
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 subscribeLocale((locale) => {
   currentLocale = locale;
   if (statusNode) {
@@ -33,12 +52,21 @@ if (formNode && statusNode && submitNode) {
   formNode.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(formNode);
+    const formData = new FormData();
+    formData.append("author", String(document.getElementById("wish-author")?.value || ""));
+    formData.append("message", String(document.getElementById("wish-message")?.value || ""));
     statusNode.dataset.state = "pending";
     statusNode.textContent = messages[currentLocale].sending;
     submitNode.disabled = true;
 
     try {
+      const file = photoNode?.files?.[0];
+
+      if (file) {
+        formData.append("photo_name", file.name);
+        formData.append("photo_data", await readFileAsDataUrl(file));
+      }
+
       const response = await fetch("/wishes/submit.php", {
         method: "POST",
         body: formData,
