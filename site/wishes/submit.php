@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';
 
-header('Access-Control-Allow-Origin: *');
-
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'OPTIONS') {
     http_response_code(204);
     exit;
@@ -23,9 +21,16 @@ try {
 
 $maxLength = (int)($config['public']['max_length'] ?? 220);
 $maxNameLength = (int)($config['public']['max_name_length'] ?? 40);
+$maxCityLength = 60;
 
 $author = wishes_normalize_text((string)($_POST['author'] ?? ''));
+$city = wishes_normalize_text((string)($_POST['city'] ?? ''));
 $message = wishes_normalize_text((string)($_POST['message'] ?? ''));
+$honeypot = trim((string)($_POST['website'] ?? ''));
+
+if ($honeypot !== '') {
+    wishes_json(['ok' => true, 'message' => 'Пожелание отправлено. После проверки оно появится на экране.']);
+}
 
 if ($message === '') {
     wishes_json(['ok' => false, 'error' => 'Напиши пожелание перед отправкой'], 422);
@@ -38,6 +43,13 @@ if (mb_strlen($message) > $maxLength) {
 if (mb_strlen($author) > $maxNameLength) {
     wishes_json(['ok' => false, 'error' => "Подпись слишком длинная. Максимум {$maxNameLength} символов."], 422);
 }
+
+if (mb_strlen($city) > $maxCityLength) {
+    wishes_json(['ok' => false, 'error' => "Город слишком длинный. Максимум {$maxCityLength} символов."], 422);
+}
+
+$cleanYears = max(0, min(99, (int)($_POST['clean_years'] ?? 0)));
+$cleanMonths = max(0, min(11, (int)($_POST['clean_months'] ?? 0)));
 
 $imagePath = null;
 $imageMime = null;
@@ -158,15 +170,18 @@ if ($photoData !== '') {
     $imageHeight = isset($imageInfo[1]) ? (int)$imageInfo[1] : null;
 }
 
-$stmt = $pdo->prepare('INSERT INTO wishes (author, message, status, image_path, image_mime, image_width, image_height) VALUES (:author, :message, :status, :image_path, :image_mime, :image_width, :image_height)');
+$stmt = $pdo->prepare('INSERT INTO wishes (author, city, message, status, image_path, image_mime, image_width, image_height, clean_years, clean_months) VALUES (:author, :city, :message, :status, :image_path, :image_mime, :image_width, :image_height, :clean_years, :clean_months)');
 $stmt->execute([
     ':author' => $author,
+    ':city' => $city,
     ':message' => $message,
     ':status' => 'pending',
     ':image_path' => $imagePath,
     ':image_mime' => $imageMime,
     ':image_width' => $imageWidth,
     ':image_height' => $imageHeight,
+    ':clean_years' => $cleanYears,
+    ':clean_months' => $cleanMonths,
 ]);
 
 wishes_json([

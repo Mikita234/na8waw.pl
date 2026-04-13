@@ -70,6 +70,16 @@
         display: grid;
         gap: 14px;
       }
+      .wish-meta {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr 1fr;
+      }
+      .wish-clean {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr 1fr;
+      }
 
       .wish-field {
         display: grid;
@@ -115,6 +125,17 @@
         color: var(--muted);
         font-size: 0.82rem;
         line-height: 1.5;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
 
       .wish-actions {
@@ -162,8 +183,15 @@
       }
 
       @media (max-width: 720px) {
+        .wish-meta,
+        .wish-clean,
         .wish-actions {
           flex-direction: column;
+        }
+
+        .wish-meta,
+        .wish-clean {
+          grid-template-columns: 1fr;
         }
 
         .wish-actions .button {
@@ -181,10 +209,17 @@
       </p>
 
       <form class="wish-form" id="wish-form" enctype="multipart/form-data">
-        <label class="wish-field">
-          <span>Подпись, если хочешь</span>
-          <input id="wish-author" name="author" type="text" maxlength="40" placeholder="Например: Ира, Варшава">
-        </label>
+        <div class="wish-meta">
+          <label class="wish-field">
+            <span>Подпись, если хочешь</span>
+            <input id="wish-author" name="author" type="text" maxlength="40" placeholder="Например: Ира">
+          </label>
+
+          <label class="wish-field">
+            <span>Город</span>
+            <input id="wish-city" name="city" type="text" maxlength="60" placeholder="Например: Варшава">
+          </label>
+        </div>
 
         <label class="wish-field">
           <span>Твое пожелание</span>
@@ -197,16 +232,28 @@
           <p class="field-note">JPG, PNG или WebP. Если хостинг еще не подхватил новые лимиты PHP, начни с файла до 2 MB. Фото тоже проходит модерацию вместе с текстом.</p>
         </label>
 
+        <label class="sr-only" aria-hidden="true">Не заполняй это поле <input id="wish-website" name="website" type="text" tabindex="-1" autocomplete="off"></label>
+
+        <div class="wish-clean">
+          <label class="wish-field">
+            <span>Срок ЧВ: лет</span>
+            <input id="wish-clean-years" name="clean_years" type="number" min="0" max="99" inputmode="numeric" placeholder="0">
+          </label>
+
+          <label class="wish-field">
+            <span>Срок ЧВ: месяцев</span>
+            <input id="wish-clean-months" name="clean_months" type="number" min="0" max="11" inputmode="numeric" placeholder="0">
+          </label>
+        </div>
+
         <div class="wish-actions">
           <button class="button" id="wish-submit" type="submit">Отправить на экран</button>
-          <a class="button button-secondary" href="/wishes/live.php" target="_blank" rel="noreferrer noopener">Открыть live-экран</a>
-          <a class="button button-secondary" href="/wishes/admin.php" target="_blank" rel="noreferrer noopener">Модерация</a>
         </div>
 
         <p class="wish-status" id="wish-status" aria-live="polite"></p>
       </form>
     </main>
 
-    <script type="module" src="/scripts/wishes.js?v=20260413w"></script>
+    <script type="module" src="/scripts/wishes.js?v=20260413x"></script>
   </body>
 </html>

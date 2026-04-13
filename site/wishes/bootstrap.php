@@ -83,6 +83,7 @@ function wishes_ensure_schema(PDO $pdo): void
         "CREATE TABLE IF NOT EXISTS wishes (
           id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
           author VARCHAR(40) NOT NULL DEFAULT '',
+          city VARCHAR(60) NOT NULL DEFAULT '',
           message VARCHAR(220) NOT NULL,
           status ENUM('pending', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
           image_path VARCHAR(255) NULL DEFAULT NULL,
@@ -97,10 +98,13 @@ function wishes_ensure_schema(PDO $pdo): void
     );
 
     $columns = [
+        'city' => "ALTER TABLE wishes ADD COLUMN city VARCHAR(60) NOT NULL DEFAULT '' AFTER author",
         'image_path' => "ALTER TABLE wishes ADD COLUMN image_path VARCHAR(255) NULL DEFAULT NULL AFTER status",
         'image_mime' => "ALTER TABLE wishes ADD COLUMN image_mime VARCHAR(32) NULL DEFAULT NULL AFTER image_path",
         'image_width' => "ALTER TABLE wishes ADD COLUMN image_width INT UNSIGNED NULL DEFAULT NULL AFTER image_mime",
         'image_height' => "ALTER TABLE wishes ADD COLUMN image_height INT UNSIGNED NULL DEFAULT NULL AFTER image_width",
+        'clean_years' => "ALTER TABLE wishes ADD COLUMN clean_years SMALLINT UNSIGNED NOT NULL DEFAULT 0 AFTER image_height",
+        'clean_months' => "ALTER TABLE wishes ADD COLUMN clean_months TINYINT UNSIGNED NOT NULL DEFAULT 0 AFTER clean_years",
     ];
 
     foreach ($columns as $column => $sql) {
@@ -169,6 +173,16 @@ function wishes_is_admin(array $config): bool
     return $cookie !== '' && hash_equals(wishes_admin_token($config), $cookie);
 }
 
+function wishes_admin_csrf_token(array $config): string
+{
+    return hash('sha256', wishes_admin_token($config) . '|csrf');
+}
+
+function wishes_verify_admin_csrf(array $config, ?string $token): bool
+{
+    return $token !== null && hash_equals(wishes_admin_csrf_token($config), $token);
+}
+
 function wishes_require_admin(array $config): void
 {
     if (!wishes_is_admin($config)) {
@@ -181,6 +195,45 @@ function wishes_normalize_text(string $value): string
 {
     $value = trim(preg_replace('/\s+/u', ' ', $value) ?? '');
     return $value;
+}
+
+function wishes_clean_duration_label(int $years, int $months, string $locale = 'ru'): string
+{
+    $parts = [];
+
+    if ($years > 0) {
+        if ($locale === 'uk') {
+            $parts[] = $years . ' ' . match (true) {
+                $years % 10 === 1 && $years % 100 !== 11 => 'рік',
+                in_array($years % 10, [2, 3, 4], true) && !in_array($years % 100, [12, 13, 14], true) => 'роки',
+                default => 'років',
+            };
+        } else {
+            $parts[] = $years . ' ' . match (true) {
+                $years % 10 === 1 && $years % 100 !== 11 => 'год',
+                in_array($years % 10, [2, 3, 4], true) && !in_array($years % 100, [12, 13, 14], true) => 'года',
+                default => 'лет',
+            };
+        }
+    }
+
+    if ($months > 0) {
+        if ($locale === 'uk') {
+            $parts[] = $months . ' ' . match (true) {
+                $months % 10 === 1 && $months % 100 !== 11 => 'місяць',
+                in_array($months % 10, [2, 3, 4], true) && !in_array($months % 100, [12, 13, 14], true) => 'місяці',
+                default => 'місяців',
+            };
+        } else {
+            $parts[] = $months . ' ' . match (true) {
+                $months % 10 === 1 && $months % 100 !== 11 => 'месяц',
+                in_array($months % 10, [2, 3, 4], true) && !in_array($months % 100, [12, 13, 14], true) => 'месяца',
+                default => 'месяцев',
+            };
+        }
+    }
+
+    return implode(' ', $parts);
 }
 
 function wishes_upload_dir(): string

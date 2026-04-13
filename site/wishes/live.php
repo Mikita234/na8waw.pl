@@ -10,10 +10,11 @@ try {
 } catch (Throwable $e) {
     $pollSeconds = 6;
 }
-$mode = (string)($_GET['mode'] ?? 'cards');
-if (!in_array($mode, ['cards', 'ticker'], true)) {
-    $mode = 'cards';
+$mode = (string)($_GET['mode'] ?? 'mixed');
+if (!in_array($mode, ['mixed', 'cards', 'ticker'], true)) {
+    $mode = 'mixed';
 }
+$cleanUi = (($_GET['clean'] ?? '') === '1');
 ?>
 <!doctype html>
 <html lang="ru">
@@ -38,6 +39,7 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         display: grid;
         min-height: 100vh;
         padding: 32px;
+        gap: 24px;
       }
       .switcher {
         position: fixed;
@@ -72,6 +74,11 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
       .cards {
         display: grid;
         place-items: center;
+        min-height: calc(100vh - 64px);
+      }
+      .mixed {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
         min-height: calc(100vh - 64px);
       }
       .stage {
@@ -129,6 +136,32 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         font-size: clamp(18px, 1.4vw, 24px);
         letter-spacing: .05em;
         text-transform: uppercase;
+      }
+      .card-total {
+        position: absolute;
+        top: clamp(28px, 4vw, 40px);
+        right: clamp(28px, 4vw, 40px);
+        z-index: 2;
+        display: inline-flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 14px 18px;
+        border: 1px solid rgba(255,255,255,.14);
+        border-radius: 20px;
+        background: rgba(4,17,38,.52);
+        backdrop-filter: blur(10px);
+        text-align: right;
+      }
+      .card-total span {
+        color: #78a9ff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .card-total strong {
+        font-size: clamp(22px, 1.8vw, 30px);
+        line-height: 1;
       }
       .card-empty {
         display: grid;
@@ -194,6 +227,13 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         letter-spacing: .06em;
         font-size: 24px;
       }
+      .item em {
+        color: rgba(248,251,255,.52);
+        font-style: normal;
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
       .empty {
         text-align: center;
         font-size: 34px;
@@ -211,21 +251,29 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         .card-message { max-width: none; font-size: clamp(28px, 8vw, 42px); }
         .card-frame { position: static; width: 100%; max-width: none; transform: none; aspect-ratio: 4 / 3; margin-top: 12px; }
         .card-media:not([hidden]) + .card-overlay + .card-content .card-message { max-width: none; }
+        .card-total { position: static; margin: 16px; text-align: left; }
       }
     </style>
   </head>
   <body>
-    <nav class="switcher" aria-label="Режим live-экрана">
-      <a class="<?= $mode === 'cards' ? 'is-active' : '' ?>" href="/wishes/live.php?mode=cards">Карточки</a>
-      <a class="<?= $mode === 'ticker' ? 'is-active' : '' ?>" href="/wishes/live.php?mode=ticker">Строка</a>
-    </nav>
+    <?php if (!$cleanUi): ?>
+      <nav class="switcher" aria-label="Режим live-экрана">
+        <a class="<?= $mode === 'mixed' ? 'is-active' : '' ?>" href="/wishes/live.php?mode=mixed">Комбо</a>
+        <a class="<?= $mode === 'cards' ? 'is-active' : '' ?>" href="/wishes/live.php?mode=cards">Карточки</a>
+        <a class="<?= $mode === 'ticker' ? 'is-active' : '' ?>" href="/wishes/live.php?mode=ticker">Строка</a>
+      </nav>
+    <?php endif; ?>
     <main class="shell">
-      <div class="<?= $mode === 'cards' ? 'cards' : 'ticker' ?>" id="display">
-        <?php if ($mode === 'cards'): ?>
+      <div class="<?= $mode === 'ticker' ? 'ticker' : ($mode === 'cards' ? 'cards' : 'mixed') ?>" id="display">
+        <?php if ($mode !== 'ticker'): ?>
           <div class="stage" id="stage">
             <div class="card-empty" id="card-empty">Пожелания появятся здесь после модерации.</div>
             <div class="card-media" id="card-media" hidden></div>
             <div class="card-overlay" id="card-overlay" hidden></div>
+            <div class="card-total" id="card-total">
+              <span>Общий срок ЧВ</span>
+              <strong id="card-total-value">0</strong>
+            </div>
             <div class="card-content" id="card-content" hidden>
               <div class="card-kicker">Пожелания на экран</div>
               <p class="card-message" id="card-message"></p>
@@ -235,9 +283,12 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
               </div>
             </div>
           </div>
-        <?php else: ?>
-          <div class="track" id="track">
-            <div class="empty">Пожелания появятся здесь после модерации.</div>
+        <?php endif; ?>
+        <?php if ($mode !== 'cards'): ?>
+          <div class="ticker">
+            <div class="track" id="track">
+              <div class="empty">Пожелания появятся здесь после модерации.</div>
+            </div>
           </div>
         <?php endif; ?>
       </div>
@@ -254,6 +305,7 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
       const cardAuthor = document.getElementById("card-author");
       const cardFrame = document.getElementById("card-frame");
       const cardImage = document.getElementById("card-image");
+      const cardTotalValue = document.getElementById("card-total-value");
       let cardItems = [];
       let cardIndex = 0;
       let cardTimer = null;
@@ -269,7 +321,8 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         }
 
         const markup = items.map((item) => {
-          const author = item.author ? `<strong>${item.author}</strong>` : "";
+          const authorParts = [item.author, item.city, item.cleanLabel].filter(Boolean);
+          const author = authorParts.length ? `<strong>${authorParts.join(" • ")}</strong>` : "";
           return `<div class="item">${author}<span>${item.message}</span></div>`;
         }).join("");
 
@@ -305,7 +358,7 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
           }
         }
         cardMessage.textContent = item.message || "";
-        cardAuthor.textContent = item.author || "Без подписи";
+        cardAuthor.textContent = [item.author || "Без подписи", item.city || "", item.cleanLabel || ""].filter(Boolean).join(" • ");
       }
 
       function scheduleCards(items) {
@@ -343,12 +396,15 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
           }
 
           const items = payload.items || [];
-          if (mode === "ticker") {
-            renderTicker(items);
-            return;
+          if (cardTotalValue && payload.totals?.cleanLabel) {
+            cardTotalValue.textContent = payload.totals.cleanLabel;
           }
-
-          scheduleCards(items);
+          if (mode === "ticker" || mode === "mixed") {
+            renderTicker(items);
+          }
+          if (mode === "cards" || mode === "mixed") {
+            scheduleCards(items);
+          }
         } catch (error) {}
       }
 

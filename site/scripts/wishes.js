@@ -54,7 +54,11 @@ if (formNode && statusNode && submitNode) {
 
     const formData = new FormData();
     formData.append("author", String(document.getElementById("wish-author")?.value || ""));
+    formData.append("city", String(document.getElementById("wish-city")?.value || ""));
     formData.append("message", String(document.getElementById("wish-message")?.value || ""));
+    formData.append("clean_years", String(document.getElementById("wish-clean-years")?.value || ""));
+    formData.append("clean_months", String(document.getElementById("wish-clean-months")?.value || ""));
+    formData.append("website", String(document.getElementById("wish-website")?.value || ""));
     statusNode.dataset.state = "pending";
     statusNode.textContent = messages[currentLocale].sending;
     submitNode.disabled = true;

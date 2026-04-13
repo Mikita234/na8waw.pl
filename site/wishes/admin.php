@@ -31,6 +31,11 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
         $loginError = 'Неверный логин или пароль.';
     } elseif (wishes_is_admin($config) && isset($_POST['wish_id'], $_POST['action'])) {
+        if (!wishes_verify_admin_csrf($config, (string)($_POST['csrf'] ?? ''))) {
+            http_response_code(403);
+            exit('Invalid CSRF token');
+        }
+
         $wishId = (int)$_POST['wish_id'];
         $action = (string)$_POST['action'];
 
@@ -95,7 +100,8 @@ if (!wishes_is_admin($config)) {
     exit;
 }
 
-$pending = $pdo->query("SELECT id, author, message, status, image_path, image_width, image_height, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
+$csrf = wishes_admin_csrf_token($config);
+$pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_months, status, image_path, image_width, image_height, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
 ?>
 <!doctype html>
 <html lang="ru">
@@ -147,12 +153,26 @@ $pending = $pdo->query("SELECT id, author, message, status, image_path, image_wi
             </figure>
           <?php endif; ?>
           <p class="message"><?= nl2br(htmlspecialchars((string)$wish['message'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')) ?></p>
-          <p class="author"><?= htmlspecialchars((string)($wish['author'] ?: 'Без подписи'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+          <p class="author">
+            <?=
+              htmlspecialchars(
+                trim(
+                  implode(' • ', array_filter([
+                    (string)($wish['author'] ?: 'Без подписи'),
+                    (string)($wish['city'] ?? ''),
+                    wishes_clean_duration_label((int)($wish['clean_years'] ?? 0), (int)($wish['clean_months'] ?? 0), 'ru'),
+                  ]))
+                ),
+                ENT_QUOTES | ENT_SUBSTITUTE,
+                'UTF-8'
+              )
+            ?>
+          </p>
           <div class="actions">
-            <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="approve"><button type="submit">Одобрить</button></form>
-            <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="reject"><button class="ghost" type="submit">Скрыть</button></form>
-            <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="pending"><button class="ghost" type="submit">В очередь</button></form>
-            <form method="post" onsubmit="return window.confirm('Удалить пожелание совсем?');"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="delete"><button class="ghost" type="submit">Удалить</button></form>
+            <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="approve"><button type="submit">Одобрить</button></form>
+            <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="reject"><button class="ghost" type="submit">Скрыть</button></form>
+            <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="pending"><button class="ghost" type="submit">В очередь</button></form>
+            <form method="post" onsubmit="return window.confirm('Удалить пожелание совсем?');"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="delete"><button class="ghost" type="submit">Удалить</button></form>
           </div>
         </article>
       <?php endforeach; ?>
