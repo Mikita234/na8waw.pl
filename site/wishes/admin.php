@@ -39,10 +39,33 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $wishId = (int)$_POST['wish_id'];
         $action = (string)$_POST['action'];
 
-        if ($wishId > 0 && in_array($action, ['approve', 'reject', 'pending', 'delete'], true)) {
+        if ($wishId > 0 && in_array($action, ['approve', 'reject', 'pending', 'delete', 'save'], true)) {
             if ($action === 'delete') {
                 $stmt = $pdo->prepare('DELETE FROM wishes WHERE id = :id');
                 $stmt->execute([':id' => $wishId]);
+                header('Location: /wishes/admin.php');
+                exit;
+            }
+
+            if ($action === 'save') {
+                $author = wishes_normalize_text((string)($_POST['author'] ?? ''));
+                $city = wishes_normalize_text((string)($_POST['city'] ?? ''));
+                $message = trim((string)($_POST['message'] ?? ''));
+                $cleanYears = max(0, min(99, (int)($_POST['clean_years'] ?? 0)));
+                $cleanMonths = max(0, min(11, (int)($_POST['clean_months'] ?? 0)));
+
+                if ($message !== '') {
+                    $stmt = $pdo->prepare('UPDATE wishes SET author = :author, city = :city, message = :message, clean_years = :clean_years, clean_months = :clean_months WHERE id = :id');
+                    $stmt->execute([
+                        ':author' => mb_substr($author, 0, 40),
+                        ':city' => mb_substr($city, 0, 60),
+                        ':message' => mb_substr($message, 0, 220),
+                        ':clean_years' => $cleanYears,
+                        ':clean_months' => $cleanMonths,
+                        ':id' => $wishId,
+                    ]);
+                }
+
                 header('Location: /wishes/admin.php');
                 exit;
             }
@@ -126,6 +149,11 @@ $pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_mon
       .author{margin:0 0 14px;color:#444}
       .actions{display:flex;flex-wrap:wrap;gap:8px}
       form{margin:0}
+      .editor{display:grid;gap:10px;margin:0 0 16px}
+      .editor-grid{display:grid;grid-template-columns:1fr 1fr 120px 120px;gap:10px}
+      .editor input,.editor textarea{width:100%;border:1px solid rgba(23,23,23,.12);border-radius:14px;padding:10px 12px;font:inherit}
+      .editor textarea{min-height:84px;resize:vertical}
+      @media (max-width: 900px){.editor-grid{grid-template-columns:1fr 1fr}.editor{gap:8px}}
     </style>
   </head>
   <body>
@@ -152,22 +180,22 @@ $pending = $pdo->query("SELECT id, author, city, message, clean_years, clean_mon
               <img src="<?= htmlspecialchars((string)$wish['image_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" alt="Фото к пожеланию #<?= (int)$wish['id'] ?>">
             </figure>
           <?php endif; ?>
-          <p class="message"><?= nl2br(htmlspecialchars((string)$wish['message'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')) ?></p>
-          <p class="author">
-            <?=
-              htmlspecialchars(
-                trim(
-                  implode(' • ', array_filter([
-                    (string)($wish['author'] ?: 'Без подписи'),
-                    (string)($wish['city'] ?? ''),
-                    wishes_clean_duration_label((int)($wish['clean_years'] ?? 0), (int)($wish['clean_months'] ?? 0), 'ru'),
-                  ]))
-                ),
-                ENT_QUOTES | ENT_SUBSTITUTE,
-                'UTF-8'
-              )
-            ?>
-          </p>
+          <form class="editor" method="post">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
+            <input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>">
+            <input type="hidden" name="action" value="save">
+            <div class="editor-grid">
+              <input name="author" type="text" maxlength="40" value="<?= htmlspecialchars((string)$wish['author'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="Подпись">
+              <input name="city" type="text" maxlength="60" value="<?= htmlspecialchars((string)$wish['city'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="Город">
+              <input name="clean_years" type="number" min="0" max="99" value="<?= (int)($wish['clean_years'] ?? 0) ?>" placeholder="Лет">
+              <input name="clean_months" type="number" min="0" max="11" value="<?= (int)($wish['clean_months'] ?? 0) ?>" placeholder="Мес.">
+            </div>
+            <textarea name="message" maxlength="220" placeholder="Текст пожелания"><?= htmlspecialchars((string)$wish['message'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></textarea>
+            <div class="actions">
+              <button class="ghost" type="submit">Сохранить правки</button>
+            </div>
+          </form>
+          <p class="author"><?= htmlspecialchars(trim(implode(' • ', array_filter([(string)($wish['author'] ?: 'Без подписи'), (string)($wish['city'] ?? ''), wishes_clean_duration_label((int)($wish['clean_years'] ?? 0), (int)($wish['clean_months'] ?? 0), 'ru')]))), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
           <div class="actions">
             <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="approve"><button type="submit">Одобрить</button></form>
             <form method="post"><input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="reject"><button class="ghost" type="submit">Скрыть</button></form>
