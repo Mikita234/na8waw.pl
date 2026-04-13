@@ -203,3 +203,35 @@ function wishes_ensure_upload_dir(): string
 
     return $dir;
 }
+
+function wishes_parse_size_to_bytes(string $value): int
+{
+    $value = trim($value);
+
+    if ($value === '') {
+        return 0;
+    }
+
+    $unit = strtolower(substr($value, -1));
+    $number = (float)$value;
+
+    return match ($unit) {
+        'g' => (int)($number * 1024 * 1024 * 1024),
+        'm' => (int)($number * 1024 * 1024),
+        'k' => (int)($number * 1024),
+        default => (int)$number,
+    };
+}
+
+function wishes_human_size(int $bytes): string
+{
+    if ($bytes >= 1024 * 1024) {
+        return rtrim(rtrim(number_format($bytes / (1024 * 1024), 1, '.', ''), '0'), '.') . ' MB';
+    }
+
+    if ($bytes >= 1024) {
+        return rtrim(rtrim(number_format($bytes / 1024, 1, '.', ''), '0'), '.') . ' KB';
+    }
+
+    return $bytes . ' B';
+}

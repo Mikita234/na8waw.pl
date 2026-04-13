@@ -43,12 +43,26 @@ $imagePath = null;
 $imageMime = null;
 $imageWidth = null;
 $imageHeight = null;
+$serverUploadLimit = wishes_parse_size_to_bytes((string)ini_get('upload_max_filesize'));
+$serverPostLimit = wishes_parse_size_to_bytes((string)ini_get('post_max_size'));
+$effectiveUploadLimit = min(
+    array_filter([$serverUploadLimit, $serverPostLimit, 5 * 1024 * 1024]) ?: [5 * 1024 * 1024]
+);
 
 if (isset($_FILES['photo']) && (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
     $fileError = (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_FILE);
 
     if ($fileError !== UPLOAD_ERR_OK) {
-        wishes_json(['ok' => false, 'error' => 'Не удалось загрузить фотографию. Попробуй еще раз.'], 422);
+        $uploadError = match ($fileError) {
+            UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE => 'Фотография слишком большая для сервера. Попробуй файл до ' . wishes_human_size($effectiveUploadLimit) . '.',
+            UPLOAD_ERR_PARTIAL => 'Фотография загрузилась не полностью. Попробуй еще раз.',
+            UPLOAD_ERR_NO_TMP_DIR => 'На сервере не настроена временная папка для загрузки файлов.',
+            UPLOAD_ERR_CANT_WRITE => 'Сервер не смог сохранить фотографию. Проверь права на папку uploads.',
+            UPLOAD_ERR_EXTENSION => 'PHP-расширение остановило загрузку фотографии.',
+            default => 'Не удалось загрузить фотографию. Попробуй еще раз.',
+        };
+
+        wishes_json(['ok' => false, 'error' => $uploadError], 422);
     }
 
     $tmpPath = (string)($_FILES['photo']['tmp_name'] ?? '');
@@ -58,8 +72,8 @@ if (isset($_FILES['photo']) && (int)($_FILES['photo']['error'] ?? UPLOAD_ERR_NO_
         wishes_json(['ok' => false, 'error' => 'Файл фотографии не распознан.'], 422);
     }
 
-    if ($fileSize <= 0 || $fileSize > 5 * 1024 * 1024) {
-        wishes_json(['ok' => false, 'error' => 'Фотография должна быть не больше 5 MB.'], 422);
+    if ($fileSize <= 0 || $fileSize > $effectiveUploadLimit) {
+        wishes_json(['ok' => false, 'error' => 'Фотография должна быть не больше ' . wishes_human_size($effectiveUploadLimit) . '.'], 422);
     }
 
     $imageInfo = @getimagesize($tmpPath);

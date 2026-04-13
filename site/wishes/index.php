@@ -194,7 +194,7 @@
         <label class="wish-field">
           <span>Фото, если хочешь</span>
           <input id="wish-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp">
-          <p class="field-note">JPG, PNG или WebP до 5 MB. Фото тоже проходит модерацию вместе с текстом.</p>
+          <p class="field-note">JPG, PNG или WebP. Если хостинг еще не подхватил новые лимиты PHP, начни с файла до 2 MB. Фото тоже проходит модерацию вместе с текстом.</p>
         </label>
 
         <div class="wish-actions">
