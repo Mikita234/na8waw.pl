@@ -7,12 +7,13 @@ require __DIR__ . '/bootstrap.php';
 try {
     $config = wishes_load_config();
     $pdo = wishes_pdo($config);
+    wishes_ensure_schema($pdo);
 } catch (Throwable $e) {
     wishes_html_error($e->getMessage(), 503);
 }
 
 if (($_GET['logout'] ?? '') === '1') {
-    unset($_SESSION['wishes_admin']);
+    wishes_logout_admin();
     header('Location: /wishes/admin.php');
     exit;
 }
@@ -23,13 +24,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $password = (string)($_POST['password'] ?? '');
 
         if ($username === (string)$config['admin']['username'] && $password === (string)$config['admin']['password']) {
-            $_SESSION['wishes_admin'] = true;
+            wishes_login_admin($config);
             header('Location: /wishes/admin.php');
             exit;
         }
 
         $loginError = 'Неверный логин или пароль.';
-    } elseif (wishes_is_admin() && isset($_POST['wish_id'], $_POST['action'])) {
+    } elseif (wishes_is_admin($config) && isset($_POST['wish_id'], $_POST['action'])) {
         $wishId = (int)$_POST['wish_id'];
         $action = (string)$_POST['action'];
 
@@ -50,7 +51,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     }
 }
 
-if (!wishes_is_admin()) {
+if (!wishes_is_admin($config)) {
     ?>
 <!doctype html>
 <html lang="ru">
@@ -87,7 +88,7 @@ if (!wishes_is_admin()) {
     exit;
 }
 
-$pending = $pdo->query("SELECT id, author, message, status, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
+$pending = $pdo->query("SELECT id, author, message, status, image_path, image_width, image_height, created_at, approved_at FROM wishes ORDER BY FIELD(status,'pending','approved','rejected'), created_at DESC LIMIT 200")->fetchAll();
 ?>
 <!doctype html>
 <html lang="ru">
@@ -104,6 +105,8 @@ $pending = $pdo->query("SELECT id, author, message, status, created_at, approved
       .ghost{background:#fff;color:#171717;border:1px solid rgba(23,23,23,.12)}
       .grid{display:grid;gap:12px;max-width:1100px;margin:0 auto}
       .card{padding:18px;border:1px solid rgba(23,23,23,.12);border-radius:22px;background:#fff}
+      .media{margin:0 0 14px}
+      .media img{display:block;width:min(100%,320px);aspect-ratio:4/3;object-fit:cover;border-radius:18px;border:1px solid rgba(23,23,23,.08)}
       .meta{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:10px;color:#666;font-size:14px}
       .status{font-weight:700;text-transform:uppercase;letter-spacing:.08em}
       .message{font-size:20px;line-height:1.45;margin:0 0 14px}
@@ -131,6 +134,11 @@ $pending = $pdo->query("SELECT id, author, message, status, created_at, approved
             <span class="status"><?= htmlspecialchars((string)$wish['status'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
             <span><?= htmlspecialchars((string)$wish['created_at'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
           </div>
+          <?php if (!empty($wish['image_path'])): ?>
+            <figure class="media">
+              <img src="<?= htmlspecialchars((string)$wish['image_path'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" alt="Фото к пожеланию #<?= (int)$wish['id'] ?>">
+            </figure>
+          <?php endif; ?>
           <p class="message"><?= nl2br(htmlspecialchars((string)$wish['message'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')) ?></p>
           <p class="author"><?= htmlspecialchars((string)($wish['author'] ?: 'Без подписи'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
           <div class="actions">

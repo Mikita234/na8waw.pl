@@ -84,7 +84,8 @@
       }
 
       .wish-field input,
-      .wish-field textarea {
+      .wish-field textarea,
+      .wish-field input[type="file"] {
         width: 100%;
         border: 1px solid var(--line);
         border-radius: 22px;
@@ -102,6 +103,18 @@
         min-height: 144px;
         padding: 16px 18px;
         resize: vertical;
+      }
+
+      .wish-field input[type="file"] {
+        min-height: 58px;
+        padding: 14px 18px;
+      }
+
+      .field-note {
+        margin: -2px 0 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
       }
 
       .wish-actions {
@@ -167,7 +180,7 @@
         Оставь короткое пожелание для юбилея. После проверки оно появится на экране во время встречи.
       </p>
 
-      <form class="wish-form" id="wish-form">
+      <form class="wish-form" id="wish-form" enctype="multipart/form-data">
         <label class="wish-field">
           <span>Подпись, если хочешь</span>
           <input id="wish-author" name="author" type="text" maxlength="40" placeholder="Например: Ира, Варшава">
@@ -176,6 +189,12 @@
         <label class="wish-field">
           <span>Твое пожелание</span>
           <textarea id="wish-message" name="message" maxlength="220" rows="4" placeholder="Напиши короткое пожелание для встречи" required></textarea>
+        </label>
+
+        <label class="wish-field">
+          <span>Фото, если хочешь</span>
+          <input id="wish-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp">
+          <p class="field-note">JPG, PNG или WebP до 5 MB. Фото тоже проходит модерацию вместе с текстом.</p>
         </label>
 
         <div class="wish-actions">
@@ -188,6 +207,6 @@
       </form>
     </main>
 
-    <script type="module" src="/scripts/wishes.js?v=20260410o"></script>
+    <script type="module" src="/scripts/wishes.js?v=20260413w"></script>
   </body>
 </html>
