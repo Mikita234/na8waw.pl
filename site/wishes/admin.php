@@ -34,7 +34,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         $wishId = (int)$_POST['wish_id'];
         $action = (string)$_POST['action'];
 
-        if ($wishId > 0 && in_array($action, ['approve', 'reject', 'pending'], true)) {
+        if ($wishId > 0 && in_array($action, ['approve', 'reject', 'pending', 'delete'], true)) {
+            if ($action === 'delete') {
+                $stmt = $pdo->prepare('DELETE FROM wishes WHERE id = :id');
+                $stmt->execute([':id' => $wishId]);
+                header('Location: /wishes/admin.php');
+                exit;
+            }
+
             $status = $action === 'approve' ? 'approved' : ($action === 'reject' ? 'rejected' : 'pending');
             $approvedAt = $status === 'approved' ? date('Y-m-d H:i:s') : null;
 
@@ -145,6 +152,7 @@ $pending = $pdo->query("SELECT id, author, message, status, image_path, image_wi
             <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="approve"><button type="submit">Одобрить</button></form>
             <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="reject"><button class="ghost" type="submit">Скрыть</button></form>
             <form method="post"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="pending"><button class="ghost" type="submit">В очередь</button></form>
+            <form method="post" onsubmit="return window.confirm('Удалить пожелание совсем?');"><input type="hidden" name="wish_id" value="<?= (int)$wish['id'] ?>"><input type="hidden" name="action" value="delete"><button class="ghost" type="submit">Удалить</button></form>
           </div>
         </article>
       <?php endforeach; ?>

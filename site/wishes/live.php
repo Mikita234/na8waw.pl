@@ -36,7 +36,6 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
       }
       .shell {
         display: grid;
-        align-content: center;
         min-height: 100vh;
         padding: 32px;
       }
@@ -73,6 +72,7 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
       .cards {
         display: grid;
         place-items: center;
+        min-height: calc(100vh - 64px);
       }
       .stage {
         position: relative;
@@ -117,7 +117,7 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         font-weight: 700;
       }
       .card-message {
-        max-width: 70%;
+        max-width: 62%;
         margin: 0;
         font-size: clamp(34px, 3.1vw, 56px);
         line-height: 1.06;
@@ -140,18 +140,43 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         font-size: clamp(32px, 3vw, 52px);
         line-height: 1.1;
       }
-      .ticker {
-        overflow: hidden;
-        border-top: 1px solid rgba(255,255,255,.12);
-        border-bottom: 1px solid rgba(255,255,255,.12);
-        background: rgba(2,8,20,.72);
+      .card-media:not([hidden]) + .card-overlay + .card-content .card-message {
+        max-width: 54%;
+      }
+      .card-frame {
+        position: absolute;
+        right: clamp(28px, 4vw, 56px);
+        top: 50%;
+        width: min(36%, 420px);
+        aspect-ratio: 4 / 5;
+        transform: translateY(-50%);
+        border-radius: 28px;
+        border: 1px solid rgba(255,255,255,.18);
+        background: rgba(255,255,255,.06);
         box-shadow: 0 24px 60px rgba(0,0,0,.35);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+      .card-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .ticker {
+        align-self: end;
+        overflow: hidden;
+        border-top: 1px solid rgba(255,255,255,.14);
+        border-bottom: 1px solid rgba(255,255,255,.14);
+        background: linear-gradient(180deg, rgba(4,17,38,.9), rgba(2,8,20,.94));
+        box-shadow: 0 24px 60px rgba(0,0,0,.35);
+        border-radius: 26px;
       }
       .track {
         display: inline-flex;
         align-items: center;
         gap: 48px;
-        padding: 28px 0;
+        padding: 24px 0;
         white-space: nowrap;
         will-change: transform;
         animation: ticker 45s linear infinite;
@@ -184,6 +209,8 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         .stage { aspect-ratio: auto; min-height: calc(100vh - 40px); border-radius: 28px; }
         .card-content { align-content: end; }
         .card-message { max-width: none; font-size: clamp(28px, 8vw, 42px); }
+        .card-frame { position: static; width: 100%; max-width: none; transform: none; aspect-ratio: 4 / 3; margin-top: 12px; }
+        .card-media:not([hidden]) + .card-overlay + .card-content .card-message { max-width: none; }
       }
     </style>
   </head>
@@ -203,6 +230,9 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
               <div class="card-kicker">Пожелания на экран</div>
               <p class="card-message" id="card-message"></p>
               <div class="card-author" id="card-author"></div>
+              <div class="card-frame" id="card-frame" hidden>
+                <img id="card-image" alt="Фото к пожеланию">
+              </div>
             </div>
           </div>
         <?php else: ?>
@@ -222,6 +252,8 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
       const cardContent = document.getElementById("card-content");
       const cardMessage = document.getElementById("card-message");
       const cardAuthor = document.getElementById("card-author");
+      const cardFrame = document.getElementById("card-frame");
+      const cardImage = document.getElementById("card-image");
       let cardItems = [];
       let cardIndex = 0;
       let cardTimer = null;
@@ -261,8 +293,17 @@ if (!in_array($mode, ['cards', 'ticker'], true)) {
         cardMedia.hidden = false;
         cardOverlay.hidden = false;
         cardContent.hidden = false;
-        cardMedia.style.backgroundImage = item.imagePath ? `url("${item.imagePath}")` : "none";
-        cardMedia.style.backgroundColor = item.imagePath ? "" : "#041126";
+        const hasImage = Boolean(item.imagePath);
+        cardMedia.style.backgroundImage = hasImage ? `url("${item.imagePath}")` : "none";
+        cardMedia.style.backgroundColor = hasImage ? "" : "#041126";
+        if (cardFrame && cardImage) {
+          cardFrame.hidden = !hasImage;
+          if (hasImage) {
+            cardImage.src = item.imagePath;
+          } else {
+            cardImage.removeAttribute("src");
+          }
+        }
         cardMessage.textContent = item.message || "";
         cardAuthor.textContent = item.author || "Без подписи";
       }
