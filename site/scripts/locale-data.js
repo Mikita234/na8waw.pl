@@ -65,6 +65,11 @@ export const siteCopy = {
     programTitle: "Програма зустрічі",
     contactsEyebrow: "Контакти",
     contactsTitle: "Контакти й координація",
+    wishesPromoEyebrow: "Не можеш приїхати?",
+    wishesPromoTitle: "Залиш побажання до ювілею",
+    wishesPromoCopy:
+      "Напиши нам кілька теплих слів. Ми покажемо твоє побажання на екрані під час ювілею, тож ти зможеш побути з нами навіть на відстані.",
+    wishesPromoAction: "Залишити побажання",
     wishesEyebrow: "Побажання на екран",
     wishesTitle: "Залиш побажання на зустріч",
     wishesCopy:
@@ -289,6 +294,11 @@ export const siteCopy = {
     programTitle: "Программа встречи",
     contactsEyebrow: "Контакты",
     contactsTitle: "Контакты и координация",
+    wishesPromoEyebrow: "Не можешь приехать?",
+    wishesPromoTitle: "Оставь пожелание к юбилею",
+    wishesPromoCopy:
+      "Напиши нам пару теплых слов. Мы покажем твое пожелание на экране во время юбилея, так что ты сможешь побыть с нами, даже если не получается приехать.",
+    wishesPromoAction: "Оставить пожелание",
     wishesEyebrow: "Пожелания на экран",
     wishesTitle: "Оставить пожелание к встрече",
     wishesCopy:

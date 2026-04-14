@@ -407,9 +407,30 @@ ${bodyParagraphs}
 `;
 }
 
-function rewriteHomePage(html, title, assetVersion) {
+function rewriteHomePage(html, locale, data, assetVersion) {
+  const isUk = locale === "uk";
+  const seoDescription = isUk
+    ? `Ювілей групи «МАЇВКА» у Варшаві 9–10 травня. Щоденник на сьогодні: ${data.title}. Програма, контакти й те, що може стати в пригоді в ці дні.`
+    : `Юбилей группы «МАЕВКА» в Варшаве 9–10 мая. Ежедневник на сегодня: ${data.title}. Программа, контакты и то, что может пригодиться в эти дни.`;
+
   return html
-    .replace(/(<h2 class="panel-title" id="daily-title">)([^<]+)(<\/h2>)/, `$1${title}$3`)
+    .replace(/(<h2 class="panel-title" id="daily-title">)([^<]+)(<\/h2>)/, `$1${data.title}$3`)
+    .replace(
+      /(<meta\s+name="description"\s+content=")[^"]+("\s*\/>)/,
+      `$1${escapeHtml(seoDescription)}$2`,
+    )
+    .replace(
+      /(<meta\s+property="og:description"\s+content=")[^"]+("\s*\/>)/,
+      `$1${escapeHtml(seoDescription)}$2`,
+    )
+    .replace(
+      /(<meta\s+name="twitter:description"\s+content=")[^"]+("\s*\/>)/,
+      `$1${escapeHtml(seoDescription)}$2`,
+    )
+    .replace(
+      /("description":\s*")[^"]+(")/,
+      `$1${escapeJs(seoDescription)}$2`,
+    )
     .replace(/\.\/styles\/main\.css\?v=[^"]+/g, `./styles/main.css?v=${assetVersion}`)
     .replace(/\.\/scripts\/main\.js\?v=[^"]+/g, `./scripts/main.js?v=${assetVersion}`);
 }
@@ -489,9 +510,9 @@ async function main() {
       ),
       "utf8",
     ),
-    writeFile(INDEX_PAGE_URL, rewriteHomePage(await readFile(INDEX_PAGE_URL, "utf8"), ukData.title, warsaw.assetVersion), "utf8"),
-    writeFile(UK_HOME_URL, rewriteHomePage(await readFile(UK_HOME_URL, "utf8"), ukData.title, warsaw.assetVersion), "utf8"),
-    writeFile(RU_HOME_URL, rewriteHomePage(await readFile(RU_HOME_URL, "utf8"), ruData.title, warsaw.assetVersion), "utf8"),
+    writeFile(INDEX_PAGE_URL, rewriteHomePage(await readFile(INDEX_PAGE_URL, "utf8"), "ru", ruData, warsaw.assetVersion), "utf8"),
+    writeFile(UK_HOME_URL, rewriteHomePage(await readFile(UK_HOME_URL, "utf8"), "uk", ukData, warsaw.assetVersion), "utf8"),
+    writeFile(RU_HOME_URL, rewriteHomePage(await readFile(RU_HOME_URL, "utf8"), "ru", ruData, warsaw.assetVersion), "utf8"),
   ]);
 
   console.log(`Updated daily files for Warsaw date ${warsaw.year}-${warsaw.month}-${warsaw.day}`);

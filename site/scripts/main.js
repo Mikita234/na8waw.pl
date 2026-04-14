@@ -51,6 +51,10 @@ const nodes = {
   contactsEyebrow: document.getElementById("contacts-eyebrow"),
   contactsTitle: document.getElementById("contacts-title"),
   contactLinks: document.getElementById("contact-links"),
+  wishesPromoEyebrow: document.getElementById("wishes-promo-eyebrow"),
+  wishesPromoTitle: document.getElementById("wishes-promo-title"),
+  wishesPromoCopy: document.getElementById("wishes-promo-copy"),
+  wishesPromoAction: document.getElementById("wishes-promo-action"),
   miniNavOracle: document.getElementById("mini-nav-oracle"),
   miniNavDaily: document.getElementById("mini-nav-daily"),
   miniNavProgram: document.getElementById("mini-nav-program"),
@@ -430,6 +434,10 @@ subscribeLocale((locale) => {
   setText(nodes.programTitle, copy.programTitle);
   setText(nodes.contactsEyebrow, copy.contactsEyebrow);
   setText(nodes.contactsTitle, copy.contactsTitle);
+  setText(nodes.wishesPromoEyebrow, copy.wishesPromoEyebrow);
+  setText(nodes.wishesPromoTitle, copy.wishesPromoTitle);
+  setText(nodes.wishesPromoCopy, copy.wishesPromoCopy);
+  setText(nodes.wishesPromoAction, copy.wishesPromoAction);
   setText(nodes.miniNavOracle, copy.miniNavOracle);
   setText(nodes.miniNavDaily, copy.miniNavDaily);
   setText(nodes.miniNavProgram, copy.miniNavProgram);
