@@ -39,7 +39,7 @@ export const siteCopy = {
     layerCopy:
       "Тут зібрані чат зустрічі, посилання на сторінку побажань і коротка пам'ятка для тих, хто їде на ювілей.",
     sourceLabel: "Чат зустрічі",
-    sourceValue: "@Maevka_8let",
+    sourceValue: "@Maevka_8",
     entryLabel: "Побажання",
     entryValue: "Окрема сторінка з модерацією та live-екраном",
     roleLabel: "Поділитися",
@@ -47,7 +47,7 @@ export const siteCopy = {
     locationsEyebrow: "Локації",
     locationsTitle: "Точки зустрічі",
     locationsCopy:
-      "Для 9 і 10 травня будуть окремі адреси. Поки для обох днів показана одна точка на карті. Щойно локації підтвердяться, ми оновимо їх тут.",
+      "Для 9 і 10 травня є окремі точки зустрічі. Перевір маршрут у Google Maps перед виїздом.",
     locationMapOpenLabel: "Відкрити в Google Maps",
     localeSwitcherLabel: "Перемикач мови",
     programEyebrow: "Програма",
@@ -90,19 +90,19 @@ export const siteCopy = {
         title: "9 травня",
         kicker: "Перший день",
         mapDayTitle: "9 травня • Перший день",
-        text: "Показати точку першого дня на карті.",
+        text: "PIAP Space sp. z o.o., Al. Jerozolimskie 202.",
         action: "Показати на карті",
-        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
-        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
+        href: "https://maps.app.goo.gl/ZPSZb3GN4wggLJBw5?g_st=atm",
+        embedHref: "https://www.google.com/maps?q=PIAP%20Space%20sp.%20z%20o.o.%2C%20Al.%20Jerozolimskie%20202%2C%2002-486%20Warszawa&output=embed",
       },
       {
         title: "10 травня",
         kicker: "Другий день",
         mapDayTitle: "10 травня • Другий день",
-        text: "Показати точку другого дня на карті.",
+        text: "Łowisko Pod Dębową Beczką.",
         action: "Показати на карті",
-        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
-        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
+        href: "https://maps.app.goo.gl/H2nnYBSCRQrBYTKF6?g_st=atm",
+        embedHref: "https://www.google.com/maps?q=%C5%81owisko%20Pod%20D%C4%99bow%C4%85%20Beczk%C4%85%2C%20Zatylna%2C%2005-555%20Kaw%C4%99czyn&output=embed",
       },
     ],
     contacts: [
@@ -115,7 +115,7 @@ export const siteCopy = {
       {
         title: "Чат зустрічі в Telegram",
         text: "Чат ювілею «МАЇВКА 8 років»",
-        href: "https://t.me/Maevka_8let",
+        href: "https://t.me/Maevka_8",
         action: "Відкрити групу",
       },
     ],
@@ -123,7 +123,7 @@ export const siteCopy = {
       {
         title: "9 травня • 1-й день",
         locationLabel: "Точка на карті для 9 травня",
-        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        locationHref: "https://maps.app.goo.gl/ZPSZb3GN4wggLJBw5?g_st=atm",
         items: [
           ["11:00", "Збір для служителів"],
           ["11:30", "Зустріч гостей, реєстрація"],
@@ -142,7 +142,7 @@ export const siteCopy = {
       {
         title: "10 травня • 2-й день",
         locationLabel: "Точка на карті для 10 травня",
-        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        locationHref: "https://maps.app.goo.gl/H2nnYBSCRQrBYTKF6?g_st=atm",
         items: [
           ["13:00", "Початок"],
           ["14:00", "Група"],
@@ -268,7 +268,7 @@ export const siteCopy = {
     layerCopy:
       "Здесь собраны чат встречи, ссылка на страницу пожеланий и короткая памятка для тех, кто едет на юбилей.",
     sourceLabel: "Чат встречи",
-    sourceValue: "@Maevka_8let",
+    sourceValue: "@Maevka_8",
     entryLabel: "Пожелания",
     entryValue: "Отдельная страница с модерацией и live-экраном",
     roleLabel: "Поделиться",
@@ -276,7 +276,7 @@ export const siteCopy = {
     locationsEyebrow: "Локации",
     locationsTitle: "Точки встречи",
     locationsCopy:
-      "Для 9 и 10 мая будут отдельные адреса. Пока для обоих дней показана одна точка на карте. Как только локации подтвердятся, мы обновим их здесь.",
+      "Для 9 и 10 мая есть отдельные точки встречи. Проверь маршрут в Google Maps перед выездом.",
     locationMapOpenLabel: "Открыть в Google Maps",
     localeSwitcherLabel: "Переключатель языка",
     programEyebrow: "Программа",
@@ -319,19 +319,19 @@ export const siteCopy = {
         title: "9 мая",
         kicker: "Первый день",
         mapDayTitle: "9 мая • Первый день",
-        text: "Показать точку первого дня на карте.",
+        text: "PIAP Space sp. z o.o., Al. Jerozolimskie 202.",
         action: "Показать на карте",
-        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
-        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
+        href: "https://maps.app.goo.gl/ZPSZb3GN4wggLJBw5?g_st=atm",
+        embedHref: "https://www.google.com/maps?q=PIAP%20Space%20sp.%20z%20o.o.%2C%20Al.%20Jerozolimskie%20202%2C%2002-486%20Warszawa&output=embed",
       },
       {
         title: "10 мая",
         kicker: "Второй день",
         mapDayTitle: "10 мая • Второй день",
-        text: "Показать точку второго дня на карте.",
+        text: "Łowisko Pod Dębową Beczką.",
         action: "Показать на карте",
-        href: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
-        embedHref: "https://www.google.com/maps?q=Ho%C5%BCa%2057%2C%2000-681%20Warszawa&output=embed",
+        href: "https://maps.app.goo.gl/H2nnYBSCRQrBYTKF6?g_st=atm",
+        embedHref: "https://www.google.com/maps?q=%C5%81owisko%20Pod%20D%C4%99bow%C4%85%20Beczk%C4%85%2C%20Zatylna%2C%2005-555%20Kaw%C4%99czyn&output=embed",
       },
     ],
     contacts: [
@@ -344,7 +344,7 @@ export const siteCopy = {
       {
         title: "Чат встречи в Telegram",
         text: "Чат юбилея «МАЕВКА 8 лет»",
-        href: "https://t.me/Maevka_8let",
+        href: "https://t.me/Maevka_8",
         action: "Открыть группу",
       },
     ],
@@ -352,7 +352,7 @@ export const siteCopy = {
       {
         title: "9 мая • 1-й день",
         locationLabel: "Точка на карте для 9 мая",
-        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        locationHref: "https://maps.app.goo.gl/ZPSZb3GN4wggLJBw5?g_st=atm",
         items: [
           ["11:00", "Сбор для служащих"],
           ["11:30", "Встреча гостей, регистрация"],
@@ -371,7 +371,7 @@ export const siteCopy = {
       {
         title: "10 мая • 2-й день",
         locationLabel: "Точка на карте для 10 мая",
-        locationHref: "https://www.google.com/maps/search/?api=1&query=Ho%C5%BCa%2057%2C%2000-681%20Warszawa",
+        locationHref: "https://maps.app.goo.gl/H2nnYBSCRQrBYTKF6?g_st=atm",
         items: [
           ["13:00", "Начало"],
           ["14:00", "Группа"],
