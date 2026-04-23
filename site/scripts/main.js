@@ -1,6 +1,6 @@
 import "./predictions.js?v=20260410m";
 import "./daily.js?v=20260423d";
-import { siteCopy } from "./locale-data.js?v=20260423a";
+import { siteCopy } from "./locale-data.js?v=20260423b";
 import { subscribeLocale } from "./locale.js?v=20260410m";
 
 let programStatusInterval;
