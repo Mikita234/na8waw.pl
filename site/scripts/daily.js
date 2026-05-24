@@ -1,4 +1,4 @@
-import { dailyMeditations } from "./daily-data.js?v=20260524d";
+import { dailyMeditations } from "./daily-data.js?v=20260525d";
 import { getLocale, subscribeLocale } from "./locale.js?v=20260410m";
 
 const titleNode = document.getElementById("daily-title");
