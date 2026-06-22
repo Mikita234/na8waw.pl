@@ -1,5 +1,5 @@
 import "./predictions.js?v=20260410m";
-import "./daily.js?v=20260622d";
+import "./daily.js?v=20260623d";
 import { siteCopy } from "./locale-data.js?v=20260423b";
 import { subscribeLocale } from "./locale.js?v=20260410m";
 
