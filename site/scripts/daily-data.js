@@ -1,5 +1,5 @@
-import { dailyMeditationUk } from "./daily-uk.js?v=20260911d";
-import { dailyMeditationRu } from "./daily-ru.js?v=20260911d";
+import { dailyMeditationUk } from "./daily-uk.js?v=20260913d";
+import { dailyMeditationRu } from "./daily-ru.js?v=20260913d";
 
 export const dailyMeditations = {
   uk: dailyMeditationUk,
